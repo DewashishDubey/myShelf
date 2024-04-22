@@ -51,7 +51,8 @@ struct RegistrationView: View {
                         }
                     }
                 }
-                HStack(spacing:130){
+                
+                /*HStack(spacing:130){
                     Text("Select Role")
                     // Picker for roles
                     Picker("Select Role", selection: $selectedRole) {
@@ -61,7 +62,7 @@ struct RegistrationView: View {
                     }
                     .pickerStyle(.menu)
                     .padding(.horizontal)
-                }
+                }*/
             }
             .padding(.horizontal)
             .padding(.top, 12)
