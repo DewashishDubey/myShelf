@@ -12,6 +12,7 @@ struct LoginView: View {
     @State private var password = ""
     @State private var selectedRole = "Member" // Default selection
     @EnvironmentObject var viewModel: AuthViewModel
+    @State private var showAlert = false
     
     let roles = ["Member", "Librarian", "Admin"] // Define roles
     
@@ -54,6 +55,8 @@ struct LoginView: View {
                                                 try await viewModel.signIn(withEmail: email, password: password)
                                             } catch {
                                                 // Handle sign-in error
+                                               
+                                                self.showAlert.toggle()
                                                 print("Failed to sign in with error: \(error.localizedDescription)")
                                             }
                                         }
@@ -69,6 +72,9 @@ struct LoginView: View {
                 .background(Color.blue)
                 .cornerRadius(10)
                 .padding(.top, 24)
+                .alert(isPresented: $showAlert) {
+                        return Alert(title: Text("Failed to register"), message: Text("Invalid login credentials"), dismissButton: .default(Text("OK")))
+                }
                 
                 Spacer()
                 
