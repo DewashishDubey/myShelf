@@ -48,22 +48,6 @@ class AuthViewModel: ObservableObject {
             await fetchUser()
             
             // Check if the fetched user's userType matches the desired userType
-            if let currentUser = self.currentUser, currentUser.userType != userType {
-                throw NSError(domain: "AuthViewModel", code: 0, userInfo: [NSLocalizedDescriptionKey: "User is not of the desired type."])
-            }
-        } catch {
-            print("Failed to log in with error \(error.localizedDescription)")
-            throw error
-        }
-    }
-     */
-    func signIn(withEmail email: String, password: String, userType: UserType) async throws {
-        do {
-            let result = try await Auth.auth().signIn(withEmail: email, password: password)
-            self.userSession = result.user
-            await fetchUser()
-            
-            // Check if the fetched user's userType matches the desired userType
             if let currentUser = self.currentUser, currentUser.userType == userType {
                 // If both email, password, and userType match, login is successful
                 print("Login successful")
@@ -73,6 +57,17 @@ class AuthViewModel: ObservableObject {
                 self.userSession = nil
                 throw NSError(domain: "AuthViewModel", code: 0, userInfo: [NSLocalizedDescriptionKey: "User is not of the desired type."])
             }
+        } catch {
+            print("Failed to log in with error \(error.localizedDescription)")
+            throw error
+        }
+    }*/
+    
+    func signIn(withEmail email: String, password: String) async throws {
+        do {
+            let result = try await Auth.auth().signIn(withEmail: email, password: password)
+            self.userSession = result.user
+            await fetchUser()
         } catch {
             print("Failed to log in with error \(error.localizedDescription)")
             throw error

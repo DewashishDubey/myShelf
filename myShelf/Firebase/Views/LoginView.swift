@@ -31,7 +31,7 @@ struct LoginView: View {
                         .autocapitalization(.none)
                     InputView(text: $password, title: "Password", placeholder: "Enter your password", isSecureField: true)
                     
-                    HStack(spacing:130){
+                    /*HStack(spacing:130){
                         Text("Select Role")
                         // Picker for roles
                         Picker("Select Role", selection: $selectedRole) {
@@ -41,7 +41,7 @@ struct LoginView: View {
                         }
                         .pickerStyle(.menu)
                         .padding(.horizontal)
-                    }
+                    }*/
                 }
                 .padding(.horizontal)
                 .padding(.top, 12)
@@ -49,10 +49,14 @@ struct LoginView: View {
                 // Sign in button
                 Button(action: {
                     Task {
-                        // Pass selected role to the signIn function
-                        try await viewModel.signIn(withEmail: email, password: password, userType: UserType(rawValue: selectedRole) ?? .member)
- 
-                    }
+                                            do {
+                                                // Attempt to sign in with provided email and password
+                                                try await viewModel.signIn(withEmail: email, password: password)
+                                            } catch {
+                                                // Handle sign-in error
+                                                print("Failed to sign in with error: \(error.localizedDescription)")
+                                            }
+                                        }
                 }) {
                     HStack {
                         Text("Sign in")
