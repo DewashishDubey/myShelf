@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1FABC5C22BD7A9AF00E730FD /* ExplorePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FABC5C12BD7A9AF00E730FD /* ExplorePage.swift */; };
+		1FABC5C22BD7A9AF00E730FD /* MemberExploreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FABC5C12BD7A9AF00E730FD /* MemberExploreView.swift */; };
 		1FABC5C42BD7AB7600E730FD /* MemberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FABC5C32BD7AB7600E730FD /* MemberView.swift */; };
 		1FABC5C72BD7ABF500E730FD /* LibrarianView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FABC5C62BD7ABF500E730FD /* LibrarianView.swift */; };
 		1FABC5CA2BD7AC2F00E730FD /* AdminView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FABC5C92BD7AC2F00E730FD /* AdminView.swift */; };
@@ -30,7 +30,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		1FABC5C12BD7A9AF00E730FD /* ExplorePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExplorePage.swift; sourceTree = "<group>"; };
+		1FABC5C12BD7A9AF00E730FD /* MemberExploreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberExploreView.swift; sourceTree = "<group>"; };
 		1FABC5C32BD7AB7600E730FD /* MemberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberView.swift; sourceTree = "<group>"; };
 		1FABC5C62BD7ABF500E730FD /* LibrarianView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibrarianView.swift; sourceTree = "<group>"; };
 		1FABC5C92BD7AC2F00E730FD /* AdminView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminView.swift; sourceTree = "<group>"; };
@@ -67,7 +67,7 @@
 		1FABC5C02BD7A96B00E730FD /* Member */ = {
 			isa = PBXGroup;
 			children = (
-				1FABC5C12BD7A9AF00E730FD /* ExplorePage.swift */,
+				1FABC5C12BD7A9AF00E730FD /* MemberExploreView.swift */,
 				1FABC5C32BD7AB7600E730FD /* MemberView.swift */,
 			);
 			path = Member;
@@ -258,7 +258,7 @@
 				A1E3EAE92BD63A68001CC21A /* ContentView.swift in Sources */,
 				A1E3EB082BD63BC9001CC21A /* InputView.swift in Sources */,
 				1FABC5CA2BD7AC2F00E730FD /* AdminView.swift in Sources */,
-				1FABC5C22BD7A9AF00E730FD /* ExplorePage.swift in Sources */,
+				1FABC5C22BD7A9AF00E730FD /* MemberExploreView.swift in Sources */,
 				A1E3EAE72BD63A68001CC21A /* myShelfApp.swift in Sources */,
 				A1E3EB0B2BD63BC9001CC21A /* RegistrationView.swift in Sources */,
 				A1E3EB0C2BD63BC9001CC21A /* SettingsRowView.swift in Sources */,
