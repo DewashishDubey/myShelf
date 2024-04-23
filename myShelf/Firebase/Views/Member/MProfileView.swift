@@ -8,8 +8,16 @@
 import SwiftUI
 
 struct MProfileView: View {
+    @EnvironmentObject var viewModel : AuthViewModel
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack
+        {
+            Button{
+                viewModel.signOut()
+            } label: {
+                SettingsRowView(imageName: "arrow.left.circle.fill", title: "Sign Out", tintColor: .red)
+            }
+        }
     }
 }
 
