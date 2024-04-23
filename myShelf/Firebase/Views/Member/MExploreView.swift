@@ -6,7 +6,7 @@
 
 import SwiftUI
 
-struct MemberExploreView: View {
+struct MExploreView: View {
     @State private var searchText = ""
     @State private var searchIsActive = false
     var body: some View {
@@ -22,7 +22,7 @@ struct MemberExploreView: View {
 
 
 #Preview {
-    MemberExploreView()
+    MExploreView()
 }
 
 
