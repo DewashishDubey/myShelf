@@ -11,6 +11,9 @@
 		1FABC5C42BD7AB7600E730FD /* MemberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FABC5C32BD7AB7600E730FD /* MemberView.swift */; };
 		1FABC5C72BD7ABF500E730FD /* LibrarianView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FABC5C62BD7ABF500E730FD /* LibrarianView.swift */; };
 		1FABC5CA2BD7AC2F00E730FD /* AdminView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FABC5C92BD7AC2F00E730FD /* AdminView.swift */; };
+		A13C0E822BD7BA630083CCDD /* MHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A13C0E812BD7BA620083CCDD /* MHomeView.swift */; };
+		A13C0E842BD7BD760083CCDD /* MEventsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A13C0E832BD7BD760083CCDD /* MEventsView.swift */; };
+		A13C0E862BD7BD840083CCDD /* MLibraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A13C0E852BD7BD840083CCDD /* MLibraryView.swift */; };
 		A1E3EAE72BD63A68001CC21A /* myShelfApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E3EAE62BD63A68001CC21A /* myShelfApp.swift */; };
 		A1E3EAE92BD63A68001CC21A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E3EAE82BD63A68001CC21A /* ContentView.swift */; };
 		A1E3EAEB2BD63A6A001CC21A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1E3EAEA2BD63A6A001CC21A /* Assets.xcassets */; };
@@ -34,6 +37,9 @@
 		1FABC5C32BD7AB7600E730FD /* MemberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberView.swift; sourceTree = "<group>"; };
 		1FABC5C62BD7ABF500E730FD /* LibrarianView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibrarianView.swift; sourceTree = "<group>"; };
 		1FABC5C92BD7AC2F00E730FD /* AdminView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminView.swift; sourceTree = "<group>"; };
+		A13C0E812BD7BA620083CCDD /* MHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MHomeView.swift; sourceTree = "<group>"; };
+		A13C0E832BD7BD760083CCDD /* MEventsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MEventsView.swift; sourceTree = "<group>"; };
+		A13C0E852BD7BD840083CCDD /* MLibraryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLibraryView.swift; sourceTree = "<group>"; };
 		A1E3EAE32BD63A68001CC21A /* myShelf.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = myShelf.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1E3EAE62BD63A68001CC21A /* myShelfApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = myShelfApp.swift; sourceTree = "<group>"; };
 		A1E3EAE82BD63A68001CC21A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -69,6 +75,9 @@
 			children = (
 				1FABC5C12BD7A9AF00E730FD /* MExploreView.swift */,
 				1FABC5C32BD7AB7600E730FD /* MemberView.swift */,
+				A13C0E812BD7BA620083CCDD /* MHomeView.swift */,
+				A13C0E832BD7BD760083CCDD /* MEventsView.swift */,
+				A13C0E852BD7BD840083CCDD /* MLibraryView.swift */,
 			);
 			path = Member;
 			sourceTree = "<group>";
@@ -258,13 +267,16 @@
 				A1E3EAE92BD63A68001CC21A /* ContentView.swift in Sources */,
 				A1E3EB082BD63BC9001CC21A /* InputView.swift in Sources */,
 				1FABC5CA2BD7AC2F00E730FD /* AdminView.swift in Sources */,
+				A13C0E822BD7BA630083CCDD /* MHomeView.swift in Sources */,
 				1FABC5C22BD7A9AF00E730FD /* MExploreView.swift in Sources */,
 				A1E3EAE72BD63A68001CC21A /* myShelfApp.swift in Sources */,
 				A1E3EB0B2BD63BC9001CC21A /* RegistrationView.swift in Sources */,
 				A1E3EB0C2BD63BC9001CC21A /* SettingsRowView.swift in Sources */,
+				A13C0E862BD7BD840083CCDD /* MLibraryView.swift in Sources */,
 				A1E3EB092BD63BC9001CC21A /* LoginView.swift in Sources */,
 				A1E3EB0A2BD63BC9001CC21A /* ProfileView.swift in Sources */,
 				1FABC5C42BD7AB7600E730FD /* MemberView.swift in Sources */,
+				A13C0E842BD7BD760083CCDD /* MEventsView.swift in Sources */,
 				1FABC5C72BD7ABF500E730FD /* LibrarianView.swift in Sources */,
 				A1E3EB072BD63BC9001CC21A /* AuthViewModel.swift in Sources */,
 			);
