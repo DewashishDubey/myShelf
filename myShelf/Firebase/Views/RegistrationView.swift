@@ -70,7 +70,6 @@ struct RegistrationView: View {
             
             Button(action: {
                 Task {
-                    // Convert the selected role string to UserType enum
                     guard let userType = UserType(rawValue: selectedRole) else {
                         print("Invalid role: \(selectedRole)")
                         return
