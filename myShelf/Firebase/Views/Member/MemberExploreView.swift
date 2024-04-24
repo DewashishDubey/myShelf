@@ -4,7 +4,6 @@ struct MemberExploreView: View {
     @State private var searchText = ""
     @State private var searchIsActive = false
     @State private var showScroll: Bool = false
-    @State private var headerOpacity: Double = 1.0
     
     var body: some View {
         
@@ -12,7 +11,7 @@ struct MemberExploreView: View {
         {
             ScrollView{
                 
-                ScrollView(.horizontal)
+                ScrollView(.horizontal, showsIndicators: false)
                 {
                     HStack(alignment: .top){
                     TagView(text: "Thriller")
@@ -58,16 +57,6 @@ struct TagView: View {
         }
     }
 }
-
-
-struct ScrollOffsetKey: PreferenceKey {
-    static var defaultValue: CGFloat = 0
-    static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
-        value = nextValue()
-    }
-}
-
-
 struct BookView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
