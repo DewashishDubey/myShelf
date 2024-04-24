@@ -74,7 +74,7 @@ class AuthViewModel: ObservableObject {
         }
     }
     
-    
+    /*
     func createUser(withEmail email: String, password: String, fullname: String, userType: UserType) async throws {
         do {
             let result = try await Auth.auth().createUser(withEmail: email, password: password)
@@ -87,7 +87,52 @@ class AuthViewModel: ObservableObject {
             print("Failed to create user with error \(error.localizedDescription)")
             throw error
         }
+    }*/
+    
+    func createUser(withEmail email: String, password: String, fullname: String, userType: UserType) async throws {
+        do {
+            let result = try await Auth.auth().createUser(withEmail: email, password: password)
+            self.userSession = result.user
+            
+            // Create user document in Firestore under "users" collection
+            let newUser = User(id: result.user.uid, fullname: fullname, email: email, userType: userType)
+            let usersRef = Firestore.firestore().collection("users").document(newUser.id)
+            try await usersRef.setData(from: newUser)
+            
+            // If userType is member, add to "members" collection with additional attributes
+            if userType == .member {
+                let membersRef = Firestore.firestore().collection("members").document(newUser.id)
+                let memberData: [String: Any] = [
+                    "id": newUser.id,
+                    "name": newUser.fullname,
+                    "no_of_issued_books": 0,
+                    "is_premium": false,
+                    "subscription_start_date": FieldValue.serverTimestamp()
+                ]
+                try await membersRef.setData(memberData)
+                
+                // Create subcollections for the member user
+                let issuedBooksRef = membersRef.collection("issued_books")
+                try await issuedBooksRef.addDocument(data: [:])
+                
+                let previouslyIssuedBooksRef = membersRef.collection("previously_issued_books")
+                try await previouslyIssuedBooksRef.addDocument(data: [:])
+                
+                let reservedBooksRef = membersRef.collection("reserved_books")
+                try await reservedBooksRef.addDocument(data: [:])
+            }
+            
+            await fetchUser() // Update currentUser after user creation
+        } catch {
+            print("Failed to create user with error \(error.localizedDescription)")
+            throw error
+        }
     }
+
+
+
+
+
 
     func signOut() {
         do {

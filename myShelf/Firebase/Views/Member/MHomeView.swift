@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-
+import Firebase
 struct MHomeView: View {
     var body: some View {
         ScrollView {
@@ -34,6 +34,7 @@ struct MHomeView: View {
 
 struct HeaderView: View {
     @EnvironmentObject var viewModel : AuthViewModel
+    @State private var isPremiumMember: Bool = false
     var body: some View {
         if let user = viewModel.currentUser{
             HStack {
@@ -43,7 +44,7 @@ struct HeaderView: View {
                         .font(.title2)
                         .fontWeight(.bold)
                         .foregroundColor(.white)
-                    Text("Premium User")
+                    Text("\(isPremiumMember ? "Premium Member" : "Basic Member")")
                         .font(.subheadline)
                         .foregroundColor(.yellow)
                 }
@@ -58,9 +59,30 @@ struct HeaderView: View {
                 }
                 
             }
+            .onAppear {
+                fetchMemberData()
+            }
             .padding()
         }
+        
+        
     }
+    
+    func fetchMemberData() {
+        if let userId = viewModel.currentUser?.id {
+            let membersRef = Firestore.firestore().collection("members").document(userId)
+            membersRef.getDocument { document, error in
+                if let document = document, document.exists {
+                    if let isPremium = document.data()?["is_premium"] as? Bool {
+                        self.isPremiumMember = isPremium
+                    }
+                } else {
+                    print("Member document does not exist or could not be retrieved: \(error?.localizedDescription ?? "Unknown error")")
+                }
+            }
+        }
+    }
+    
 }
 
 struct CurrentlyReadingView: View {
