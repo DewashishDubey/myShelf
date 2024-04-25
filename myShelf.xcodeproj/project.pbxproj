@@ -15,6 +15,8 @@
 		A133C85C2BDA093C00A9597B /* LLibraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A133C85B2BDA093C00A9597B /* LLibraryView.swift */; };
 		A133C85E2BDA094E00A9597B /* LEventsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A133C85D2BDA094E00A9597B /* LEventsView.swift */; };
 		A133C8602BDA095C00A9597B /* LProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A133C85F2BDA095C00A9597B /* LProfileView.swift */; };
+		A133C8632BDA1F5C00A9597B /* CodeScanner in Frameworks */ = {isa = PBXBuildFile; productRef = A133C8622BDA1F5C00A9597B /* CodeScanner */; };
+		A133C8652BDA1F8100A9597B /* ScanCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = A133C8642BDA1F8100A9597B /* ScanCode.swift */; };
 		A13C0E822BD7BA630083CCDD /* MHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A13C0E812BD7BA620083CCDD /* MHomeView.swift */; };
 		A13C0E842BD7BD760083CCDD /* MEventsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A13C0E832BD7BD760083CCDD /* MEventsView.swift */; };
 		A13C0E862BD7BD840083CCDD /* MLibraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A13C0E852BD7BD840083CCDD /* MLibraryView.swift */; };
@@ -49,6 +51,7 @@
 		A133C85B2BDA093C00A9597B /* LLibraryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LLibraryView.swift; sourceTree = "<group>"; };
 		A133C85D2BDA094E00A9597B /* LEventsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LEventsView.swift; sourceTree = "<group>"; };
 		A133C85F2BDA095C00A9597B /* LProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LProfileView.swift; sourceTree = "<group>"; };
+		A133C8642BDA1F8100A9597B /* ScanCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanCode.swift; sourceTree = "<group>"; };
 		A13C0E812BD7BA620083CCDD /* MHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MHomeView.swift; sourceTree = "<group>"; };
 		A13C0E832BD7BD760083CCDD /* MEventsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MEventsView.swift; sourceTree = "<group>"; };
 		A13C0E852BD7BD840083CCDD /* MLibraryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLibraryView.swift; sourceTree = "<group>"; };
@@ -76,6 +79,7 @@
 			files = (
 				A1E3EAF92BD63BA2001CC21A /* FirebaseDatabase in Frameworks */,
 				A1E3EAF72BD63BA2001CC21A /* FirebaseAuth in Frameworks */,
+				A133C8632BDA1F5C00A9597B /* CodeScanner in Frameworks */,
 				A1E3EAFB2BD63BA2001CC21A /* FirebaseFirestore in Frameworks */,
 				A1E3EAFF2BD63BA2001CC21A /* FirebaseStorage in Frameworks */,
 				A1E3EAFD2BD63BA2001CC21A /* FirebaseFirestoreSwift in Frameworks */,
@@ -107,6 +111,7 @@
 				A133C85B2BDA093C00A9597B /* LLibraryView.swift */,
 				A133C85D2BDA094E00A9597B /* LEventsView.swift */,
 				A133C85F2BDA095C00A9597B /* LProfileView.swift */,
+				A133C8642BDA1F8100A9597B /* ScanCode.swift */,
 			);
 			path = Librarian;
 			sourceTree = "<group>";
@@ -228,6 +233,7 @@
 				A1E3EAFA2BD63BA2001CC21A /* FirebaseFirestore */,
 				A1E3EAFC2BD63BA2001CC21A /* FirebaseFirestoreSwift */,
 				A1E3EAFE2BD63BA2001CC21A /* FirebaseStorage */,
+				A133C8622BDA1F5C00A9597B /* CodeScanner */,
 			);
 			productName = myShelf;
 			productReference = A1E3EAE32BD63A68001CC21A /* myShelf.app */;
@@ -259,6 +265,7 @@
 			mainGroup = A1E3EADA2BD63A68001CC21A;
 			packageReferences = (
 				A1E3EAF52BD63BA2001CC21A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				A133C8612BDA1F5C00A9597B /* XCRemoteSwiftPackageReference "CodeScanner" */,
 			);
 			productRefGroup = A1E3EAE42BD63A68001CC21A /* Products */;
 			projectDirPath = "";
@@ -295,6 +302,7 @@
 				A133C85C2BDA093C00A9597B /* LLibraryView.swift in Sources */,
 				A13C0E822BD7BA630083CCDD /* MHomeView.swift in Sources */,
 				1FABC5C22BD7A9AF00E730FD /* MExploreView.swift in Sources */,
+				A133C8652BDA1F8100A9597B /* ScanCode.swift in Sources */,
 				A1E3EAE72BD63A68001CC21A /* myShelfApp.swift in Sources */,
 				A133C85A2BDA092C00A9597B /* LHomeView.swift in Sources */,
 				A13C0E882BD7D1730083CCDD /* MProfileView.swift in Sources */,
@@ -445,6 +453,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = myShelf/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -475,6 +484,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = myShelf/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -518,6 +528,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		A133C8612BDA1F5C00A9597B /* XCRemoteSwiftPackageReference "CodeScanner" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/twostraws/CodeScanner";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.4.1;
+			};
+		};
 		A1E3EAF52BD63BA2001CC21A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
@@ -529,6 +547,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		A133C8622BDA1F5C00A9597B /* CodeScanner */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A133C8612BDA1F5C00A9597B /* XCRemoteSwiftPackageReference "CodeScanner" */;
+			productName = CodeScanner;
+		};
 		A1E3EAF62BD63BA2001CC21A /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = A1E3EAF52BD63BA2001CC21A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;

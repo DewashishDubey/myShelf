@@ -13,7 +13,8 @@ struct LHomeView: View {
         if let user = viewModel.currentUser{
             ScrollView{
                 VStack{
-                    
+                    Text(user.fullname)
+                    ScanCode()
                 }
             }
             .frame(maxWidth : .infinity)

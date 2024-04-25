@@ -154,11 +154,11 @@ struct LLibraryView: View {
                     let genre = genres.joined(separator: ", ")
                     let publisher = volumeInfo["publisher"] as? String ?? "Unknown Publisher"
                     let description = volumeInfo["description"] as? String ?? "No description available"
-                    let rating = volumeInfo["averageRating"] as? String
-                    let noOfCopies = volumeInfo["copiesInLibrary"] as? String
-                    let noOfPages = volumeInfo["pageCount"] as? String
+                    _ = volumeInfo["averageRating"] as? String
+                    _ = volumeInfo["copiesInLibrary"] as? String
+                    _ = volumeInfo["pageCount"] as? String
                     let language = volumeInfo["language"] as? String
-                    let shelfLocation = volumeInfo["shelfLocation"] as? String
+                    _ = volumeInfo["shelfLocation"] as? String
                     
                     var imageUrl: String?
                     if let imageLinks = volumeInfo["imageLinks"] as? [String: Any], let thumbnail = imageLinks["thumbnail"] as? String {
