@@ -96,9 +96,9 @@
 		1FABC5C02BD7A96B00E730FD /* Member */ = {
 			isa = PBXGroup;
 			children = (
+				1FABC5C32BD7AB7600E730FD /* MemberView.swift */,
 				A11442492BDA7ADB00AF884A /* Views */,
 				A11442482BDA7AC100AF884A /* SubViews */,
-				1FABC5C32BD7AB7600E730FD /* MemberView.swift */,
 			);
 			path = Member;
 			sourceTree = "<group>";
@@ -106,12 +106,9 @@
 		1FABC5C52BD7ABD100E730FD /* Librarian */ = {
 			isa = PBXGroup;
 			children = (
+				A114424B2BDA7BB600AF884A /* SubViews */,
+				A114424A2BDA7B9B00AF884A /* Views */,
 				1FABC5C62BD7ABF500E730FD /* LibrarianView.swift */,
-				A133C8592BDA092C00A9597B /* LHomeView.swift */,
-				A133C85B2BDA093C00A9597B /* LLibraryView.swift */,
-				A133C85D2BDA094E00A9597B /* LEventsView.swift */,
-				A133C85F2BDA095C00A9597B /* LProfileView.swift */,
-				A133C8642BDA1F8100A9597B /* ScanCode.swift */,
 			);
 			path = Librarian;
 			sourceTree = "<group>";
@@ -142,6 +139,25 @@
 				A13C0E852BD7BD840083CCDD /* MLibraryView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		A114424A2BDA7B9B00AF884A /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				A133C8592BDA092C00A9597B /* LHomeView.swift */,
+				A133C85B2BDA093C00A9597B /* LLibraryView.swift */,
+				A133C85D2BDA094E00A9597B /* LEventsView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		A114424B2BDA7BB600AF884A /* SubViews */ = {
+			isa = PBXGroup;
+			children = (
+				A133C85F2BDA095C00A9597B /* LProfileView.swift */,
+				A133C8642BDA1F8100A9597B /* ScanCode.swift */,
+			);
+			path = SubViews;
 			sourceTree = "<group>";
 		};
 		A133C8662BDA2E8600A9597B /* ViewModels */ = {
@@ -215,11 +231,11 @@
 		A1E3EB0F2BD63D4B001CC21A /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				A197D9922BD8F737005C18F2 /* OnboardingView.swift */,
+				A1E3EB032BD63BC9001CC21A /* ProfileView.swift */,
 				1FABC5C82BD7AC1C00E730FD /* Admin */,
 				1FABC5C52BD7ABD100E730FD /* Librarian */,
 				1FABC5C02BD7A96B00E730FD /* Member */,
-				A1E3EB032BD63BC9001CC21A /* ProfileView.swift */,
-				A197D9922BD8F737005C18F2 /* OnboardingView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
