@@ -48,7 +48,7 @@
 		1FABC5C32BD7AB7600E730FD /* MemberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberView.swift; sourceTree = "<group>"; };
 		1FABC5C62BD7ABF500E730FD /* LibrarianView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibrarianView.swift; sourceTree = "<group>"; };
 		1FABC5C92BD7AC2F00E730FD /* AdminView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminView.swift; sourceTree = "<group>"; };
-		A115C6082BD92C8000B99E3E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		A115C6082BD92C8000B99E3E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A133C8592BDA092C00A9597B /* LHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LHomeView.swift; sourceTree = "<group>"; };
 		A133C85B2BDA093C00A9597B /* LLibraryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LLibraryView.swift; sourceTree = "<group>"; };
 		A133C85D2BDA094E00A9597B /* LEventsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LEventsView.swift; sourceTree = "<group>"; };
@@ -96,13 +96,9 @@
 		1FABC5C02BD7A96B00E730FD /* Member */ = {
 			isa = PBXGroup;
 			children = (
-				1FABC5C12BD7A9AF00E730FD /* MExploreView.swift */,
+				A11442492BDA7ADB00AF884A /* Views */,
+				A11442482BDA7AC100AF884A /* SubViews */,
 				1FABC5C32BD7AB7600E730FD /* MemberView.swift */,
-				A13C0E812BD7BA620083CCDD /* MHomeView.swift */,
-				A13C0E832BD7BD760083CCDD /* MEventsView.swift */,
-				A13C0E852BD7BD840083CCDD /* MLibraryView.swift */,
-				A13C0E872BD7D1730083CCDD /* MProfileView.swift */,
-				A197D9902BD8F42A005C18F2 /* MFAQView.swift */,
 			);
 			path = Member;
 			sourceTree = "<group>";
@@ -128,6 +124,26 @@
 			path = Admin;
 			sourceTree = "<group>";
 		};
+		A11442482BDA7AC100AF884A /* SubViews */ = {
+			isa = PBXGroup;
+			children = (
+				A13C0E872BD7D1730083CCDD /* MProfileView.swift */,
+				A197D9902BD8F42A005C18F2 /* MFAQView.swift */,
+			);
+			path = SubViews;
+			sourceTree = "<group>";
+		};
+		A11442492BDA7ADB00AF884A /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				1FABC5C12BD7A9AF00E730FD /* MExploreView.swift */,
+				A13C0E812BD7BA620083CCDD /* MHomeView.swift */,
+				A13C0E832BD7BD760083CCDD /* MEventsView.swift */,
+				A13C0E852BD7BD840083CCDD /* MLibraryView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		A133C8662BDA2E8600A9597B /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
@@ -142,6 +158,7 @@
 			children = (
 				A1E3EAE52BD63A68001CC21A /* myShelf */,
 				A190EDF02BD7E82700EB3D31 /* GoogleService-Info.plist */,
+				A115C6082BD92C8000B99E3E /* Info.plist */,
 				A1E3EAE42BD63A68001CC21A /* Products */,
 			);
 			sourceTree = "<group>";
@@ -157,10 +174,9 @@
 		A1E3EAE52BD63A68001CC21A /* myShelf */ = {
 			isa = PBXGroup;
 			children = (
-				A115C6082BD92C8000B99E3E /* Info.plist */,
+				A1E3EB062BD63BC9001CC21A /* Firebase */,
 				A133C8662BDA2E8600A9597B /* ViewModels */,
 				A1E3EB0F2BD63D4B001CC21A /* Views */,
-				A1E3EB062BD63BC9001CC21A /* Firebase */,
 				A1E3EAF42BD63A71001CC21A /* App */,
 				A1E3EAE82BD63A68001CC21A /* ContentView.swift */,
 				A1E3EAEA2BD63A6A001CC21A /* Assets.xcassets */,
@@ -188,6 +204,8 @@
 		A1E3EB062BD63BC9001CC21A /* Firebase */ = {
 			isa = PBXGroup;
 			children = (
+				A1E3EB022BD63BC9001CC21A /* LoginView.swift */,
+				A1E3EB042BD63BC9001CC21A /* RegistrationView.swift */,
 				A1E3EB112BD63D6F001CC21A /* Helper */,
 				A1E3EB102BD63D66001CC21A /* Model */,
 			);
@@ -201,8 +219,6 @@
 				1FABC5C52BD7ABD100E730FD /* Librarian */,
 				1FABC5C02BD7A96B00E730FD /* Member */,
 				A1E3EB032BD63BC9001CC21A /* ProfileView.swift */,
-				A1E3EB022BD63BC9001CC21A /* LoginView.swift */,
-				A1E3EB042BD63BC9001CC21A /* RegistrationView.swift */,
 				A197D9922BD8F737005C18F2 /* OnboardingView.swift */,
 			);
 			path = Views;

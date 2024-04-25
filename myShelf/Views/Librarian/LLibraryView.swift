@@ -100,9 +100,9 @@ struct LLibraryView: View {
                 "imageUrl": book.imageUrl ?? "", // Use imageUrl if available
                 "rating": rating,
                 "noOfCopies": noOfCopies,
-                "noOfPages": noOfPages,
+                "noOfPages": Int(noOfPages) ?? 0,
                 "language": book.language ?? "",
-                "shelfLocation": shelfLocation
+                "shelfLocation": shelfLocation,
             ]
 
             // Add book data to Firestore collection "books"

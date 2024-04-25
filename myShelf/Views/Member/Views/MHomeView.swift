@@ -128,7 +128,10 @@ struct CurrentlyReadingView: View {
 }
 
 struct PopularBooksView: View {
+    @State private var lastReadGenre: String = "Loading..."
     @ObservedObject var firebaseManager = FirebaseManager()
+    @EnvironmentObject var viewModel: AuthViewModel // Injecting AuthViewModel
+    
     var body: some View {
         VStack(alignment: .leading) {
             Text("Popular Books")
@@ -136,110 +139,73 @@ struct PopularBooksView: View {
                 .foregroundColor(.white)
                 .padding(.horizontal)
             
+            /*Text("Last Read Genre: \(lastReadGenre)") // Display last read genre
+                .foregroundStyle(Color.white)*/
+            
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 20) {
-                    //BookThumbnailView()
-                    //MLibraryView()
                     ForEach(firebaseManager.books, id: \.uid) { book in
-                        VStack {
-                            AsyncImage(url: URL(string: book.imageUrl)) { phase in
-                                switch phase {
-                                case .empty:
-                                    ProgressView()
-                                case .success(let image):
-                                    image
-                                        .resizable()
-                                    .aspectRatio(contentMode: .fill)
-                                    .frame(width: 100, height: 150)
-                                    
-                                case .failure:
-                                    Image(systemName: "photo")
-                                        .resizable()
-                                    .aspectRatio(contentMode: .fill)
-                                    .frame(width: 100, height: 150)
-                                    .clipped()
-                                @unknown default:
-                                    Text("Unknown")
+                        if book.genre == lastReadGenre{
+                            VStack {
+                                AsyncImage(url: URL(string: book.imageUrl)) { phase in
+                                    switch phase {
+                                    case .empty:
+                                        ProgressView()
+                                    case .success(let image):
+                                        image
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fill)
+                                            .frame(width: 100, height: 150)
+                                            .clipped()
+                                    case .failure:
+                                        Image(systemName: "photo")
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fill)
+                                            .frame(width: 100, height: 150)
+                                            .clipped()
+                                    @unknown default:
+                                        Text("Unknown")
+                                    }
                                 }
+                                .frame(width: 100, height: 150)
+                                
+                                Text(book.title)
+                                    .font(.caption)
+                                    .foregroundColor(.white)
+                                    .lineLimit(1)
+                                Text("\(book.authors.joined(separator: ", "))")
+                                    .font(.caption)
+                                    .foregroundColor(.gray)
+                                    .lineLimit(1)
                             }
-                            .frame(width: 100, height: 150) // Adjust size as needed
-                            
-                            Text(book.title)
-                                .font(.caption)
-                                .foregroundColor(.white)
-                                .lineLimit(1)
-                            Text("\(book.authors.joined(separator: ", "))")
-                                .font(.caption)
-                                .foregroundColor(.gray)
-                                .lineLimit(1)
                         }
                     }
                 }
                 .padding(.horizontal)
             }
             .onAppear {
+                fetchLastReadGenre() // Fetch last read genre on view appear
                 firebaseManager.fetchBooks()
+            }
+        }
+    }
+    
+    func fetchLastReadGenre() {
+        if let userId = viewModel.currentUser?.id {
+            let membersRef = Firestore.firestore().collection("members").document(userId)
+            membersRef.getDocument { document, error in
+                if let document = document, document.exists {
+                    if let lastReadGenre = document.data()?["lastReadGenre"] as? String {
+                        self.lastReadGenre = lastReadGenre // Update lastReadGenre
+                    }
+                } else {
+                    print("Member document does not exist or could not be retrieved: \(error?.localizedDescription ?? "Unknown error")")
+                }
+            }
         }
     }
 }
 
-struct BookThumbnailView: View {
-    @ObservedObject var firebaseManager = FirebaseManager()
-    var body: some View {
-                ForEach(firebaseManager.books, id: \.uid) { book in
-                    VStack(alignment: .leading, spacing: 8) {
-                        AsyncImage(url: URL(string: book.imageUrl)) { phase in
-                            switch phase {
-                            case .empty:
-                                ProgressView()
-                            case .success(let image):
-                                image
-                                    .resizable()
-                                .aspectRatio(contentMode: .fill)
-                                .frame(width: 100, height: 150)
-                                .clipped()
-                            case .failure:
-                                Image(systemName: "photo")
-                                    .resizable()
-                                .aspectRatio(contentMode: .fill)
-                                .frame(width: 100, height: 150)
-                                .clipped()
-                            @unknown default:
-                                Text("Unknown")
-                            }
-                        }
-                        .frame(width: 100, height: 100) // Adjust size as needed
-                        
-                        Text(book.title)
-                            .font(.caption)
-                            .foregroundColor(.white)
-                            .lineLimit(1)
-                        Text("Authors: \(book.authors.joined(separator: ", "))")
-                            .font(.caption)
-                            .foregroundColor(.gray)
-                            .lineLimit(1)
-                    }
-                }
-            }
-        
-        /*
-        VStack {
-            Image("book")
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .frame(width: 100, height: 150)
-                .clipped()
-            Text("Book Title")
-                .font(.caption)
-                .foregroundColor(.white)
-                .lineLimit(1)
-            Text("Author Name")
-                .font(.caption)
-                .foregroundColor(.gray)
-                .lineLimit(1)
-        }*/
-    }
-}
 
 // Placeholder image loader
 struct ImageLoader {
@@ -314,9 +280,7 @@ struct NewReleasesView: View {
             
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 20) {
-                    ForEach(0..<5) { _ in
                         NewThumbnailView()
-                    }
                 }
                 .padding(.horizontal)
             }
@@ -325,21 +289,50 @@ struct NewReleasesView: View {
 }
 
 struct NewThumbnailView: View {
+    @ObservedObject var firebaseManager = FirebaseManager()
     var body: some View {
-        VStack {
-            Image("book")
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .frame(width: 100, height: 150)
-                .clipped()
-            Text("Book Title")
-                .font(.caption)
-                .foregroundColor(.white)
-                .lineLimit(1)
-            Text("Author Name")
-                .font(.caption)
-                .foregroundColor(.gray)
-                .lineLimit(1)
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack(spacing: 20) {
+                ForEach(firebaseManager.books, id: \.uid) { book in
+                        VStack {
+                            AsyncImage(url: URL(string: book.imageUrl)) { phase in
+                                switch phase {
+                                case .empty:
+                                    ProgressView()
+                                case .success(let image):
+                                    image
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fill)
+                                        .frame(width: 100, height: 150)
+                                        .clipped()
+                                case .failure:
+                                    Image(systemName: "photo")
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fill)
+                                        .frame(width: 100, height: 150)
+                                        .clipped()
+                                @unknown default:
+                                    Text("Unknown")
+                                }
+                            }
+                            .frame(width: 100, height: 150)
+                            
+                            Text(book.title)
+                                .font(.caption)
+                                .foregroundColor(.white)
+                                .lineLimit(1)
+                            Text(book.authors[0])
+                                .font(.caption)
+                                .foregroundColor(.gray)
+                                .lineLimit(1)
+                        }
+                    
+                }
+            }
+            .padding(.horizontal)
+        }
+        .onAppear {
+            firebaseManager.fetchBooks()
         }
     }
 }
