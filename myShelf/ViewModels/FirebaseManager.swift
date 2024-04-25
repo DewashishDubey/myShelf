@@ -34,7 +34,9 @@ class FirebaseManager: ObservableObject {
                               let publisher = data["publisher"] as? String,
                               let rating = data["rating"] as? String,
                               let shelfLocation = data["shelfLocation"] as? String,
-                              let uid = data["uid"] as? String else {
+                              let uid = data["uid"] as? String,
+                              let noOfRatings = data["noOfRatings"] as? String
+                        else {
                             return nil
                         }
                         
@@ -51,10 +53,13 @@ class FirebaseManager: ObservableObject {
                                     publisher: publisher,
                                     rating: rating,
                                     shelfLocation: shelfLocation,
-                                    uid: uid)
+                                    uid: uid,
+                                    noOfRatings: noOfRatings
+                        )
                     }
                 }
             }
         }
     }
 }
+

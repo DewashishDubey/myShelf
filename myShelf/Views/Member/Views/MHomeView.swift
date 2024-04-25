@@ -8,6 +8,9 @@
 import SwiftUI
 import FirebaseFirestore
 
+struct BookUID: Identifiable {
+    let id: String
+}
 
 struct MHomeView: View {
     @ObservedObject var firebaseManager = FirebaseManager()
@@ -22,7 +25,7 @@ struct MHomeView: View {
                 PopularBooksView()
                     .padding(.vertical)
                 
-                AuthorSectionView()
+               // AuthorSectionView()
                 
                 NewReleasesView()
                     .padding(.vertical)
@@ -131,7 +134,8 @@ struct PopularBooksView: View {
     @State private var lastReadGenre: String = "Loading..."
     @ObservedObject var firebaseManager = FirebaseManager()
     @EnvironmentObject var viewModel: AuthViewModel // Injecting AuthViewModel
-    
+    @State private var showingSheet = false
+    @State private var selectedBookUID: BookUID?
     var body: some View {
         VStack(alignment: .leading) {
             Text("Popular Books")
@@ -178,6 +182,11 @@ struct PopularBooksView: View {
                                     .foregroundColor(.gray)
                                     .lineLimit(1)
                             }
+                            .onTapGesture {
+                                showingSheet.toggle()
+                                selectedBookUID = BookUID(id: book.uid)
+                            }
+                                    
                         }
                     }
                 }
@@ -187,6 +196,9 @@ struct PopularBooksView: View {
                 fetchLastReadGenre() // Fetch last read genre on view appear
                 firebaseManager.fetchBooks()
             }
+            .sheet(item: $selectedBookUID) { selectedUID in // Use item form of sheet
+                            MBookDetailView(bookUID: selectedUID.id) // Pass selected book UID
+                        }
         }
     }
     
@@ -290,11 +302,14 @@ struct NewReleasesView: View {
 
 struct NewThumbnailView: View {
     @ObservedObject var firebaseManager = FirebaseManager()
+    @State private var showingSheet = false
+    @State private var selectedBookUID: BookUID?
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 20) {
                 ForEach(firebaseManager.books, id: \.uid) { book in
-                        VStack {
+                        VStack 
+                    {
                             AsyncImage(url: URL(string: book.imageUrl)) { phase in
                                 switch phase {
                                 case .empty:
@@ -326,6 +341,13 @@ struct NewThumbnailView: View {
                                 .foregroundColor(.gray)
                                 .lineLimit(1)
                         }
+                    .onTapGesture {
+                        showingSheet.toggle()
+                        selectedBookUID = BookUID(id: book.uid)
+                    }
+                    .sheet(item: $selectedBookUID) { selectedUID in // Use item form of sheet
+                                    MBookDetailView(bookUID: selectedUID.id) // Pass selected book UID
+                                }
                     
                 }
             }

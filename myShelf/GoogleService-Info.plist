@@ -3,17 +3,17 @@
 <plist version="1.0">
 <dict>
 	<key>API_KEY</key>
-	<string>AIzaSyDH6Gj8UMCqMC09e50UoqF_MXC9rKmewbA</string>
+	<string>AIzaSyCqLnlAYvkulYJiD7RuQTvZ31vYlXo3IFE</string>
 	<key>GCM_SENDER_ID</key>
-	<string>872381490335</string>
+	<string>1007819992774</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>myOrganization.myShelf</string>
 	<key>PROJECT_ID</key>
-	<string>lmsinfy-d05a1</string>
+	<string>lmsinfytest</string>
 	<key>STORAGE_BUCKET</key>
-	<string>lmsinfy-d05a1.appspot.com</string>
+	<string>lmsinfytest.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -25,6 +25,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:872381490335:ios:85c0386cc8b41d6dddeeaa</string>
+	<string>1:1007819992774:ios:e57d3c6eee91c7eba0f1c7</string>
 </dict>
 </plist>

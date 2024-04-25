@@ -22,4 +22,6 @@ struct Book {
     let rating: String
     let shelfLocation: String
     let uid: String
+    let noOfRatings : String
 }
+
