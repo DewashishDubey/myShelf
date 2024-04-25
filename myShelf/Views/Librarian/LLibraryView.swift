@@ -5,6 +5,7 @@
 //  Created by Dewashish Dubey on 25/04/24.
 //
 
+
 import SwiftUI
 import Firebase
 
@@ -17,17 +18,17 @@ struct BookDetails: Codable {
     let publisher: String
     let description: String
     let imageUrl: String?
-    let rating: String?
-    let noOfCopies: String?
-    let noOfPages: String?
     let language: String?
-    let shelfLocation: String?
 }
 
 struct LLibraryView: View {
     @State private var isbnInput: String = ""
     @State private var book: BookDetails?
     @State private var imageData: Data? // New state variable to store image data
+    @State private var shelfLocation = ""
+    @State private var noOfPages = ""
+    @State private var noOfCopies = ""
+    @State private var rating = ""
     private let db = Firestore.firestore()
     
     var body: some View {
@@ -52,15 +53,15 @@ struct LLibraryView: View {
                         .padding()
                     TextField("Description", text: .constant(book.description))
                         .padding()
-                    TextField("Rating", text: .constant(book.rating ?? "Unknown"))
+                    TextField("Rating", text:$rating)
                         .padding()
-                    TextField("Number of Copies", text: .constant(book.noOfCopies ?? "Unknown"))
+                    TextField("Number of Copies", text: $noOfCopies)
                         .padding()
-                    TextField("Number of Pages", text: .constant(book.noOfPages ?? "Unknown"))
+                    TextField("Number of Pages", text: $noOfPages)
                         .padding()
                     TextField("Language", text: .constant(book.language ?? "Unknown"))
                         .padding()
-                    TextField("Shelf Location", text: .constant(book.shelfLocation ?? "Unknown"))
+                    TextField("Shelf Location", text: $shelfLocation)
                         .padding()
                     
                     if let imageData = imageData, let uiImage = UIImage(data: imageData) {
@@ -97,11 +98,11 @@ struct LLibraryView: View {
                 "publisher": book.publisher,
                 "description": book.description,
                 "imageUrl": book.imageUrl ?? "", // Use imageUrl if available
-                "rating": book.rating ?? "",
-                "noOfCopies": book.noOfCopies ?? "",
-                "noOfPages": book.noOfPages ?? "",
+                "rating": rating,
+                "noOfCopies": noOfCopies,
+                "noOfPages": noOfPages,
                 "language": book.language ?? "",
-                "shelfLocation": book.shelfLocation ?? ""
+                "shelfLocation": shelfLocation
             ]
 
             // Add book data to Firestore collection "books"
@@ -164,7 +165,7 @@ struct LLibraryView: View {
                         imageUrl = thumbnail
                     }
                     
-                    let book = BookDetails(title: title, authors: authors, edition: edition, publicationDate: publicationDate, genre: genre, publisher: publisher, description: description, imageUrl: imageUrl, rating: rating, noOfCopies: noOfCopies, noOfPages: noOfPages, language: language, shelfLocation: shelfLocation)
+                    let book = BookDetails(title: title, authors: authors, edition: edition, publicationDate: publicationDate, genre: genre, publisher: publisher, description: description, imageUrl: imageUrl,language: language)
                     
                     DispatchQueue.main.async {
                         self.book = book
@@ -196,8 +197,9 @@ struct LLibraryView: View {
     }
 }
 
-struct LLibraryView_Previews: PreviewProvider {
+struct ContentView1_Previews: PreviewProvider {
     static var previews: some View {
         LLibraryView()
     }
 }
+
