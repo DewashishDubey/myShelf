@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+
 struct StarsView: View {
     let rating: Float
     let maxRating: Float

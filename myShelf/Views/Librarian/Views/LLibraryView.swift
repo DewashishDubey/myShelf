@@ -147,14 +147,14 @@ struct LLibraryView: View {
                 let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
                 
                 if let items = json?["items"] as? [[String: Any]], let volumeInfo = items.first?["volumeInfo"] as? [String: Any] {
-                    let title = volumeInfo["title"] as? String ?? "Unknown Title"
+                    let title = volumeInfo["title"] as? String ?? "NA"
                     let authors = volumeInfo["authors"] as? [String] ?? []
-                    let edition = volumeInfo["edition"] as? String ?? "Unknown Edition"
-                    let publicationDate = volumeInfo["publishedDate"] as? String ?? "Unknown"
+                    let edition = volumeInfo["edition"] as? String ?? "NA"
+                    let publicationDate = volumeInfo["publishedDate"] as? String ?? "NA"
                     let genres = volumeInfo["categories"] as? [String] ?? []
                     let genre = genres.joined(separator: ", ")
-                    let publisher = volumeInfo["publisher"] as? String ?? "Unknown Publisher"
-                    let description = volumeInfo["description"] as? String ?? "No description available"
+                    let publisher = volumeInfo["publisher"] as? String ?? "NA"
+                    let description = volumeInfo["description"] as? String ?? "NA"
                     _ = volumeInfo["averageRating"] as? String
                     _ = volumeInfo["copiesInLibrary"] as? String
                     _ = volumeInfo["pageCount"] as? String

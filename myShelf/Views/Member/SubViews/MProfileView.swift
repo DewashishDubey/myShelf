@@ -93,6 +93,36 @@ struct MProfileView: View {
                 .padding(.bottom,20)
                 
                 VStack(alignment: .leading, spacing: 20) {
+                    
+                    NavigationLink {
+                        MWishlistView()
+                    } label: {
+                        HStack(alignment: .center) {
+                            Image(systemName: "bookmark.fill")
+                                .foregroundColor(Color(red: 0, green: 0.48, blue: 1))
+                            
+                                .frame(width: 25, alignment: .top)
+                            // Space Between
+                            Text("Wishlist")
+                                .font(
+                                    Font.custom("SF Pro", size: 14)
+                                        .weight(.medium)
+                                )
+                                .foregroundColor(.white)
+                            Spacer()
+                            // Alternative Views and Spacers
+                            Image(systemName: "chevron.right")
+                                .foregroundColor(Color(red: 0.6, green: 0.6, blue: 0.6))
+                        }
+                        .padding(.horizontal, 0)
+                        .frame(width: 313, alignment: .center)
+                    }
+                    
+                    Rectangle()
+                    .foregroundColor(.clear)
+                    .frame(width: 313, height: 0.5)
+                    .background(Color(red: 0.19, green: 0.19, blue: 0.19))
+                    
                     NavigationLink {
                         MFAQView()
                     } label: {
