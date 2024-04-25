@@ -13,7 +13,30 @@ struct LibrarianView: View {
     
     var body: some View {
         // Librarian-specific profile view
-        if let user = viewModel.currentUser{
+        if viewModel.currentUser != nil{
+            TabView{
+                Group{
+                    NavigationStack{
+                        LHomeView()
+                    }
+                    .tabItem {  Label("Home", systemImage: "book") }
+                    
+                    NavigationStack{
+                        LLibraryView()
+                    }
+                    .tabItem {  Label("Library", systemImage: "books.vertical") }
+                    
+                    NavigationStack{
+                        LEventsView()
+                    }
+                    .tabItem {  Label("Events", systemImage: "theatermasks") }
+                }
+                .toolbarBackground(.black, for: .tabBar)
+                .toolbarBackground(.visible, for: .tabBar)
+                .toolbarColorScheme(.dark, for: .tabBar)
+            }
+        }
+        /*if let user = viewModel.currentUser{
             VStack{
                 Text("This is the librarian Page")
                 Text(user.fullname)
@@ -28,7 +51,7 @@ struct LibrarianView: View {
                 }
                 Spacer()
             }
-        }
+        }*/
     }
 }
 
