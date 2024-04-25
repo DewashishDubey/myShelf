@@ -17,18 +17,19 @@ struct MLibraryView: View {
         Book(title: "INFERNO"/*, imageName: "inferno"*/),
         Book(title: "INFERNO"/*, imageName: "inferno"*/),
         Book(title: "INFERNO"/*, imageName: "inferno"*/),
+        Book(title: "Crazy Asians"/*, imageName: "girl_on_train"*/),
+        Book(title: "INFERNO"/*, imageName: "inferno"*/),
+        Book(title: "INFERNO"/*, imageName: "inferno"*/),
+        Book(title: "INFERNO"/*, imageName: "inferno"*/),
     ]
     
     var body: some View {
         NavigationStack{
-            ScrollView{
+            ScrollView(showsIndicators: false){
                 HStack {
                     TagsView(text: "All Books")
-                    Spacer()
                     TagsView(text: "Categories")
-                    Spacer()
                     TagsView(text: "Borrowed")
-                    Spacer()
                     TagsView(text: "Reserved")
                 }
                 Text("All Books")
