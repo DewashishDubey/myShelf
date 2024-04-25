@@ -6,8 +6,11 @@
 //
 
 import SwiftUI
-import Firebase
+import FirebaseFirestore
+
+
 struct MHomeView: View {
+    @ObservedObject var firebaseManager = FirebaseManager()
     var body: some View {
         ScrollView {
             VStack(alignment: .leading) {
@@ -25,8 +28,6 @@ struct MHomeView: View {
                     .padding(.vertical)
                     
             }
-               
-                
         }
         .background(Color.black.edgesIgnoringSafeArea(.all))
     }
@@ -127,6 +128,7 @@ struct CurrentlyReadingView: View {
 }
 
 struct PopularBooksView: View {
+    @ObservedObject var firebaseManager = FirebaseManager()
     var body: some View {
         VStack(alignment: .leading) {
             Text("Popular Books")
@@ -136,18 +138,91 @@ struct PopularBooksView: View {
             
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 20) {
-                    ForEach(0..<5) { _ in
-                        BookThumbnailView()
+                    //BookThumbnailView()
+                    //MLibraryView()
+                    ForEach(firebaseManager.books, id: \.uid) { book in
+                        VStack {
+                            AsyncImage(url: URL(string: book.imageUrl)) { phase in
+                                switch phase {
+                                case .empty:
+                                    ProgressView()
+                                case .success(let image):
+                                    image
+                                        .resizable()
+                                    .aspectRatio(contentMode: .fill)
+                                    .frame(width: 100, height: 150)
+                                    
+                                case .failure:
+                                    Image(systemName: "photo")
+                                        .resizable()
+                                    .aspectRatio(contentMode: .fill)
+                                    .frame(width: 100, height: 150)
+                                    .clipped()
+                                @unknown default:
+                                    Text("Unknown")
+                                }
+                            }
+                            .frame(width: 100, height: 150) // Adjust size as needed
+                            
+                            Text(book.title)
+                                .font(.caption)
+                                .foregroundColor(.white)
+                                .lineLimit(1)
+                            Text("\(book.authors.joined(separator: ", "))")
+                                .font(.caption)
+                                .foregroundColor(.gray)
+                                .lineLimit(1)
+                        }
                     }
                 }
                 .padding(.horizontal)
             }
+            .onAppear {
+                firebaseManager.fetchBooks()
         }
     }
 }
 
 struct BookThumbnailView: View {
+    @ObservedObject var firebaseManager = FirebaseManager()
     var body: some View {
+                ForEach(firebaseManager.books, id: \.uid) { book in
+                    VStack(alignment: .leading, spacing: 8) {
+                        AsyncImage(url: URL(string: book.imageUrl)) { phase in
+                            switch phase {
+                            case .empty:
+                                ProgressView()
+                            case .success(let image):
+                                image
+                                    .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: 100, height: 150)
+                                .clipped()
+                            case .failure:
+                                Image(systemName: "photo")
+                                    .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: 100, height: 150)
+                                .clipped()
+                            @unknown default:
+                                Text("Unknown")
+                            }
+                        }
+                        .frame(width: 100, height: 100) // Adjust size as needed
+                        
+                        Text(book.title)
+                            .font(.caption)
+                            .foregroundColor(.white)
+                            .lineLimit(1)
+                        Text("Authors: \(book.authors.joined(separator: ", "))")
+                            .font(.caption)
+                            .foregroundColor(.gray)
+                            .lineLimit(1)
+                    }
+                }
+            }
+        
+        /*
         VStack {
             Image("book")
                 .resizable()
@@ -162,7 +237,7 @@ struct BookThumbnailView: View {
                 .font(.caption)
                 .foregroundColor(.gray)
                 .lineLimit(1)
-        }
+        }*/
     }
 }
 

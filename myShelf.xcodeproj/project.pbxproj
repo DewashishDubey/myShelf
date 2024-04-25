@@ -17,6 +17,8 @@
 		A133C8602BDA095C00A9597B /* LProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A133C85F2BDA095C00A9597B /* LProfileView.swift */; };
 		A133C8632BDA1F5C00A9597B /* CodeScanner in Frameworks */ = {isa = PBXBuildFile; productRef = A133C8622BDA1F5C00A9597B /* CodeScanner */; };
 		A133C8652BDA1F8100A9597B /* ScanCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = A133C8642BDA1F8100A9597B /* ScanCode.swift */; };
+		A133C8682BDA2E9600A9597B /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = A133C8672BDA2E9600A9597B /* Book.swift */; };
+		A133C86A2BDA2EC800A9597B /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A133C8692BDA2EC800A9597B /* FirebaseManager.swift */; };
 		A13C0E822BD7BA630083CCDD /* MHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A13C0E812BD7BA620083CCDD /* MHomeView.swift */; };
 		A13C0E842BD7BD760083CCDD /* MEventsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A13C0E832BD7BD760083CCDD /* MEventsView.swift */; };
 		A13C0E862BD7BD840083CCDD /* MLibraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A13C0E852BD7BD840083CCDD /* MLibraryView.swift */; };
@@ -52,6 +54,8 @@
 		A133C85D2BDA094E00A9597B /* LEventsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LEventsView.swift; sourceTree = "<group>"; };
 		A133C85F2BDA095C00A9597B /* LProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LProfileView.swift; sourceTree = "<group>"; };
 		A133C8642BDA1F8100A9597B /* ScanCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanCode.swift; sourceTree = "<group>"; };
+		A133C8672BDA2E9600A9597B /* Book.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Book.swift; sourceTree = "<group>"; };
+		A133C8692BDA2EC800A9597B /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
 		A13C0E812BD7BA620083CCDD /* MHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MHomeView.swift; sourceTree = "<group>"; };
 		A13C0E832BD7BD760083CCDD /* MEventsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MEventsView.swift; sourceTree = "<group>"; };
 		A13C0E852BD7BD840083CCDD /* MLibraryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLibraryView.swift; sourceTree = "<group>"; };
@@ -124,6 +128,15 @@
 			path = Admin;
 			sourceTree = "<group>";
 		};
+		A133C8662BDA2E8600A9597B /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				A133C8672BDA2E9600A9597B /* Book.swift */,
+				A133C8692BDA2EC800A9597B /* FirebaseManager.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
 		A1E3EADA2BD63A68001CC21A = {
 			isa = PBXGroup;
 			children = (
@@ -145,6 +158,7 @@
 			isa = PBXGroup;
 			children = (
 				A115C6082BD92C8000B99E3E /* Info.plist */,
+				A133C8662BDA2E8600A9597B /* ViewModels */,
 				A1E3EB0F2BD63D4B001CC21A /* Views */,
 				A1E3EB062BD63BC9001CC21A /* Firebase */,
 				A1E3EAF42BD63A71001CC21A /* App */,
@@ -302,6 +316,7 @@
 				A133C85C2BDA093C00A9597B /* LLibraryView.swift in Sources */,
 				A13C0E822BD7BA630083CCDD /* MHomeView.swift in Sources */,
 				1FABC5C22BD7A9AF00E730FD /* MExploreView.swift in Sources */,
+				A133C8682BDA2E9600A9597B /* Book.swift in Sources */,
 				A133C8652BDA1F8100A9597B /* ScanCode.swift in Sources */,
 				A1E3EAE72BD63A68001CC21A /* myShelfApp.swift in Sources */,
 				A133C85A2BDA092C00A9597B /* LHomeView.swift in Sources */,
@@ -310,6 +325,7 @@
 				A133C85E2BDA094E00A9597B /* LEventsView.swift in Sources */,
 				A133C8602BDA095C00A9597B /* LProfileView.swift in Sources */,
 				A1E3EB0C2BD63BC9001CC21A /* SettingsRowView.swift in Sources */,
+				A133C86A2BDA2EC800A9597B /* FirebaseManager.swift in Sources */,
 				A13C0E862BD7BD840083CCDD /* MLibraryView.swift in Sources */,
 				A1E3EB092BD63BC9001CC21A /* LoginView.swift in Sources */,
 				A1E3EB0A2BD63BC9001CC21A /* ProfileView.swift in Sources */,
