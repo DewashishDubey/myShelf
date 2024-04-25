@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1F9B69B82BDA08B400A1AEEC /* MHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9B69B72BDA08B400A1AEEC /* MHomeView.swift */; };
+		1F9B69BA2BDA094400A1AEEC /* MBookDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9B69B92BDA094400A1AEEC /* MBookDetailView.swift */; };
 		1FABC5C22BD7A9AF00E730FD /* MemberExploreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FABC5C12BD7A9AF00E730FD /* MemberExploreView.swift */; };
 		1FABC5C42BD7AB7600E730FD /* MemberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FABC5C32BD7AB7600E730FD /* MemberView.swift */; };
 		1FABC5C72BD7ABF500E730FD /* LibrarianView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FABC5C62BD7ABF500E730FD /* LibrarianView.swift */; };
@@ -31,6 +33,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1F9B69B72BDA08B400A1AEEC /* MHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MHomeView.swift; sourceTree = "<group>"; };
+		1F9B69B92BDA094400A1AEEC /* MBookDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBookDetailView.swift; sourceTree = "<group>"; };
 		1FABC5C12BD7A9AF00E730FD /* MemberExploreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberExploreView.swift; sourceTree = "<group>"; };
 		1FABC5C32BD7AB7600E730FD /* MemberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberView.swift; sourceTree = "<group>"; };
 		1FABC5C62BD7ABF500E730FD /* LibrarianView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibrarianView.swift; sourceTree = "<group>"; };
@@ -72,6 +76,8 @@
 				1FABC5C12BD7A9AF00E730FD /* MemberExploreView.swift */,
 				1FABC5C32BD7AB7600E730FD /* MemberView.swift */,
 				1FABC5CB2BD7C15100E730FD /* PracticalFile.swift */,
+				1F9B69B72BDA08B400A1AEEC /* MHomeView.swift */,
+				1F9B69B92BDA094400A1AEEC /* MBookDetailView.swift */,
 			);
 			path = Member;
 			sourceTree = "<group>";
@@ -260,9 +266,11 @@
 			files = (
 				A1E3EAE92BD63A68001CC21A /* ContentView.swift in Sources */,
 				A1E3EB082BD63BC9001CC21A /* InputView.swift in Sources */,
+				1F9B69BA2BDA094400A1AEEC /* MBookDetailView.swift in Sources */,
 				1FABC5CA2BD7AC2F00E730FD /* AdminView.swift in Sources */,
 				1FABC5C22BD7A9AF00E730FD /* MemberExploreView.swift in Sources */,
 				A1E3EAE72BD63A68001CC21A /* myShelfApp.swift in Sources */,
+				1F9B69B82BDA08B400A1AEEC /* MHomeView.swift in Sources */,
 				A1E3EB0B2BD63BC9001CC21A /* RegistrationView.swift in Sources */,
 				A1E3EB0C2BD63BC9001CC21A /* SettingsRowView.swift in Sources */,
 				A1E3EB092BD63BC9001CC21A /* LoginView.swift in Sources */,
