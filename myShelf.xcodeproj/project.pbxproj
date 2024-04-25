@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		1F9B69B82BDA08B400A1AEEC /* MHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9B69B72BDA08B400A1AEEC /* MHomeView.swift */; };
 		1F9B69BA2BDA094400A1AEEC /* MBookDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9B69B92BDA094400A1AEEC /* MBookDetailView.swift */; };
+		1F9B69BD2BDA0B4F00A1AEEC /* StarsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9B69BC2BDA0B4F00A1AEEC /* StarsView.swift */; };
+		1F9B69BF2BDA0BE900A1AEEC /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9B69BE2BDA0BE900A1AEEC /* SearchBar.swift */; };
+		1F9B69C32BDA112200A1AEEC /* MLibraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9B69C22BDA112200A1AEEC /* MLibraryView.swift */; };
 		1FABC5C22BD7A9AF00E730FD /* MemberExploreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FABC5C12BD7A9AF00E730FD /* MemberExploreView.swift */; };
 		1FABC5C42BD7AB7600E730FD /* MemberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FABC5C32BD7AB7600E730FD /* MemberView.swift */; };
 		1FABC5C72BD7ABF500E730FD /* LibrarianView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FABC5C62BD7ABF500E730FD /* LibrarianView.swift */; };
@@ -35,6 +38,9 @@
 /* Begin PBXFileReference section */
 		1F9B69B72BDA08B400A1AEEC /* MHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MHomeView.swift; sourceTree = "<group>"; };
 		1F9B69B92BDA094400A1AEEC /* MBookDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBookDetailView.swift; sourceTree = "<group>"; };
+		1F9B69BC2BDA0B4F00A1AEEC /* StarsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarsView.swift; sourceTree = "<group>"; };
+		1F9B69BE2BDA0BE900A1AEEC /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
+		1F9B69C22BDA112200A1AEEC /* MLibraryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLibraryView.swift; sourceTree = "<group>"; };
 		1FABC5C12BD7A9AF00E730FD /* MemberExploreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberExploreView.swift; sourceTree = "<group>"; };
 		1FABC5C32BD7AB7600E730FD /* MemberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberView.swift; sourceTree = "<group>"; };
 		1FABC5C62BD7ABF500E730FD /* LibrarianView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibrarianView.swift; sourceTree = "<group>"; };
@@ -70,6 +76,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1F9B69BB2BDA0B2A00A1AEEC /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				1F9B69BC2BDA0B4F00A1AEEC /* StarsView.swift */,
+				1F9B69BE2BDA0BE900A1AEEC /* SearchBar.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
 		1FABC5C02BD7A96B00E730FD /* Member */ = {
 			isa = PBXGroup;
 			children = (
@@ -78,6 +93,7 @@
 				1FABC5CB2BD7C15100E730FD /* PracticalFile.swift */,
 				1F9B69B72BDA08B400A1AEEC /* MHomeView.swift */,
 				1F9B69B92BDA094400A1AEEC /* MBookDetailView.swift */,
+				1F9B69C22BDA112200A1AEEC /* MLibraryView.swift */,
 			);
 			path = Member;
 			sourceTree = "<group>";
@@ -146,6 +162,7 @@
 		A1E3EB062BD63BC9001CC21A /* Firebase */ = {
 			isa = PBXGroup;
 			children = (
+				1F9B69BB2BDA0B2A00A1AEEC /* Components */,
 				A1E3EB112BD63D6F001CC21A /* Helper */,
 				A1E3EB102BD63D66001CC21A /* Model */,
 				A1E3EB0F2BD63D4B001CC21A /* Views */,
@@ -266,6 +283,7 @@
 			files = (
 				A1E3EAE92BD63A68001CC21A /* ContentView.swift in Sources */,
 				A1E3EB082BD63BC9001CC21A /* InputView.swift in Sources */,
+				1F9B69BD2BDA0B4F00A1AEEC /* StarsView.swift in Sources */,
 				1F9B69BA2BDA094400A1AEEC /* MBookDetailView.swift in Sources */,
 				1FABC5CA2BD7AC2F00E730FD /* AdminView.swift in Sources */,
 				1FABC5C22BD7A9AF00E730FD /* MemberExploreView.swift in Sources */,
@@ -277,7 +295,9 @@
 				1FABC5CC2BD7C15100E730FD /* PracticalFile.swift in Sources */,
 				A1E3EB0A2BD63BC9001CC21A /* ProfileView.swift in Sources */,
 				1FABC5C42BD7AB7600E730FD /* MemberView.swift in Sources */,
+				1F9B69C32BDA112200A1AEEC /* MLibraryView.swift in Sources */,
 				1FABC5C72BD7ABF500E730FD /* LibrarianView.swift in Sources */,
+				1F9B69BF2BDA0BE900A1AEEC /* SearchBar.swift in Sources */,
 				A1E3EB072BD63BC9001CC21A /* AuthViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

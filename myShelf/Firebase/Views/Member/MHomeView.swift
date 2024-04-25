@@ -309,6 +309,7 @@ struct NewImageLoader {
 struct HomePageUser_Previews: PreviewProvider {
     static var previews: some View {
         MHomeView()
+            .preferredColorScheme(.dark)
     }
 }
 

@@ -18,7 +18,7 @@ struct ContentView: View {
 //                LoginView()
 //            }
 //        }
-        MemberExploreView()
+        MLibraryView()
     }
 }
 
