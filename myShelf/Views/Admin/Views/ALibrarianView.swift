@@ -15,6 +15,7 @@ struct ALibrarianView: View {
     @State private var showingSheet1 = false
     @State private var selectedBookUID: BookUID?
     @ObservedObject var librarianManager = LibrarianManager()
+   // @ObservedObject var viewModel : AuthViewModel
     var body: some View {
         ZStack{
             Color.black.ignoresSafeArea(.all)
@@ -63,37 +64,42 @@ struct ALibrarianView: View {
                         .padding(.leading,10)
                         
                         ForEach(librarianManager.librarians, id: \.uid) { librarian in
-                            VStack{
-                                HStack{
-                                    Image(systemName: "person.crop.circle.fill")
-                                        .resizable()
-                                        .aspectRatio(contentMode: .fill)
-                                        .frame(width: 40, height: 40)
-                                        .clipped()
-                                        .foregroundColor(.white)
-                                        .padding(.leading,10)
-                                    VStack{
-                                        Text(librarian.name)
-                                            .font(
-                                                Font.custom("SF Pro", size: 14)
-                                                    .weight(.medium)
-                                            )
+                            NavigationLink{
+                                LibrarianDetailView(libID: librarian.uid)
+                            }label: {
+                                VStack{
+                                    HStack{
+                                        Image(systemName: "person.crop.circle.fill")
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fill)
+                                            .frame(width: 40, height: 40)
+                                            .clipped()
                                             .foregroundColor(.white)
                                             .padding(.leading,10)
+                                        VStack{
+                                            Text(librarian.name)
+                                                .font(
+                                                    Font.custom("SF Pro", size: 14)
+                                                        .weight(.medium)
+                                                )
+                                                .foregroundColor(.white)
+                                                .padding(.leading,10)
+                                        }
+                                       Spacer()
+                                        Image(systemName: "chevron.right")
+                                            .foregroundColor(.gray)
+                                            .padding(.trailing,10)
                                     }
-                                   Spacer()
-                                    Image(systemName: "chevron.right")
-                                        .foregroundColor(.gray)
-                                        .padding(.trailing,10)
+                                    .frame(maxWidth: .infinity,alignment: .leading)
+                                    .padding(.bottom,10)
+                                    Rectangle()
+                                        .foregroundColor(.clear)
+                                        .frame(width: 353, height: 1)
+                                        .background(Color(red: 0.19, green: 0.19, blue: 0.19))
                                 }
-                                .frame(maxWidth: .infinity,alignment: .leading)
-                                .padding(.bottom,10)
-                                Rectangle()
-                                    .foregroundColor(.clear)
-                                    .frame(width: 353, height: 1)
-                                    .background(Color(red: 0.19, green: 0.19, blue: 0.19))
+                                .padding()
                             }
-                            .padding()
+                            
                         }
                         
                     }
