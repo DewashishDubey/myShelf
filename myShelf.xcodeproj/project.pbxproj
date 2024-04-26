@@ -26,6 +26,11 @@
 		A13C0E842BD7BD760083CCDD /* MEventsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A13C0E832BD7BD760083CCDD /* MEventsView.swift */; };
 		A13C0E862BD7BD840083CCDD /* MLibraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A13C0E852BD7BD840083CCDD /* MLibraryView.swift */; };
 		A13C0E882BD7D1730083CCDD /* MProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A13C0E872BD7D1730083CCDD /* MProfileView.swift */; };
+		A14AFBEC2BDBA6A900A29380 /* AddBookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A14AFBEB2BDBA6A900A29380 /* AddBookView.swift */; };
+		A14AFBEF2BDBB0DF00A29380 /* LBookDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A14AFBEE2BDBB0DF00A29380 /* LBookDetailView.swift */; };
+		A14AFBF22BDBB85800A29380 /* AHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A14AFBF12BDBB85800A29380 /* AHomeView.swift */; };
+		A14AFBF42BDBB88E00A29380 /* ALibrarianView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A14AFBF32BDBB88E00A29380 /* ALibrarianView.swift */; };
+		A14AFBF62BDBB8F800A29380 /* AEventsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A14AFBF52BDBB8F800A29380 /* AEventsView.swift */; };
 		A14D334A2BDA95EE0052C27B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A14D33492BDA95EE0052C27B /* GoogleService-Info.plist */; };
 		A197D9912BD8F42A005C18F2 /* MFAQView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A197D9902BD8F42A005C18F2 /* MFAQView.swift */; };
 		A197D9932BD8F737005C18F2 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A197D9922BD8F737005C18F2 /* OnboardingView.swift */; };
@@ -67,6 +72,11 @@
 		A13C0E832BD7BD760083CCDD /* MEventsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MEventsView.swift; sourceTree = "<group>"; };
 		A13C0E852BD7BD840083CCDD /* MLibraryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLibraryView.swift; sourceTree = "<group>"; };
 		A13C0E872BD7D1730083CCDD /* MProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MProfileView.swift; sourceTree = "<group>"; };
+		A14AFBEB2BDBA6A900A29380 /* AddBookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBookView.swift; sourceTree = "<group>"; };
+		A14AFBEE2BDBB0DF00A29380 /* LBookDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LBookDetailView.swift; sourceTree = "<group>"; };
+		A14AFBF12BDBB85800A29380 /* AHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AHomeView.swift; sourceTree = "<group>"; };
+		A14AFBF32BDBB88E00A29380 /* ALibrarianView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ALibrarianView.swift; sourceTree = "<group>"; };
+		A14AFBF52BDBB8F800A29380 /* AEventsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AEventsView.swift; sourceTree = "<group>"; };
 		A14D33492BDA95EE0052C27B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A197D9902BD8F42A005C18F2 /* MFAQView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MFAQView.swift; sourceTree = "<group>"; };
 		A197D9922BD8F737005C18F2 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
@@ -124,6 +134,7 @@
 		1FABC5C82BD7AC1C00E730FD /* Admin */ = {
 			isa = PBXGroup;
 			children = (
+				A14AFBF02BDBB40600A29380 /* Views */,
 				1FABC5C92BD7AC2F00E730FD /* AdminView.swift */,
 			);
 			path = Admin;
@@ -167,6 +178,8 @@
 			children = (
 				A133C85F2BDA095C00A9597B /* LProfileView.swift */,
 				A133C8642BDA1F8100A9597B /* ScanCode.swift */,
+				A14AFBEB2BDBA6A900A29380 /* AddBookView.swift */,
+				A14AFBEE2BDBB0DF00A29380 /* LBookDetailView.swift */,
 			);
 			path = SubViews;
 			sourceTree = "<group>";
@@ -179,6 +192,16 @@
 				A126F8AF2BDAF36100693474 /* WishlistManager.swift */,
 			);
 			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		A14AFBF02BDBB40600A29380 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				A14AFBF12BDBB85800A29380 /* AHomeView.swift */,
+				A14AFBF32BDBB88E00A29380 /* ALibrarianView.swift */,
+				A14AFBF52BDBB8F800A29380 /* AEventsView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		A1E3EADA2BD63A68001CC21A = {
@@ -355,6 +378,7 @@
 				A1E3EAE92BD63A68001CC21A /* ContentView.swift in Sources */,
 				A126F8AE2BDAF30F00693474 /* MWishlistView.swift in Sources */,
 				A1E3EB082BD63BC9001CC21A /* InputView.swift in Sources */,
+				A14AFBF62BDBB8F800A29380 /* AEventsView.swift in Sources */,
 				A126F8B02BDAF36100693474 /* WishlistManager.swift in Sources */,
 				A197D9912BD8F42A005C18F2 /* MFAQView.swift in Sources */,
 				A197D9932BD8F737005C18F2 /* OnboardingView.swift in Sources */,
@@ -367,10 +391,13 @@
 				A133C8652BDA1F8100A9597B /* ScanCode.swift in Sources */,
 				A1E3EAE72BD63A68001CC21A /* myShelfApp.swift in Sources */,
 				A133C85A2BDA092C00A9597B /* LHomeView.swift in Sources */,
+				A14AFBF22BDBB85800A29380 /* AHomeView.swift in Sources */,
 				A13C0E882BD7D1730083CCDD /* MProfileView.swift in Sources */,
 				A1E3EB0B2BD63BC9001CC21A /* RegistrationView.swift in Sources */,
 				A133C85E2BDA094E00A9597B /* LEventsView.swift in Sources */,
+				A14AFBF42BDBB88E00A29380 /* ALibrarianView.swift in Sources */,
 				A133C8602BDA095C00A9597B /* LProfileView.swift in Sources */,
+				A14AFBEC2BDBA6A900A29380 /* AddBookView.swift in Sources */,
 				A1E3EB0C2BD63BC9001CC21A /* SettingsRowView.swift in Sources */,
 				A133C86A2BDA2EC800A9597B /* FirebaseManager.swift in Sources */,
 				A13C0E862BD7BD840083CCDD /* MLibraryView.swift in Sources */,
@@ -379,6 +406,7 @@
 				1FABC5C42BD7AB7600E730FD /* MemberView.swift in Sources */,
 				A13C0E842BD7BD760083CCDD /* MEventsView.swift in Sources */,
 				1FABC5C72BD7ABF500E730FD /* LibrarianView.swift in Sources */,
+				A14AFBEF2BDBB0DF00A29380 /* LBookDetailView.swift in Sources */,
 				A10CDA302BDAB5F400756AA0 /* StarsView.swift in Sources */,
 				A1E3EB072BD63BC9001CC21A /* AuthViewModel.swift in Sources */,
 			);
