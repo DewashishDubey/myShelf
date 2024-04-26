@@ -89,7 +89,7 @@ class AuthViewModel: ObservableObject {
         }
     }*/
     
-    func createUser(withEmail email: String, password: String, fullname: String, userType: UserType) async throws {
+    func createUser(withEmail email: String, password: String, fullname: String, userType: UserType, gender: Gender? = nil) async throws {
         do {
             let result = try await Auth.auth().createUser(withEmail: email, password: password)
             self.userSession = result.user
@@ -121,9 +121,22 @@ class AuthViewModel: ObservableObject {
                 
                 let reservedBooksRef = membersRef.collection("reserved_books")
                 try await reservedBooksRef.addDocument(data: [:])
+                await fetchUser() // Update currentUser after user creation
             }
             
-            await fetchUser() // Update currentUser after user creation
+            if userType == .librarian{
+                // Add librarian-specific data
+                            let librarianRef = Firestore.firestore().collection("librarians").document(newUser.id)
+                            let librarianData: [String: Any] = [
+                                "uid": newUser.id,
+                                "name": newUser.fullname,
+                                "gender": gender == .male ? "male" : "female",
+                                "email": newUser.email
+                            ]
+                            try await librarianRef.setData(librarianData)
+            }
+            
+            
         } catch {
             print("Failed to create user with error \(error.localizedDescription)")
             throw error

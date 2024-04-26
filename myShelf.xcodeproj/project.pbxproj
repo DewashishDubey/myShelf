@@ -31,6 +31,8 @@
 		A14AFBF22BDBB85800A29380 /* AHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A14AFBF12BDBB85800A29380 /* AHomeView.swift */; };
 		A14AFBF42BDBB88E00A29380 /* ALibrarianView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A14AFBF32BDBB88E00A29380 /* ALibrarianView.swift */; };
 		A14AFBF62BDBB8F800A29380 /* AEventsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A14AFBF52BDBB8F800A29380 /* AEventsView.swift */; };
+		A14AFBF92BDBC50300A29380 /* AddLibrarianView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A14AFBF82BDBC50300A29380 /* AddLibrarianView.swift */; };
+		A14AFBFB2BDBCE8400A29380 /* Librarian.swift in Sources */ = {isa = PBXBuildFile; fileRef = A14AFBFA2BDBCE8400A29380 /* Librarian.swift */; };
 		A14D334A2BDA95EE0052C27B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A14D33492BDA95EE0052C27B /* GoogleService-Info.plist */; };
 		A197D9912BD8F42A005C18F2 /* MFAQView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A197D9902BD8F42A005C18F2 /* MFAQView.swift */; };
 		A197D9932BD8F737005C18F2 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A197D9922BD8F737005C18F2 /* OnboardingView.swift */; };
@@ -77,6 +79,8 @@
 		A14AFBF12BDBB85800A29380 /* AHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AHomeView.swift; sourceTree = "<group>"; };
 		A14AFBF32BDBB88E00A29380 /* ALibrarianView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ALibrarianView.swift; sourceTree = "<group>"; };
 		A14AFBF52BDBB8F800A29380 /* AEventsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AEventsView.swift; sourceTree = "<group>"; };
+		A14AFBF82BDBC50300A29380 /* AddLibrarianView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLibrarianView.swift; sourceTree = "<group>"; };
+		A14AFBFA2BDBCE8400A29380 /* Librarian.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Librarian.swift; sourceTree = "<group>"; };
 		A14D33492BDA95EE0052C27B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A197D9902BD8F42A005C18F2 /* MFAQView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MFAQView.swift; sourceTree = "<group>"; };
 		A197D9922BD8F737005C18F2 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
@@ -134,6 +138,7 @@
 		1FABC5C82BD7AC1C00E730FD /* Admin */ = {
 			isa = PBXGroup;
 			children = (
+				A14AFBF72BDBC4ED00A29380 /* SubViews */,
 				A14AFBF02BDBB40600A29380 /* Views */,
 				1FABC5C92BD7AC2F00E730FD /* AdminView.swift */,
 			);
@@ -190,6 +195,7 @@
 				A133C8672BDA2E9600A9597B /* Book.swift */,
 				A133C8692BDA2EC800A9597B /* FirebaseManager.swift */,
 				A126F8AF2BDAF36100693474 /* WishlistManager.swift */,
+				A14AFBFA2BDBCE8400A29380 /* Librarian.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -202,6 +208,14 @@
 				A14AFBF52BDBB8F800A29380 /* AEventsView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		A14AFBF72BDBC4ED00A29380 /* SubViews */ = {
+			isa = PBXGroup;
+			children = (
+				A14AFBF82BDBC50300A29380 /* AddLibrarianView.swift */,
+			);
+			path = SubViews;
 			sourceTree = "<group>";
 		};
 		A1E3EADA2BD63A68001CC21A = {
@@ -381,6 +395,7 @@
 				A14AFBF62BDBB8F800A29380 /* AEventsView.swift in Sources */,
 				A126F8B02BDAF36100693474 /* WishlistManager.swift in Sources */,
 				A197D9912BD8F42A005C18F2 /* MFAQView.swift in Sources */,
+				A14AFBFB2BDBCE8400A29380 /* Librarian.swift in Sources */,
 				A197D9932BD8F737005C18F2 /* OnboardingView.swift in Sources */,
 				1FABC5CA2BD7AC2F00E730FD /* AdminView.swift in Sources */,
 				A133C85C2BDA093C00A9597B /* LLibraryView.swift in Sources */,
@@ -405,6 +420,7 @@
 				A1E3EB0A2BD63BC9001CC21A /* ProfileView.swift in Sources */,
 				1FABC5C42BD7AB7600E730FD /* MemberView.swift in Sources */,
 				A13C0E842BD7BD760083CCDD /* MEventsView.swift in Sources */,
+				A14AFBF92BDBC50300A29380 /* AddLibrarianView.swift in Sources */,
 				1FABC5C72BD7ABF500E730FD /* LibrarianView.swift in Sources */,
 				A14AFBEF2BDBB0DF00A29380 /* LBookDetailView.swift in Sources */,
 				A10CDA302BDAB5F400756AA0 /* StarsView.swift in Sources */,
