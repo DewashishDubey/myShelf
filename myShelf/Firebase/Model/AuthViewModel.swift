@@ -5,7 +5,7 @@
 //  Created by Dewashish Dubey on 20/04/24.
 //
 
-
+/*
 import Foundation
 import Firebase
 import FirebaseFirestore
@@ -64,6 +64,10 @@ class AuthViewModel: ObservableObject {
     }*/
     
     func signIn(withEmail email: String, password: String) async throws {
+        guard userSession == nil else {
+                print("Another user is already signed in. Please sign out first.")
+                return
+            }
         do {
             let result = try await Auth.auth().signIn(withEmail: email, password: password)
             self.userSession = result.user
@@ -97,7 +101,7 @@ class AuthViewModel: ObservableObject {
             // Create user document in Firestore under "users" collection
             let newUser = User(id: result.user.uid, fullname: fullname, email: email, userType: userType)
             let usersRef = Firestore.firestore().collection("users").document(newUser.id)
-            try await usersRef.setData(from: newUser)
+            try usersRef.setData(from: newUser)
             
             // If userType is member, add to "members" collection with additional attributes
             if userType == .member {
@@ -162,10 +166,145 @@ class AuthViewModel: ObservableObject {
     func deleteAccount() {}
 
     func fetchUser() async {
+        if let uid = Auth.auth().currentUser?.uid {
+            do {
+                let snapshot = try await Firestore.firestore().collection("users").document(uid).getDocument()
+                if snapshot.exists {
+                    self.currentUser = try snapshot.data(as: User.self)
+                } else {
+                    print("User document does not exist")
+                }
+            } catch {
+                print("Failed to fetch user: \(error.localizedDescription)")
+            }
+        } else {
+            print("User is not authenticated")
+        }
+    }
+    
+    /*
+    func fetchUser() async {
         guard let uid = Auth.auth().currentUser?.uid else { return }
         guard let snapshot = try? await Firestore.firestore().collection("users").document(uid).getDocument() else { return }
         self.currentUser = try? snapshot.data(as: User.self)
-    }
+    }*/
+}
+*/
+
+
+import Foundation
+import Firebase
+import FirebaseFirestore
+
+enum UserType: String, Codable {
+    case member = "Member"
+    case librarian = "Librarian"
+    case admin = "Admin"
 }
 
+struct User: Identifiable, Codable {
+    var id: String
+    var fullname: String
+    var email: String
+    var userType: UserType
+}
+
+@MainActor
+class AuthViewModel: ObservableObject {
+    @Published var userSession: FirebaseAuth.User?
+    @Published var currentUser: User?
+
+    init() {
+        self.userSession = Auth.auth().currentUser
+
+        Task {
+            await fetchUser()
+        }
+    }
+
+    func signIn(withEmail email: String, password: String) async throws {
+        guard userSession == nil else {
+            print("Another user is already signed in. Please sign out first.")
+            return
+        }
+        do {
+            let result = try await Auth.auth().signIn(withEmail: email, password: password)
+            self.userSession = result.user
+            await fetchUser()
+        } catch {
+            print("Failed to log in with error \(error.localizedDescription)")
+            throw error
+        }
+    }
+
+    func createUser(withEmail email: String, password: String, fullname: String, userType: UserType, gender: Gender? = nil) async throws {
+        do {
+            let result = try await Auth.auth().createUser(withEmail: email, password: password)
+            self.userSession = result.user
+            
+            // Create user document in Firestore under "users" collection
+            let newUser = User(id: result.user.uid, fullname: fullname, email: email, userType: userType)
+            let usersRef = Firestore.firestore().collection("users").document(newUser.id)
+            try usersRef.setData(from: newUser)
+            
+            // If userType is member, add to "members" collection with additional attributes
+            if userType == .member {
+                let membersRef = Firestore.firestore().collection("members").document(newUser.id)
+                let memberData: [String: Any] = [
+                    "id": newUser.id,
+                    "name": newUser.fullname,
+                    "no_of_issued_books": 0,
+                    "is_premium": false,
+                    "subscription_start_date": FieldValue.serverTimestamp(),
+                    "lastReadGenre" : "Fiction"
+                ]
+                try await membersRef.setData(memberData)
+                await fetchUser() // Update currentUser after user creation
+                
+            }
+            
+            if userType == .librarian{
+                // Add librarian-specific data
+                let librarianRef = Firestore.firestore().collection("librarians").document(newUser.id)
+                let librarianData: [String: Any] = [
+                    "uid": newUser.id,
+                    "name": newUser.fullname,
+                    "gender": gender == .male ? "male" : "female",
+                    "email": newUser.email
+                ]
+                try await librarianRef.setData(librarianData)
+            }
+        } catch {
+            print("Failed to create user with error \(error.localizedDescription)")
+            throw error
+        }
+    }
+
+    func signOut() {
+        do {
+            try Auth.auth().signOut()
+            self.userSession = nil
+            self.currentUser = nil
+        } catch {
+            print("Failed to sign out error : \(error.localizedDescription)")
+        }
+    }
+
+    func fetchUser() async {
+        if let uid = Auth.auth().currentUser?.uid {
+            do {
+                let snapshot = try await Firestore.firestore().collection("users").document(uid).getDocument()
+                if snapshot.exists {
+                    self.currentUser = try snapshot.data(as: User.self)
+                } else {
+                    print("User document does not exist")
+                }
+            } catch {
+                print("Failed to fetch user: \(error.localizedDescription)")
+            }
+        } else {
+            print("User is not authenticated")
+        }
+    }
+}
 

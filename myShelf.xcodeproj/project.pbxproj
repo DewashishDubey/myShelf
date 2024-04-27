@@ -33,11 +33,11 @@
 		A14AFBF62BDBB8F800A29380 /* AEventsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A14AFBF52BDBB8F800A29380 /* AEventsView.swift */; };
 		A14AFBF92BDBC50300A29380 /* AddLibrarianView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A14AFBF82BDBC50300A29380 /* AddLibrarianView.swift */; };
 		A14AFBFB2BDBCE8400A29380 /* Librarian.swift in Sources */ = {isa = PBXBuildFile; fileRef = A14AFBFA2BDBCE8400A29380 /* Librarian.swift */; };
+		A18CE35B2BDD16DB00234BD2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A18CE35A2BDD16DB00234BD2 /* GoogleService-Info.plist */; };
 		A197D9912BD8F42A005C18F2 /* MFAQView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A197D9902BD8F42A005C18F2 /* MFAQView.swift */; };
 		A197D9932BD8F737005C18F2 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A197D9922BD8F737005C18F2 /* OnboardingView.swift */; };
 		A1993DE72BDA7CF000AF764B /* MBookDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1993DE62BDA7CF000AF764B /* MBookDetailView.swift */; };
 		A1AD8F1C2BDBF8AC00C720EF /* LibrarianDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1AD8F1B2BDBF8AC00C720EF /* LibrarianDetailView.swift */; };
-		A1AD8F1E2BDC0E7000C720EF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A1AD8F1D2BDC0E7000C720EF /* GoogleService-Info.plist */; };
 		A1E3EAE72BD63A68001CC21A /* myShelfApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E3EAE62BD63A68001CC21A /* myShelfApp.swift */; };
 		A1E3EAE92BD63A68001CC21A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E3EAE82BD63A68001CC21A /* ContentView.swift */; };
 		A1E3EAEB2BD63A6A001CC21A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1E3EAEA2BD63A6A001CC21A /* Assets.xcassets */; };
@@ -82,11 +82,11 @@
 		A14AFBF52BDBB8F800A29380 /* AEventsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AEventsView.swift; sourceTree = "<group>"; };
 		A14AFBF82BDBC50300A29380 /* AddLibrarianView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLibrarianView.swift; sourceTree = "<group>"; };
 		A14AFBFA2BDBCE8400A29380 /* Librarian.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Librarian.swift; sourceTree = "<group>"; };
+		A18CE35A2BDD16DB00234BD2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A197D9902BD8F42A005C18F2 /* MFAQView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MFAQView.swift; sourceTree = "<group>"; };
 		A197D9922BD8F737005C18F2 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		A1993DE62BDA7CF000AF764B /* MBookDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBookDetailView.swift; sourceTree = "<group>"; };
 		A1AD8F1B2BDBF8AC00C720EF /* LibrarianDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibrarianDetailView.swift; sourceTree = "<group>"; };
-		A1AD8F1D2BDC0E7000C720EF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A1E3EAE32BD63A68001CC21A /* myShelf.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = myShelf.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1E3EAE62BD63A68001CC21A /* myShelfApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = myShelfApp.swift; sourceTree = "<group>"; };
 		A1E3EAE82BD63A68001CC21A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -247,7 +247,7 @@
 				A1E3EAF42BD63A71001CC21A /* App */,
 				A1E3EAE82BD63A68001CC21A /* ContentView.swift */,
 				A1E3EAEA2BD63A6A001CC21A /* Assets.xcassets */,
-				A1AD8F1D2BDC0E7000C720EF /* GoogleService-Info.plist */,
+				A18CE35A2BDD16DB00234BD2 /* GoogleService-Info.plist */,
 				A1E3EAEC2BD63A6A001CC21A /* Preview Content */,
 			);
 			path = myShelf;
@@ -381,7 +381,7 @@
 			files = (
 				A1E3EAEE2BD63A6A001CC21A /* Preview Assets.xcassets in Resources */,
 				A1E3EAEB2BD63A6A001CC21A /* Assets.xcassets in Resources */,
-				A1AD8F1E2BDC0E7000C720EF /* GoogleService-Info.plist in Resources */,
+				A18CE35B2BDD16DB00234BD2 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -562,6 +562,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"myShelf/Preview Content\"";
+				DEVELOPMENT_TEAM = S55NM539S3;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = myShelf/Info.plist;
@@ -577,7 +578,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = myOrganization.myShelf;
+				PRODUCT_BUNDLE_IDENTIFIER = infyProject.myShelf;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -593,6 +594,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"myShelf/Preview Content\"";
+				DEVELOPMENT_TEAM = S55NM539S3;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = myShelf/Info.plist;
@@ -608,7 +610,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = myOrganization.myShelf;
+				PRODUCT_BUNDLE_IDENTIFIER = infyProject.myShelf;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

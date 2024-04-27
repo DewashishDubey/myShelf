@@ -15,8 +15,8 @@ struct ContentView: View {
                 ProfileView()
             }
             else{
-                //LoginView()
-                OnboardingView()
+                LoginView()
+                //OnboardingView()
             }
         }
     }

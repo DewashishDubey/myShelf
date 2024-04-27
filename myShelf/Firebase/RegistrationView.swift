@@ -84,15 +84,25 @@ struct RegistrationView: View {
                 .padding(.top, 12)
                 
                 Button(action: {
-                    Task {
-                        guard let userType = UserType(rawValue: selectedRole) else {
-                            print("Invalid role: \(selectedRole)")
-                            return
-                        }
-                        // Pass the UserType enum to createUser function
-                        try await viewModel.createUser(withEmail: email, password: password, fullname: fullname, userType: userType)
-                    }
-                }) {
+                                    // Validate user input
+                                    guard !email.isEmpty, !fullname.isEmpty, !password.isEmpty, !confirmPassword.isEmpty else {
+                                        print("All fields are required")
+                                        return
+                                    }
+                                    guard password == confirmPassword else {
+                                        print("Passwords do not match")
+                                        return
+                                    }
+                                    // Attempt to create user
+                                    Task {
+                                        do {
+                                            // Call createUser function from viewModel
+                                            try await viewModel.createUser(withEmail: email, password: password, fullname: fullname, userType: .member)
+                                        } catch {
+                                            print("Failed to create user: \(error.localizedDescription)")
+                                        }
+                                    }
+                                }) {
                     HStack {
                         Text("Sign up")
                             .fontWeight(.semibold)
