@@ -112,6 +112,7 @@ class AuthViewModel: ObservableObject {
                 ]
                 try await membersRef.setData(memberData)
                 
+                /*
                 // Create subcollections for the member user
                 let issuedBooksRef = membersRef.collection("issued_books")
                 try await issuedBooksRef.addDocument(data: [:])
@@ -120,7 +121,7 @@ class AuthViewModel: ObservableObject {
                 try await previouslyIssuedBooksRef.addDocument(data: [:])
                 
                 let reservedBooksRef = membersRef.collection("reserved_books")
-                try await reservedBooksRef.addDocument(data: [:])
+                try await reservedBooksRef.addDocument(data: [:])*/
                 await fetchUser() // Update currentUser after user creation
             }
             
