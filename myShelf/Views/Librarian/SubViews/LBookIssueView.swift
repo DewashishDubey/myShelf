@@ -175,6 +175,10 @@ struct LBookIssueView: View {
                 // Issue the book for non-premium member
                 issueBook(startDate: Date(), endDate: Date().addingTimeInterval(7 * 24 * 60 * 60))
             }
+            else if member.isPremium
+            {
+                issueBook(startDate: Date(), endDate: Date().addingTimeInterval(15 * 24 * 60 * 60))
+            }
             else
             {
                 showAlert = true
@@ -212,18 +216,72 @@ struct LBookIssueView: View {
         let issuedBooksRef = db.collection("members").document(MemberID).collection("issued_books")
         let booksRef = db.collection("books").document(bookID)
         let memberRef = db.collection("members").document(MemberID)
-
+        let booksIssuedRef = db.collection("books_issued") // New collection reference
         // Add the issued book document
         issuedBooksRef.addDocument(data: [
             "bookID": bookID,
             "start_date": startDate,
             "end_date": endDate,
-            "fine": 0
-        ]) { error in
+            "fine": 0,
+            "documentID": "", // Placeholder for the UID
+        ]) { (error) in
             if let error = error {
                 print("Error adding document: \(error)")
             } else {
-                print("Document added successfully")
+                issuedBooksRef.getDocuments { (snapshot, error) in
+                    if let error = error {
+                        print("Error getting documents: \(error)")
+                    } else if let snapshot = snapshot {
+                        guard let document = snapshot.documents.first else {
+                            print("Document does not exist")
+                            return
+                        }
+                        let documentID = document.documentID
+                        
+                        // Update the document with the UID
+                        issuedBooksRef.document(documentID).setData(["documentID": documentID], merge: true) { error in
+                            if let error = error {
+                                print("Error updating document with UID: \(error)")
+                            } else {
+                                print("UID added successfully to the document")
+                            }
+                        }
+                    }
+                }
+
+                // Add the issued book document to books_issued collection
+                    booksIssuedRef.addDocument(data: [
+                        "memberID": MemberID, // Add MemberID
+                        "bookID": bookID,
+                        "start_date": startDate,
+                        "end_date": endDate,
+                        "documentID": "", // Placeholder for the UID
+                    ]) { (error) in
+                        if let error = error {
+                            print("Error adding document to books_issued: \(error)")
+                        } else {
+                            booksIssuedRef.getDocuments { (snapshot, error) in
+                                if let error = error {
+                                    print("Error getting documents: \(error)")
+                                } else if let snapshot = snapshot {
+                                    guard let document = snapshot.documents.first else {
+                                        print("Document does not exist")
+                                        return
+                                    }
+                                    let documentID = document.documentID
+                                    
+                                    // Update the document with the UID
+                                    booksIssuedRef.document(documentID).setData(["documentID": documentID], merge: true) { error in
+                                        if let error = error {
+                                            print("Error updating document with UID: \(error)")
+                                        } else {
+                                            print("UID added successfully to the document")
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
                 
                 // Update the number of copies for the book
                 booksRef.getDocument { document, error in
@@ -242,9 +300,9 @@ struct LBookIssueView: View {
                                     memberRef.updateData(["no_of_issued_books": FieldValue.increment(Int64(1))])
                                     
                                     if let genre = bookData["genre"] as? String {
-                                                                        // Update lastReadGenre in member document
-                                                                        memberRef.updateData(["lastReadGenre": genre])
-                                                                    }
+                                        // Update lastReadGenre in member document
+                                        memberRef.updateData(["lastReadGenre": genre])
+                                    }
                                     print("Document updated successfully")
                                 }
                             }
@@ -256,6 +314,7 @@ struct LBookIssueView: View {
             }
         }
     }
+
 
     
     func formattedDate(_ date: Date) -> String {
