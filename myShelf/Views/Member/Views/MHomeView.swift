@@ -7,6 +7,7 @@
 
 import SwiftUI
 import FirebaseFirestore
+import FirebaseAuth
 
 struct BookUID: Identifiable {
     let id: String
@@ -14,6 +15,7 @@ struct BookUID: Identifiable {
 
 struct MHomeView: View {
     @ObservedObject var firebaseManager = FirebaseManager()
+    @EnvironmentObject var viewModel : AuthViewModel
     var body: some View {
         ScrollView {
             VStack(alignment: .leading) {
@@ -31,9 +33,63 @@ struct MHomeView: View {
                     .padding(.vertical)
                     
             }
+            .onAppear{
+                if let currentUserUID = Auth.auth().currentUser?.uid {
+                                        checkAndUpdateFines(for: currentUserUID)
+                                    }
+            }
         }
         .background(Color.black.edgesIgnoringSafeArea(.all))
     }
+    func checkAndUpdateFines(for userID: String) {
+        let db = Firestore.firestore()
+        let issuedBooksRef = db.collection("members").document(userID).collection("issued_books")
+        
+        issuedBooksRef.getDocuments { snapshot, error in
+            if let error = error {
+                print("Error getting documents: \(error)")
+                return
+            }
+            
+            guard let documents = snapshot?.documents else {
+                print("No documents found")
+                return
+            }
+            
+            let currentDate = Date()
+            
+            for document in documents {
+                let data = document.data()
+                guard let timestamp = data["end_date"] as? Timestamp else {
+                    continue
+                }
+                
+                let endDate = timestamp.dateValue() // Convert Timestamp to Date
+                
+                if currentDate > endDate {
+                    // Calculate the difference in days
+                    let calendar = Calendar.current
+                    let components = calendar.dateComponents([.day], from: endDate, to: currentDate)
+                    guard let daysOverdue = components.day else {
+                        continue
+                    }
+                    
+                    // Calculate fine
+                    let fine = daysOverdue * 5
+                    
+                    // Update the document with the updated fine
+                    issuedBooksRef.document(document.documentID).updateData(["fine": fine]) { error in
+                        if let error = error {
+                            print("Error updating document: \(error)")
+                        } else {
+                            print("Fine updated successfully")
+                        }
+                    }
+                }
+            }
+        }
+    }
+
 }
 
 struct HeaderView: View {
@@ -90,12 +146,106 @@ struct HeaderView: View {
 }
 
 struct CurrentlyReadingView: View {
+    @ObservedObject var firebaseManager = FirebaseManager()
+    @State private var issuedBooks: [(String, Int, Int)] = []
     var body: some View {
-        VStack(alignment: .leading) {
             Text("Currently Reading")
                 .font(.headline)
                 .foregroundColor(.white)
                 .padding(.horizontal)
+        ScrollView(.horizontal,showsIndicators: false)
+        {
+                    HStack {
+                        ForEach(issuedBooks, id: \.0) { (bookID, remainingDays, fine) in
+                            if let book = firebaseManager.books.first(where: { $0.uid == bookID }) {
+                                
+                                HStack{
+                                    VStack{
+                                        VStack(alignment: .leading, spacing: 10) {
+                                            Text("Due in \(remainingDays) days")
+                                                .font(
+                                                Font.custom("SF Pro Text", size: 10)
+                                                .weight(.semibold)
+                                                )
+                                                .foregroundColor(.black)
+                                                .padding(.horizontal, 10)
+                                                .padding(.top, 4)
+                                                .padding(.bottom, 5)
+                                                .background(Color(red: 1, green: 0.79, blue: 0.16))
+                                                .cornerRadius(200)
+                                            
+                                            Text(book.title)
+                                            .font(
+                                            Font.custom("SF Pro Text", size: 16)
+                                            .weight(.bold)
+                                            )
+                                            .foregroundColor(.white)
+                                        }
+                                        .padding(0)
+                                        .frame(maxWidth: .infinity, alignment: .topLeading)
+                                        
+                                        Spacer()
+                                        VStack(alignment: .leading, spacing: 10) {
+                                            Text(book.authors[0])
+                                            .font(Font.custom("SF Pro Text", size: 12))
+                                            .foregroundColor(Color(red: 0.6, green: 0.6, blue: 0.6))
+                                            
+                                            Text(book.genre)
+                                            .font(Font.custom("SF Pro Text", size: 12))
+                                            .foregroundColor(Color(red: 0.6, green: 0.6, blue: 0.6))
+                                            
+                                            Text("Overdue Fine: $\(fine)")
+                                            .font(Font.custom("SF Pro Text", size: 12))
+                                            .foregroundColor(Color(red: 0.2, green: 0.66, blue: 0.33))
+
+
+                                        }
+                                        .frame(maxWidth: .infinity, alignment: .topLeading)
+                                        .padding(0)
+                                        .padding(.bottom,10)
+                                    }
+                                    .padding(.top,18)
+                                    Spacer()
+                                    AsyncImage(url: URL(string: book.imageUrl)) { phase in
+                                        switch phase {
+                                        case .empty:
+                                            ProgressView()
+                                        case .success(let image):
+                                            image
+                                                .resizable()
+                                                .aspectRatio(contentMode: .fit)
+                                                .frame(width: 100, height: 180)
+                                                .clipped()
+                                        case .failure:
+                                            Image(systemName: "photo")
+                                                .resizable()
+                                                .aspectRatio(contentMode: .fit)
+                                                .frame(width: 100, height: 180)
+                                                .clipped()
+                                        @unknown default:
+                                            Text("Unknown")
+                                        }
+                                    }
+                                    .frame(width: 100, height: 180)
+                                    
+                                }
+                                .frame(width: 300,alignment: .topLeading)
+                                .padding(15)
+                                .background(Color(red: 0.11, green: 0.11, blue: 0.12))
+                                .cornerRadius(10)
+                                .padding(.trailing,10)
+                            }
+                        }
+                    }
+                    .padding(.horizontal)
+                }
+               .onAppear {
+                   fetchIssuedBookDetails()
+                   firebaseManager.fetchBooks()
+               }
+        /*
+        VStack(alignment: .leading) {
+            
             
             HStack {
                 VStack(alignment: .leading) {
@@ -126,6 +276,44 @@ struct CurrentlyReadingView: View {
                     .clipped()
             }
             .padding(.horizontal)
+        }*/
+    }
+    func fetchIssuedBookDetails() {
+        guard let currentUserUID = Auth.auth().currentUser?.uid else {
+            print("Current user UID not found")
+            return
+        }
+        
+        let db = Firestore.firestore()
+        let issuedBooksRef = db.collection("members").document(currentUserUID).collection("issued_books")
+        
+        issuedBooksRef.getDocuments { snapshot, error in
+            if let error = error {
+                print("Error getting documents: \(error)")
+                return
+            }
+            
+            guard let documents = snapshot?.documents else {
+                print("No documents found")
+                return
+            }
+            
+            var booksData: [(String, Int, Int)] = []
+            let currentDate = Date()
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "MMM d, yyyy 'at' h:mm:ss a Z"
+            
+            for document in documents {
+                let data = document.data()
+                if let bookID = data["bookID"] as? String,
+                   let endDateTimestamp = data["end_date"] as? Timestamp,
+                   let fine = data["fine"] as? Int {
+                    let endDate = endDateTimestamp.dateValue()
+                    let remainingDays = Calendar.current.dateComponents([.day], from: currentDate, to: endDate).day ?? 0
+                    booksData.append((bookID, remainingDays, fine))
+                }
+            }
+            issuedBooks = booksData
         }
     }
 }

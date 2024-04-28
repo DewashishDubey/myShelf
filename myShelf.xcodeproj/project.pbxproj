@@ -14,6 +14,9 @@
 		A10CDA302BDAB5F400756AA0 /* StarsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10CDA2F2BDAB5F400756AA0 /* StarsView.swift */; };
 		A126F8AE2BDAF30F00693474 /* MWishlistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A126F8AD2BDAF30F00693474 /* MWishlistView.swift */; };
 		A126F8B02BDAF36100693474 /* WishlistManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A126F8AF2BDAF36100693474 /* WishlistManager.swift */; };
+		A129978F2BDE21AF00099962 /* LMemebrDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A129978E2BDE21AF00099962 /* LMemebrDetailView.swift */; };
+		A12997912BDE253A00099962 /* LScanMember.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12997902BDE253A00099962 /* LScanMember.swift */; };
+		A12997932BDE284600099962 /* LBookIssueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12997922BDE284600099962 /* LBookIssueView.swift */; };
 		A133C85A2BDA092C00A9597B /* LHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A133C8592BDA092C00A9597B /* LHomeView.swift */; };
 		A133C85C2BDA093C00A9597B /* LLibraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A133C85B2BDA093C00A9597B /* LLibraryView.swift */; };
 		A133C85E2BDA094E00A9597B /* LEventsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A133C85D2BDA094E00A9597B /* LEventsView.swift */; };
@@ -64,6 +67,9 @@
 		A115C6082BD92C8000B99E3E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A126F8AD2BDAF30F00693474 /* MWishlistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MWishlistView.swift; sourceTree = "<group>"; };
 		A126F8AF2BDAF36100693474 /* WishlistManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishlistManager.swift; sourceTree = "<group>"; };
+		A129978E2BDE21AF00099962 /* LMemebrDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LMemebrDetailView.swift; sourceTree = "<group>"; };
+		A12997902BDE253A00099962 /* LScanMember.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LScanMember.swift; sourceTree = "<group>"; };
+		A12997922BDE284600099962 /* LBookIssueView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LBookIssueView.swift; sourceTree = "<group>"; };
 		A133C8592BDA092C00A9597B /* LHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LHomeView.swift; sourceTree = "<group>"; };
 		A133C85B2BDA093C00A9597B /* LLibraryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LLibraryView.swift; sourceTree = "<group>"; };
 		A133C85D2BDA094E00A9597B /* LEventsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LEventsView.swift; sourceTree = "<group>"; };
@@ -183,12 +189,23 @@
 		A114424B2BDA7BB600AF884A /* SubViews */ = {
 			isa = PBXGroup;
 			children = (
+				A12997942BDE2CBE00099962 /* Book Issue Process */,
 				A133C85F2BDA095C00A9597B /* LProfileView.swift */,
 				A133C8642BDA1F8100A9597B /* ScanCode.swift */,
 				A14AFBEB2BDBA6A900A29380 /* AddBookView.swift */,
 				A14AFBEE2BDBB0DF00A29380 /* LBookDetailView.swift */,
+				A12997902BDE253A00099962 /* LScanMember.swift */,
+				A12997922BDE284600099962 /* LBookIssueView.swift */,
 			);
 			path = SubViews;
+			sourceTree = "<group>";
+		};
+		A12997942BDE2CBE00099962 /* Book Issue Process */ = {
+			isa = PBXGroup;
+			children = (
+				A129978E2BDE21AF00099962 /* LMemebrDetailView.swift */,
+			);
+			path = "Book Issue Process";
 			sourceTree = "<group>";
 		};
 		A133C8662BDA2E8600A9597B /* ViewModels */ = {
@@ -402,8 +419,11 @@
 				A197D9932BD8F737005C18F2 /* OnboardingView.swift in Sources */,
 				1FABC5CA2BD7AC2F00E730FD /* AdminView.swift in Sources */,
 				A133C85C2BDA093C00A9597B /* LLibraryView.swift in Sources */,
+				A12997932BDE284600099962 /* LBookIssueView.swift in Sources */,
+				A129978F2BDE21AF00099962 /* LMemebrDetailView.swift in Sources */,
 				A1993DE72BDA7CF000AF764B /* MBookDetailView.swift in Sources */,
 				A13C0E822BD7BA630083CCDD /* MHomeView.swift in Sources */,
+				A12997912BDE253A00099962 /* LScanMember.swift in Sources */,
 				1FABC5C22BD7A9AF00E730FD /* MExploreView.swift in Sources */,
 				A133C8682BDA2E9600A9597B /* Book.swift in Sources */,
 				A133C8652BDA1F8100A9597B /* ScanCode.swift in Sources */,
