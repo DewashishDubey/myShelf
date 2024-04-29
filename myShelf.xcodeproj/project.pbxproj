@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1F0C513A2BDA4E9F0094C5F1 /* MLibraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0C51392BDA4E9F0094C5F1 /* MLibraryView.swift */; };
 		1F8264232BDF752500B4FA53 /* rough.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8264222BDF752500B4FA53 /* rough.swift */; };
+		1F8264252BDFAE1C00B4FA53 /* MDetailLibraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8264242BDFAE1C00B4FA53 /* MDetailLibraryView.swift */; };
 		1F9B69B82BDA08B400A1AEEC /* MHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9B69B72BDA08B400A1AEEC /* MHomeView.swift */; };
 		1F9B69BA2BDA094400A1AEEC /* MBookDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9B69B92BDA094400A1AEEC /* MBookDetailView.swift */; };
 		1F9B69BD2BDA0B4F00A1AEEC /* StarsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9B69BC2BDA0B4F00A1AEEC /* StarsView.swift */; };
@@ -40,6 +41,7 @@
 /* Begin PBXFileReference section */
 		1F0C51392BDA4E9F0094C5F1 /* MLibraryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLibraryView.swift; sourceTree = "<group>"; };
 		1F8264222BDF752500B4FA53 /* rough.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = rough.swift; sourceTree = "<group>"; };
+		1F8264242BDFAE1C00B4FA53 /* MDetailLibraryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDetailLibraryView.swift; sourceTree = "<group>"; };
 		1F9B69B72BDA08B400A1AEEC /* MHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MHomeView.swift; sourceTree = "<group>"; };
 		1F9B69B92BDA094400A1AEEC /* MBookDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBookDetailView.swift; sourceTree = "<group>"; };
 		1F9B69BC2BDA0B4F00A1AEEC /* StarsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarsView.swift; sourceTree = "<group>"; };
@@ -100,6 +102,7 @@
 				1F9B69C22BDA112200A1AEEC /* MLibraryView_2.swift */,
 				1F0C51392BDA4E9F0094C5F1 /* MLibraryView.swift */,
 				1F8264222BDF752500B4FA53 /* rough.swift */,
+				1F8264242BDFAE1C00B4FA53 /* MDetailLibraryView.swift */,
 			);
 			path = Member;
 			sourceTree = "<group>";
@@ -291,6 +294,7 @@
 				A1E3EB082BD63BC9001CC21A /* InputView.swift in Sources */,
 				1F9B69BD2BDA0B4F00A1AEEC /* StarsView.swift in Sources */,
 				1F9B69BA2BDA094400A1AEEC /* MBookDetailView.swift in Sources */,
+				1F8264252BDFAE1C00B4FA53 /* MDetailLibraryView.swift in Sources */,
 				1FABC5CA2BD7AC2F00E730FD /* AdminView.swift in Sources */,
 				1FABC5C22BD7A9AF00E730FD /* MemberExploreView.swift in Sources */,
 				A1E3EAE72BD63A68001CC21A /* myShelfApp.swift in Sources */,
