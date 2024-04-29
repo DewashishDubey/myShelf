@@ -15,4 +15,6 @@ struct SearchBar: View {
 }
 
 
-
+#Preview {
+    SearchBar()
+}

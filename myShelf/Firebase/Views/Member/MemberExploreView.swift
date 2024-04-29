@@ -9,7 +9,7 @@ struct MemberExploreView: View {
         
         NavigationStack
         {
-            ScrollView{
+            ScrollView(showsIndicators: false){
                 
                 ScrollView(.horizontal, showsIndicators: false)
                 {
