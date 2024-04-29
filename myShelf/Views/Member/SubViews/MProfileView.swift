@@ -215,6 +215,9 @@ struct MProfileView: View {
             let membersRef = Firestore.firestore().collection("members").document(userId)
             membersRef.getDocument { document, error in
                 if let document = document, document.exists {
+                    if let isPremium = document.data()?["is_premium"] as? Bool {
+                        self.isPremiumMember = isPremium
+                    }
                 } else {
                     print("Member document does not exist or could not be retrieved: \(error?.localizedDescription ?? "Unknown error")")
                 }
