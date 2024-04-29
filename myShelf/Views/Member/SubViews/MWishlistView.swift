@@ -129,11 +129,11 @@ struct MWishlistView: View {
             }
         }
     }
-    
     private func fetchWishlist(for userID: String) {
         let db = Firestore.firestore()
         let userRef = db.collection("members").document(userID)
         
+        // Fetch initial wishlist data
         userRef.collection("wishlist").getDocuments { [self] snapshot, error in
             if let error = error {
                 print("Error fetching wishlist: \(error.localizedDescription)")
@@ -188,7 +188,65 @@ struct MWishlistView: View {
                 }
             }
         }
+        
+        // Add a real-time listener to update the wishlist books locally whenever changes occur
+        userRef.collection("wishlist").addSnapshotListener { snapshot, error in
+            if let error = error {
+                print("Error fetching wishlist snapshot: \(error.localizedDescription)")
+                return
+            }
+            
+            guard let documents = snapshot?.documents else {
+                print("Wishlist snapshot is empty")
+                return
+            }
+            
+            let bookUIDs = documents.compactMap { $0.documentID }
+            
+            if bookUIDs.isEmpty {
+                print("No books in wishlist snapshot")
+                self.wishlistBooks = [] // Clear wishlist books
+                return
+            }
+            
+            // Fetch books using bookUIDs
+            let booksRef = db.collection("books")
+            booksRef.whereField("uid", in: bookUIDs).getDocuments { snapshot, error in
+                if let error = error {
+                    print("Error fetching books: \(error.localizedDescription)")
+                    return
+                }
+                
+                guard let documents = snapshot?.documents else {
+                    print("No matching books found")
+                    return
+                }
+                
+                // Convert Firestore documents to Book objects
+                self.wishlistBooks = documents.compactMap { document in
+                    let data = document.data()
+                    return Book(
+                        title: data["title"] as? String ?? "",
+                        authors: data["authors"] as? [String] ?? [],
+                        description: data["description"] as? String ?? "",
+                        edition: data["edition"] as? String ?? "",
+                        genre: data["genre"] as? String ?? "",
+                        imageUrl: data["imageUrl"] as? String ?? "",
+                        language: data["language"] as? String ?? "",
+                        noOfCopies: data["noOfCopies"] as? String ?? "",
+                        noOfPages: data["noOfPages"] as? String ?? "",
+                        publicationDate: data["publicationDate"] as? String ?? "",
+                        publisher: data["publisher"] as? String ?? "",
+                        rating: data["rating"] as? String ?? "",
+                        shelfLocation: data["shelfLocation"] as? String ?? "",
+                        uid: data["uid"] as? String ?? "",
+                        noOfRatings: data["noOfRatings"] as? String ?? ""
+                    )
+                }
+            }
+        }
     }
+
 }
 
 

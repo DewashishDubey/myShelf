@@ -14,7 +14,7 @@ class FirebaseManager: ObservableObject {
     private var db = Firestore.firestore()
     
     func fetchBooks() {
-        db.collection("books").getDocuments { snapshot, error in
+        db.collection("books").addSnapshotListener { snapshot, error in
             if let error = error {
                 print("Error getting documents: \(error)")
             } else {

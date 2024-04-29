@@ -47,15 +47,18 @@ struct LBookDetailView: View {
                                             .font(Font.custom("SF Pro Text", size: 16))
                                             .foregroundColor(Color(red: 0, green: 0.48, blue: 1))
                                             .padding(.leading,5)
+                                        Spacer()
                                         Button(action: {
                                             dismiss()
                                         }) {
                                             Image(systemName: "xmark.circle.fill")
                                                 .foregroundColor(.gray.opacity(0.7))
                                                 .frame(width: 20, height: 20)
-                                                .padding(.leading, 320)
+                                                //.padding(.leading, 320)
                                         }
                                     }
+                                    .frame(maxWidth: .infinity)
+                                    .padding(.horizontal)
                                     .padding(.bottom,10)
                                     
                                     AsyncImage(url: URL(string: book.imageUrl)) { phase in

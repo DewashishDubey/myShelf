@@ -3,17 +3,17 @@
 <plist version="1.0">
 <dict>
 	<key>API_KEY</key>
-	<string>AIzaSyDxBNUcxN8Yh9wOqk3CASJAtIwhLzMCePs</string>
+	<string>AIzaSyBpBD_apV62LD1bbe9NgxFdaeXvHXfP96Q</string>
 	<key>GCM_SENDER_ID</key>
-	<string>470521063535</string>
+	<string>135998495392</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>infyProject.myShelf</string>
 	<key>PROJECT_ID</key>
-	<string>lmsinfytest2</string>
+	<string>myshelf-8f3d1</string>
 	<key>STORAGE_BUCKET</key>
-	<string>lmsinfytest2.appspot.com</string>
+	<string>myshelf-8f3d1.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -25,6 +25,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:470521063535:ios:5516e63a8367568fe8859a</string>
+	<string>1:135998495392:ios:deb673ac1c89fc661747c5</string>
 </dict>
 </plist>

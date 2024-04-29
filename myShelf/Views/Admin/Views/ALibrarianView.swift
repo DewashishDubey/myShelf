@@ -24,7 +24,8 @@ struct ALibrarianView: View {
                 
                 NavigationStack
                 {
-                    VStack{
+                    VStack
+                    {
                         HStack(alignment: .center) {
                         
                             Text("Add a New Librarian")
@@ -47,6 +48,8 @@ struct ALibrarianView: View {
                         .onTapGesture {
                             showingSheet.toggle()
                         }
+                        .padding(20)
+                        //.padding(.horizontal)
                         
                         HStack(alignment: .center)
                         {
@@ -62,6 +65,7 @@ struct ALibrarianView: View {
                         .frame(maxWidth: .infinity, alignment: .center)
                         .padding(.bottom,10)
                         .padding(.leading,10)
+                        .padding(.horizontal)
                         
                         ForEach(librarianManager.librarians, id: \.uid) { librarian in
                             NavigationLink{

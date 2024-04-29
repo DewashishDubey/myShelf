@@ -35,7 +35,7 @@ struct MEventsView: View {
         let db = Firestore.firestore()
         let memberRef = db.collection("members").document(userID)
         
-        memberRef.getDocument { (document, error) in
+        memberRef.addSnapshotListener { document, error in
             if let document = document, document.exists {
                 if let lastReadGenre = document.data()?["lastReadGenre"] as? String {
                     self.lastReadGenre = lastReadGenre

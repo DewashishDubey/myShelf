@@ -86,8 +86,6 @@ struct AddBookView: View {
                             .aspectRatio(contentMode: .fit)
                             .frame(width: 140, height: 210)
                             .padding(.bottom,10)
-                    } else {
-                        ProgressView() // Show a loading indicator while image is being fetched
                     }
                 
                 CustomTextFieldRow(imageName: "book", title: "Title", textFieldData: book?.title)

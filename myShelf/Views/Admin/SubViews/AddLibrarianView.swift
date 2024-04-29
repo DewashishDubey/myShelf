@@ -33,7 +33,8 @@ struct AddLibrarianView: View {
         ZStack{
             Color.black
                 .ignoresSafeArea()
-                VStack(alignment: .leading, spacing: 20){
+                VStack(alignment: .leading, spacing: 20)
+            {
                     HStack{
                         Button(action: {
                             dismiss()
@@ -71,6 +72,7 @@ struct AddLibrarianView: View {
                         
                     }.padding(.leading,10)
                         .padding(.bottom,20)
+                        .padding(.top,20)
                     VStack(alignment: .center, spacing: 20) {
                         /*
                         Rectangle()
@@ -236,6 +238,7 @@ struct AddLibrarianView: View {
             
             
             }
+
             
             
         
