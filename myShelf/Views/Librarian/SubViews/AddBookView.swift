@@ -220,6 +220,33 @@ struct AddBookView: View {
                 
                     Button(action: {
                         saveBookDetails()
+                        let db = Firestore.firestore()
+                        let adminRef = db.collection("admin").document("adminDocument")
+                        // Pass the UserType enum to createUser function
+                        adminRef.getDocument { document, error in
+                               if let document = document, document.exists {
+                                   var books = document.data()?["books"] as? Int ?? 0
+                                   books += Int(noOfCopies) ?? 0
+                                   
+                                   // Update document with new value of "librarians" attribute
+                                   adminRef.setData([
+                                                     "books": books], merge: true) { error in
+                                       if let error = error {
+                                           print("Error updating document: \(error.localizedDescription)")
+                                       }
+                                   }
+                               } else if let error = error {
+                                   print("Error fetching document: \(error.localizedDescription)")
+                               } else {
+                                   // Document doesn't exist, create it with librarians count 1
+                                   adminRef.setData([
+                                    "books": Int(noOfCopies) ?? 0]) { error in
+                                       if let error = error {
+                                           print("Error creating document: \(error.localizedDescription)")
+                                       }
+                                   }
+                               }
+                           }
                         dismiss()
                     }) {
                         HStack {

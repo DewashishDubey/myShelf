@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-
+import Firebase
 
 import SwiftUI
 enum Gender {
@@ -60,7 +60,33 @@ struct AddLibrarianView: View {
                                     print("Invalid role: \(selectedRole)")
                                     return
                                 }
+                                let db = Firestore.firestore()
+                                let adminRef = db.collection("admin").document("adminDocument")
                                 // Pass the UserType enum to createUser function
+                                adminRef.getDocument { document, error in
+                                       if let document = document, document.exists {
+                                           var librariansCount = document.data()?["librarians"] as? Int ?? 0
+                                           librariansCount += 1
+                                           
+                                           // Update document with new value of "librarians" attribute
+                                           adminRef.setData([
+                                                             "librarians": librariansCount], merge: true) { error in
+                                               if let error = error {
+                                                   print("Error updating document: \(error.localizedDescription)")
+                                               }
+                                           }
+                                       } else if let error = error {
+                                           print("Error fetching document: \(error.localizedDescription)")
+                                       } else {
+                                           // Document doesn't exist, create it with librarians count 1
+                                           adminRef.setData([
+                                                             "librarians": 1]) { error in
+                                               if let error = error {
+                                                   print("Error creating document: \(error.localizedDescription)")
+                                               }
+                                           }
+                                       }
+                                   }
                                 try await viewModel.createUser(withEmail: email, password: password, fullname: name, userType: userType, gender: selectedGender)
                                 dismiss()
                             }                        }) {

@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-
+import Firebase
 struct RegistrationView: View {
     @State private var email = ""
     @State private var fullname = ""
@@ -97,6 +97,31 @@ struct RegistrationView: View {
                                     Task {
                                         do {
                                             // Call createUser function from viewModel
+                                            let db = Firestore.firestore()
+                                            let adminRef = db.collection("admin").document("adminDocument")
+                                            // Pass the UserType enum to createUser function
+                                            adminRef.getDocument { document, error in
+                                                   if let document = document, document.exists {
+                                                       var members = document.data()?["members"] as? Int ?? 0
+                                                       members += 1
+                                                       
+                                                       adminRef.setData([
+                                                                         "members": members], merge: true) { error in
+                                                           if let error = error {
+                                                               print("Error updating document: \(error.localizedDescription)")
+                                                           }
+                                                       }
+                                                   } else if let error = error {
+                                                       print("Error fetching document: \(error.localizedDescription)")
+                                                   } else {
+                                                       adminRef.setData([
+                                                        "members": 1]) { error in
+                                                           if let error = error {
+                                                               print("Error creating document: \(error.localizedDescription)")
+                                                           }
+                                                       }
+                                                   }
+                                               }
                                             try await viewModel.createUser(withEmail: email, password: password, fullname: fullname, userType: .member)
                                         } catch {
                                             print("Failed to create user: \(error.localizedDescription)")

@@ -259,6 +259,8 @@ class AuthViewModel: ObservableObject {
                     "lastReadGenre" : "Fiction"
                 ]
                 try await membersRef.setData(memberData)
+                
+                
                 await fetchUser() // Update currentUser after user creation
                 
             }
