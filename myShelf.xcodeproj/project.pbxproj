@@ -18,6 +18,7 @@
 		A129978F2BDE21AF00099962 /* LMemebrDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A129978E2BDE21AF00099962 /* LMemebrDetailView.swift */; };
 		A12997912BDE253A00099962 /* LScanMember.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12997902BDE253A00099962 /* LScanMember.swift */; };
 		A12997932BDE284600099962 /* LBookIssueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12997922BDE284600099962 /* LBookIssueView.swift */; };
+		A12F36E82BE13F69004EE337 /* MBorrowedBookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12F36E72BE13F69004EE337 /* MBorrowedBookView.swift */; };
 		A1300FA72BDF83D0001926E0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A1300FA62BDF83D0001926E0 /* GoogleService-Info.plist */; };
 		A133C85A2BDA092C00A9597B /* LHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A133C8592BDA092C00A9597B /* LHomeView.swift */; };
 		A133C85C2BDA093C00A9597B /* LLibraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A133C85B2BDA093C00A9597B /* LLibraryView.swift */; };
@@ -77,6 +78,7 @@
 		A129978E2BDE21AF00099962 /* LMemebrDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LMemebrDetailView.swift; sourceTree = "<group>"; };
 		A12997902BDE253A00099962 /* LScanMember.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LScanMember.swift; sourceTree = "<group>"; };
 		A12997922BDE284600099962 /* LBookIssueView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LBookIssueView.swift; sourceTree = "<group>"; };
+		A12F36E72BE13F69004EE337 /* MBorrowedBookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBorrowedBookView.swift; sourceTree = "<group>"; };
 		A1300FA62BDF83D0001926E0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A133C8592BDA092C00A9597B /* LHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LHomeView.swift; sourceTree = "<group>"; };
 		A133C85B2BDA093C00A9597B /* LLibraryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LLibraryView.swift; sourceTree = "<group>"; };
@@ -260,6 +262,7 @@
 			children = (
 				A13C0E852BD7BD840083CCDD /* MLibraryView.swift */,
 				A1BC2DA22BDFC753002E3A79 /* MLibraryGridView.swift */,
+				A12F36E72BE13F69004EE337 /* MBorrowedBookView.swift */,
 			);
 			path = MLibrary;
 			sourceTree = "<group>";
@@ -469,6 +472,7 @@
 				A14AFBF42BDBB88E00A29380 /* ALibrarianView.swift in Sources */,
 				A133C8602BDA095C00A9597B /* LProfileView.swift in Sources */,
 				A14AFBEC2BDBA6A900A29380 /* AddBookView.swift in Sources */,
+				A12F36E82BE13F69004EE337 /* MBorrowedBookView.swift in Sources */,
 				A1E3EB0C2BD63BC9001CC21A /* SettingsRowView.swift in Sources */,
 				A133C86A2BDA2EC800A9597B /* FirebaseManager.swift in Sources */,
 				A13C0E862BD7BD840083CCDD /* MLibraryView.swift in Sources */,
@@ -643,6 +647,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"myShelf/Preview Content\"";
@@ -664,6 +669,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = infyProject.myShelf;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

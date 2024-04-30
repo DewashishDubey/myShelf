@@ -75,83 +75,92 @@ struct BorrowedBooks: View {
         VStack{
             ForEach(issuedBooksViewModel.issuedBooks)
             { issuedBook in
-                VStack(alignment: .leading,spacing: 20)
-                {
-                    HStack(alignment: .top,spacing: 10){
+                NavigationLink{
+                    MBorrowedBookView(docID: issuedBook.documentID)
+                }label: {
+                    VStack(alignment: .leading,spacing: 20)
+                    {
                         
-                        AsyncImage(url: URL(string: issuedBook.book.imageUrl)) { phase in
-                            switch phase {
-                            case .empty:
-                                ProgressView()
-                            case .success(let image):
-                                image
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(width: 60, height: 90)
-                                    .clipped()
-                                    .padding(.trailing,10)
-                            case .failure:
-                                Image(systemName: "photo")
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(width: 60, height: 90)
-                                    .clipped()
-                                    .padding(.trailing,10)
-                            @unknown default:
-                                Text("Unknown")
-                            }
-                        }
-                        .frame(width: 60, height: 90)
-                        .clipped()
-                        .padding(.trailing,10)
-                        
-                        HStack(alignment:.top,spacing: 10){
-                            VStack(alignment: .leading,spacing: 10){
-                                Text(issuedBook.book.title)
-                                /*.font(
-                                 Font.custom("SF Pro Text", size: 14)
-                                 .weight(.semibold)
-                                 )*/
-                                    .font(.custom("SFProText-Semibold", size: 14))
-                                    .fontWeight(.semibold)
-                                    .foregroundColor(.white)
-                                Text(issuedBook.book.authors[0])
-                                    .font(Font.custom("SF Pro Text", size: 12))
-                                    .foregroundColor(.white.opacity(0.6))
-                                    .frame(maxWidth: .infinity, alignment: .topLeading)
-                                
-                                Text("Borrowed on: \(trimTime(from: issuedBook.startDateString))")
-                                    .font(Font.custom("SF Pro Text", size: 12))
-                                    .foregroundColor(.white.opacity(0.6))
-                                    .frame(maxWidth: .infinity, alignment: .topLeading)
-                                
-                                Text("Returned Due on: \(trimTime(from: issuedBook.endDateString))")
-                                    .font(Font.custom("SF Pro Text", size: 12))
-                                    .foregroundColor(.white.opacity(0.6))
-                                    .frame(maxWidth: .infinity, alignment: .topLeading)
-                                
-                                
-                            }
-                            .padding(.leading,2)
-                            .padding(.top,4)
+                        HStack(alignment: .top,spacing: 10)
+                        {
                             
-                            Text("Borrowed")
-                                .font(
-                                    Font.custom("SF Pro", size: 12)
-                                        .weight(.semibold)
-                                )
-                                .multilineTextAlignment(.center)
-                                .foregroundColor(Color(red: 0.98, green: 0.74, blue: 0.02))
+                            AsyncImage(url: URL(string: issuedBook.book.imageUrl)) { phase in
+                                switch phase {
+                                case .empty:
+                                    ProgressView()
+                                case .success(let image):
+                                    image
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fit)
+                                        .frame(width: 60, height: 90)
+                                        .clipped()
+                                        .padding(.trailing,10)
+                                case .failure:
+                                    Image(systemName: "photo")
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fit)
+                                        .frame(width: 60, height: 90)
+                                        .clipped()
+                                        .padding(.trailing,10)
+                                @unknown default:
+                                    Text("Unknown")
+                                }
+                            }
+                            .frame(width: 60, height: 90)
+                            .clipped()
+                            .padding(.trailing,10)
+                            
+                            HStack(alignment:.top,spacing: 10){
+                                VStack(alignment: .leading,spacing: 10){
+                                    Text(issuedBook.book.title)
+                                    /*.font(
+                                     Font.custom("SF Pro Text", size: 14)
+                                     .weight(.semibold)
+                                     )*/
+                                        .font(.custom("SFProText-Semibold", size: 14))
+                                        .fontWeight(.semibold)
+                                        .foregroundColor(.white)
+                                    Text(issuedBook.book.authors[0])
+                                        .font(Font.custom("SF Pro Text", size: 12))
+                                        .foregroundColor(.white.opacity(0.6))
+                                        .frame(maxWidth: .infinity, alignment: .topLeading)
+                                    
+                                    Text("Borrowed on: \(trimTime(from: issuedBook.startDateString))")
+                                        .font(Font.custom("SF Pro Text", size: 12))
+                                        .foregroundColor(.white.opacity(0.6))
+                                        .frame(maxWidth: .infinity, alignment: .topLeading)
+                                    
+                                    Text("Returned Due on: \(trimTime(from: issuedBook.endDateString))")
+                                        .font(Font.custom("SF Pro Text", size: 12))
+                                        .foregroundColor(.white.opacity(0.6))
+                                        .frame(maxWidth: .infinity, alignment: .topLeading)
+                                    
+                                    
+                                }
+                                .padding(.leading,2)
                                 .padding(.top,4)
+                                
+                                Text("Borrowed")
+                                    .font(
+                                        Font.custom("SF Pro", size: 12)
+                                            .weight(.semibold)
+                                    )
+                                    .multilineTextAlignment(.center)
+                                    .foregroundColor(Color(red: 0.98, green: 0.74, blue: 0.02))
+                                    .padding(.top,4)
+                            }
                         }
+                        Rectangle()
+                            .foregroundColor(.clear)
+                            .frame(width: 353, height: 1)
+                            .background(Color(red: 0.19, green: 0.19, blue: 0.19))
+                        Spacer()
                     }
-                    Rectangle()
-                        .foregroundColor(.clear)
-                        .frame(width: 353, height: 1)
-                        .background(Color(red: 0.19, green: 0.19, blue: 0.19))
-                    Spacer()
+                    .padding(.horizontal)
                 }
-                .padding(.horizontal)
+               
+                
+                
                 
             }
         }
