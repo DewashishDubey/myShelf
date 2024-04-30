@@ -12,6 +12,7 @@
 		1FABC5C72BD7ABF500E730FD /* LibrarianView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FABC5C62BD7ABF500E730FD /* LibrarianView.swift */; };
 		1FABC5CA2BD7AC2F00E730FD /* AdminView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FABC5C92BD7AC2F00E730FD /* AdminView.swift */; };
 		A10CDA302BDAB5F400756AA0 /* StarsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10CDA2F2BDAB5F400756AA0 /* StarsView.swift */; };
+		A11EAAF42BE0FE1C00B46B47 /* MSubscriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11EAAF32BE0FE1C00B46B47 /* MSubscriptionView.swift */; };
 		A126F8AE2BDAF30F00693474 /* MWishlistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A126F8AD2BDAF30F00693474 /* MWishlistView.swift */; };
 		A126F8B02BDAF36100693474 /* WishlistManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A126F8AF2BDAF36100693474 /* WishlistManager.swift */; };
 		A129978F2BDE21AF00099962 /* LMemebrDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A129978E2BDE21AF00099962 /* LMemebrDetailView.swift */; };
@@ -70,6 +71,7 @@
 		1FABC5C92BD7AC2F00E730FD /* AdminView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminView.swift; sourceTree = "<group>"; };
 		A10CDA2F2BDAB5F400756AA0 /* StarsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarsView.swift; sourceTree = "<group>"; };
 		A115C6082BD92C8000B99E3E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A11EAAF32BE0FE1C00B46B47 /* MSubscriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MSubscriptionView.swift; sourceTree = "<group>"; };
 		A126F8AD2BDAF30F00693474 /* MWishlistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MWishlistView.swift; sourceTree = "<group>"; };
 		A126F8AF2BDAF36100693474 /* WishlistManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishlistManager.swift; sourceTree = "<group>"; };
 		A129978E2BDE21AF00099962 /* LMemebrDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LMemebrDetailView.swift; sourceTree = "<group>"; };
@@ -171,6 +173,7 @@
 				A1993DE62BDA7CF000AF764B /* MBookDetailView.swift */,
 				A10CDA2F2BDAB5F400756AA0 /* StarsView.swift */,
 				A126F8AD2BDAF30F00693474 /* MWishlistView.swift */,
+				A11EAAF32BE0FE1C00B46B47 /* MSubscriptionView.swift */,
 			);
 			path = SubViews;
 			sourceTree = "<group>";
@@ -433,6 +436,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A1E3EAE92BD63A68001CC21A /* ContentView.swift in Sources */,
+				A11EAAF42BE0FE1C00B46B47 /* MSubscriptionView.swift in Sources */,
 				A126F8AE2BDAF30F00693474 /* MWishlistView.swift in Sources */,
 				A1E3EB082BD63BC9001CC21A /* InputView.swift in Sources */,
 				A1BC2DA32BDFC753002E3A79 /* MLibraryGridView.swift in Sources */,

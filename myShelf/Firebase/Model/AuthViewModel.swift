@@ -256,7 +256,8 @@ class AuthViewModel: ObservableObject {
                     "no_of_issued_books": 0,
                     "is_premium": false,
                     "subscription_start_date": FieldValue.serverTimestamp(),
-                    "lastReadGenre" : "Fiction"
+                    "lastReadGenre" : "Fiction",
+                    "membership_duration" : 0
                 ]
                 try await membersRef.setData(memberData)
                 
