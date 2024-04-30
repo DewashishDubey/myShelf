@@ -14,6 +14,7 @@ struct FinePolicyView: View {
         let reservationOptions = ["01 Hour", "02 Hours", "03 Hours"]
     @State private var showAlert = false
     @State private var value = ""
+    @FocusState private var isFocused: Bool
     var body: some View {
       
         NavigationView{
@@ -48,11 +49,12 @@ struct FinePolicyView: View {
                                 .background(.gray)
                                 .padding(.trailing,15)
                             TextField("Value per day", text: $value)
+                                .keyboardType(.numberPad)
+                                .focused($isFocused)
                                 .foregroundColor(.white)
                                 .padding(0)
                                 .frame(width: 110)
                                 .accentColor(.white)
-                            
                         }
                         .padding(0)
                         .frame(width: 110, alignment: .leading)
@@ -201,9 +203,10 @@ struct FinePolicyView: View {
                 
             }
         }
-            
-            
-        
+        .onTapGesture {
+            // To Dismiss keyboard
+            isFocused = false
+        }
     }
 }
 
