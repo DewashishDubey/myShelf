@@ -43,6 +43,7 @@
 		A1993DE72BDA7CF000AF764B /* MBookDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1993DE62BDA7CF000AF764B /* MBookDetailView.swift */; };
 		A19A4AEA2BDFF243000604D7 /* FinePolicyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19A4AE92BDFF243000604D7 /* FinePolicyView.swift */; };
 		A19A4AEC2BE00520000604D7 /* AdminData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19A4AEB2BE00520000604D7 /* AdminData.swift */; };
+		A1A9BDE82BE24AF400EFF2F8 /* MBorrowedBookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A9BDE72BE24AF400EFF2F8 /* MBorrowedBookView.swift */; };
 		A1AD8F1C2BDBF8AC00C720EF /* LibrarianDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1AD8F1B2BDBF8AC00C720EF /* LibrarianDetailView.swift */; };
 		A1BC2DA32BDFC753002E3A79 /* MLibraryGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1BC2DA22BDFC753002E3A79 /* MLibraryGridView.swift */; };
 		A1BC2DA52BDFCF3A002E3A79 /* IssuedBooks.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1BC2DA42BDFCF3A002E3A79 /* IssuedBooks.swift */; };
@@ -101,6 +102,7 @@
 		A1993DE62BDA7CF000AF764B /* MBookDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBookDetailView.swift; sourceTree = "<group>"; };
 		A19A4AE92BDFF243000604D7 /* FinePolicyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinePolicyView.swift; sourceTree = "<group>"; };
 		A19A4AEB2BE00520000604D7 /* AdminData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminData.swift; sourceTree = "<group>"; };
+		A1A9BDE72BE24AF400EFF2F8 /* MBorrowedBookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBorrowedBookView.swift; sourceTree = "<group>"; };
 		A1AD8F1B2BDBF8AC00C720EF /* LibrarianDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibrarianDetailView.swift; sourceTree = "<group>"; };
 		A1BC2DA22BDFC753002E3A79 /* MLibraryGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLibraryGridView.swift; sourceTree = "<group>"; };
 		A1BC2DA42BDFCF3A002E3A79 /* IssuedBooks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssuedBooks.swift; sourceTree = "<group>"; };
@@ -260,6 +262,7 @@
 			children = (
 				A13C0E852BD7BD840083CCDD /* MLibraryView.swift */,
 				A1BC2DA22BDFC753002E3A79 /* MLibraryGridView.swift */,
+				A1A9BDE72BE24AF400EFF2F8 /* MBorrowedBookView.swift */,
 			);
 			path = MLibrary;
 			sourceTree = "<group>";
@@ -469,6 +472,7 @@
 				A14AFBF42BDBB88E00A29380 /* ALibrarianView.swift in Sources */,
 				A133C8602BDA095C00A9597B /* LProfileView.swift in Sources */,
 				A14AFBEC2BDBA6A900A29380 /* AddBookView.swift in Sources */,
+				A1A9BDE82BE24AF400EFF2F8 /* MBorrowedBookView.swift in Sources */,
 				A1E3EB0C2BD63BC9001CC21A /* SettingsRowView.swift in Sources */,
 				A133C86A2BDA2EC800A9597B /* FirebaseManager.swift in Sources */,
 				A13C0E862BD7BD840083CCDD /* MLibraryView.swift in Sources */,

@@ -76,7 +76,9 @@ struct BorrowedBooks: View {
         VStack{
             ForEach(issuedBooksViewModel.issuedBooks)
             { issuedBook in
-                
+                NavigationLink{
+                    MBorrowedBookView(docID: issuedBook.documentID)
+                }label: {
                     VStack(alignment: .leading,spacing: 20)
                     {
                         
@@ -157,6 +159,8 @@ struct BorrowedBooks: View {
                     }
                     .padding(.horizontal)
                 }
+                }
+                   
                
                 
                 
