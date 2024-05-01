@@ -11,14 +11,39 @@ struct LHomeView: View {
     @EnvironmentObject var viewModel : AuthViewModel
     var body: some View {
         if let user = viewModel.currentUser{
-            ScrollView{
-                VStack{
-                    Text(user.fullname)
-                    ScanCode()
+            ZStack{
+                Color.black.ignoresSafeArea(.all)
+                ScrollView{
+                    VStack{
+                        NavigationLink{
+                            LRequestsView()
+                        }label: {
+                            HStack(alignment: .center) {
+                                Text("Requests")
+                                    .font(
+                                    Font.custom("SF Pro", size: 14)
+                                    .weight(.medium)
+                                    )
+                                    .multilineTextAlignment(.center)
+                                    .foregroundColor(.white)
+                                
+                                Spacer()
+                                
+                                Image(systemName: "person")
+                                    .foregroundColor(.white)
+                            }
+                            .padding(20)
+                            .frame(width: 353, alignment: .center)
+                            .background(Color(red: 0.11, green: 0.11, blue: 0.12))
+                            .cornerRadius(8)
+                            .padding(.horizontal,20)
+                        }
+                       
+                        Text(user.fullname)
+                        ScanCode()
+                    }
                 }
             }
-            .frame(maxWidth : .infinity)
-            .background(Color.black.edgesIgnoringSafeArea(.all))
         }
     }
 }

@@ -44,6 +44,8 @@
 		A19A4AEA2BDFF243000604D7 /* FinePolicyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19A4AE92BDFF243000604D7 /* FinePolicyView.swift */; };
 		A19A4AEC2BE00520000604D7 /* AdminData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19A4AEB2BE00520000604D7 /* AdminData.swift */; };
 		A1A9BDE82BE24AF400EFF2F8 /* MBorrowedBookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A9BDE72BE24AF400EFF2F8 /* MBorrowedBookView.swift */; };
+		A1A9BDEA2BE24F4000EFF2F8 /* LRequestsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A9BDE92BE24F4000EFF2F8 /* LRequestsView.swift */; };
+		A1A9BDEC2BE2516200EFF2F8 /* ExtensionRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A9BDEB2BE2516200EFF2F8 /* ExtensionRequests.swift */; };
 		A1AD8F1C2BDBF8AC00C720EF /* LibrarianDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1AD8F1B2BDBF8AC00C720EF /* LibrarianDetailView.swift */; };
 		A1BC2DA32BDFC753002E3A79 /* MLibraryGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1BC2DA22BDFC753002E3A79 /* MLibraryGridView.swift */; };
 		A1BC2DA52BDFCF3A002E3A79 /* IssuedBooks.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1BC2DA42BDFCF3A002E3A79 /* IssuedBooks.swift */; };
@@ -103,6 +105,8 @@
 		A19A4AE92BDFF243000604D7 /* FinePolicyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinePolicyView.swift; sourceTree = "<group>"; };
 		A19A4AEB2BE00520000604D7 /* AdminData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminData.swift; sourceTree = "<group>"; };
 		A1A9BDE72BE24AF400EFF2F8 /* MBorrowedBookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBorrowedBookView.swift; sourceTree = "<group>"; };
+		A1A9BDE92BE24F4000EFF2F8 /* LRequestsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LRequestsView.swift; sourceTree = "<group>"; };
+		A1A9BDEB2BE2516200EFF2F8 /* ExtensionRequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionRequests.swift; sourceTree = "<group>"; };
 		A1AD8F1B2BDBF8AC00C720EF /* LibrarianDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibrarianDetailView.swift; sourceTree = "<group>"; };
 		A1BC2DA22BDFC753002E3A79 /* MLibraryGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLibraryGridView.swift; sourceTree = "<group>"; };
 		A1BC2DA42BDFCF3A002E3A79 /* IssuedBooks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssuedBooks.swift; sourceTree = "<group>"; };
@@ -211,6 +215,7 @@
 				A14AFBEE2BDBB0DF00A29380 /* LBookDetailView.swift */,
 				A12997902BDE253A00099962 /* LScanMember.swift */,
 				A12997922BDE284600099962 /* LBookIssueView.swift */,
+				A1A9BDE92BE24F4000EFF2F8 /* LRequestsView.swift */,
 			);
 			path = SubViews;
 			sourceTree = "<group>";
@@ -233,6 +238,7 @@
 				A1BC2DA42BDFCF3A002E3A79 /* IssuedBooks.swift */,
 				A1BC2DA62BDFD5E8002E3A79 /* PreviouslyIssuedBooks.swift */,
 				A19A4AEB2BE00520000604D7 /* AdminData.swift */,
+				A1A9BDEB2BE2516200EFF2F8 /* ExtensionRequests.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -439,7 +445,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				A1E3EAE92BD63A68001CC21A /* ContentView.swift in Sources */,
+				A1A9BDEA2BE24F4000EFF2F8 /* LRequestsView.swift in Sources */,
 				A11EAAF42BE0FE1C00B46B47 /* MSubscriptionView.swift in Sources */,
+				A1A9BDEC2BE2516200EFF2F8 /* ExtensionRequests.swift in Sources */,
 				A126F8AE2BDAF30F00693474 /* MWishlistView.swift in Sources */,
 				A1E3EB082BD63BC9001CC21A /* InputView.swift in Sources */,
 				A1BC2DA32BDFC753002E3A79 /* MLibraryGridView.swift in Sources */,
