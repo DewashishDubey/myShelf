@@ -68,8 +68,8 @@ struct MLibraryGridView: View {
                     }
                 }
                 .onAppear {
-                    issuedBooksViewModel.fetchIssuedBooks(for: viewModel.currentUser?.id ?? "")
-                    previouslyIssuedBooksViewModel.fetchReservedBooks(for: viewModel.currentUser?.id ?? "")
+                    issuedBooksViewModel.fetchIssuedBooks(for: viewModel.currentUser?.id ?? "ILZTUpzz84e5F5b7Xoof3pUX8Hf1")
+                    previouslyIssuedBooksViewModel.fetchReservedBooks(for: viewModel.currentUser?.id ?? "ILZTUpzz84e5F5b7Xoof3pUX8Hf1")
                 }
             }
             .searchable(text: $searchText, isPresented: $searchIsActive)

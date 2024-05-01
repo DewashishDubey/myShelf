@@ -7,6 +7,7 @@
 
 
 import SwiftUI
+
 struct MLibraryView: View {
     @State private var searchText = ""
     @State private var searchIsActive = false
@@ -75,9 +76,7 @@ struct BorrowedBooks: View {
         VStack{
             ForEach(issuedBooksViewModel.issuedBooks)
             { issuedBook in
-                NavigationLink{
-                    MBorrowedBookView(docID: issuedBook.documentID)
-                }label: {
+                
                     VStack(alignment: .leading,spacing: 20)
                     {
                         
@@ -162,11 +161,10 @@ struct BorrowedBooks: View {
                 
                 
                 
-            }
         }
         .onAppear {
-            issuedBooksViewModel.fetchIssuedBooks(for: viewModel.currentUser?.id ?? "")
-            previouslyIssuedBooksViewModel.fetchReservedBooks(for: viewModel.currentUser?.id ?? "")
+            issuedBooksViewModel.fetchIssuedBooks(for: viewModel.currentUser?.id ?? "ILZTUpzz84e5F5b7Xoof3pUX8Hf1")
+            previouslyIssuedBooksViewModel.fetchReservedBooks(for: viewModel.currentUser?.id ?? "ILZTUpzz84e5F5b7Xoof3pUX8Hf1")
         }
     }
     private func trimTime(from dateString: String) -> String {

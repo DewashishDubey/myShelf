@@ -94,7 +94,7 @@ class PreviouslyReservedBooksViewModel: ObservableObject {
         }
     }
     
-    func fetchReservedBook(for memberID: String, documentID: String) {
+   /* func fetchReservedBook(for memberID: String, documentID: String) {
         let db = Firestore.firestore()
         let issuedBookRef = db.collection("members").document(memberID).collection("issued_books").document(documentID)
 
@@ -129,7 +129,7 @@ class PreviouslyReservedBooksViewModel: ObservableObject {
                 }
             }
         }
-    }
+    }*/
 
     
     func formatDate(_ date: Date?) -> String {
