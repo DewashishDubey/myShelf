@@ -14,6 +14,7 @@ struct MBookDetailView: View {
     @ObservedObject var firebaseManager = FirebaseManager()
     @EnvironmentObject var viewModel : AuthViewModel
     @State private var isBookmarked = false
+    @State private var showAlert = false
     var body: some View {
             //Text(user.id)
             ScrollView(showsIndicators: false)
@@ -169,6 +170,8 @@ struct MBookDetailView: View {
                                     
                                     Button(action: {
                                         // Action for Reserve button
+                                        //Text(viewModel.currentUser?.id ?? "")
+                                        reserveBook()
                                     }) {
                                         Text("Reserve Book")
                                             .font(
@@ -182,7 +185,9 @@ struct MBookDetailView: View {
                                             .cornerRadius(10)
                                     }
                                     .padding(.top, 30)
-                                    
+                                    .alert(isPresented: $showAlert) {
+                                                Alert(title: Text("Alert"), message: Text("You cannot issue more than one book."), dismissButton: .default(Text("OK")))
+                                            }
                                     
                                     
                                     
@@ -397,6 +402,50 @@ struct MBookDetailView: View {
                 self.isBookmarked = isInWishlist
             }
         }
+    
+    func reserveBook() {
+            guard let userUID = viewModel.currentUser?.id else {
+                return
+            }
+            
+            let db = Firestore.firestore()
+            let userRef = db.collection("members").document(userUID)
+            let reservationsRef = userRef.collection("reservations")
+            
+            reservationsRef.getDocuments { snapshot, error in
+                if let error = error {
+                    print("Error checking reservations: \(error.localizedDescription)")
+                    return
+                }
+                
+                if let snapshot = snapshot, !snapshot.isEmpty {
+                    // Show alert if reservations exist
+                    showAlert = true
+                } else {
+                    // Proceed with reservation
+                    let currentTime = Date()
+                    let twoHoursLater = Calendar.current.date(byAdding: .hour, value: 2, to: currentTime)!
+                    
+                    var reservationData: [String: Any] = [
+                        "bookUID": bookUID,
+                        "userID": userUID,
+                        "timestamp": Timestamp(date: twoHoursLater)
+                    ]
+                    
+                    let reservationDocRef = reservationsRef.document()
+                    reservationData["reservationID"] = reservationDocRef.documentID
+                    
+                    reservationDocRef.setData(reservationData) { error in
+                        if let error = error {
+                            print("Error reserving book: \(error.localizedDescription)")
+                        } else {
+                            print("Book reserved successfully!")
+                        }
+                    }
+                }
+            }
+        }
+
 }
 
 

@@ -24,8 +24,12 @@ struct MHomeView: View {
                 CurrentlyReadingView()
                     .padding(.vertical)
                 
+                ReservationDetailView()
+                        .padding(.vertical)
+                
                 PopularBooksView()
                     .padding(.vertical)
+                
                 
                // AuthorSectionView()
                 
@@ -36,6 +40,7 @@ struct MHomeView: View {
             .onAppear{
                 if let currentUserUID = Auth.auth().currentUser?.uid {
                                         checkAndUpdateFines(for: currentUserUID)
+                    deleteExpiredReservation(for: currentUserUID)
                                     }
             }
         }
@@ -89,7 +94,45 @@ struct MHomeView: View {
             }
         }
     }
-
+    
+    
+    func deleteExpiredReservation(for userID: String) {
+        let db = Firestore.firestore()
+        let reservationRef = db.collection("members").document(userID).collection("reservations")
+        
+        // Fetch the reservation document
+        reservationRef.getDocuments { snapshot, error in
+            if let error = error {
+                print("Error fetching reservation: \(error.localizedDescription)")
+                return
+            }
+            
+            guard let document = snapshot?.documents.first else {
+                print("No reservation document found")
+                return
+            }
+            
+            if let timestamp = document.data()["timestamp"] as? Timestamp {
+                let endTime = timestamp.dateValue() // Convert timestamp to Date
+                
+                // Get current time
+                let currentTime = Date()
+                
+                // Compare end time with current time
+                if endTime <= currentTime {
+                    // Delete the reservation document
+                    reservationRef.document(document.documentID).delete { error in
+                        if let error = error {
+                            print("Error deleting reservation document: \(error.localizedDescription)")
+                        } else {
+                            print("Expired reservation document deleted successfully")
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
 }
 
 struct HeaderView: View {
@@ -314,6 +357,148 @@ struct CurrentlyReadingView: View {
                 }
             }
             issuedBooks = booksData
+        }
+    }
+}
+
+struct ReservationDetailView: View {
+    @State private var remainingTime: TimeInterval = 0
+    @State private var timer: Timer?
+    @EnvironmentObject var viewModel: AuthViewModel
+    @State private var book: Book? // Store fetched book data
+    
+    var body: some View {
+        VStack {
+            // Display book information if available
+            if let book = book, remainingTime>0 {
+                HStack
+                {
+                    VStack{
+                        Text("Book Reserved")
+                            .font(
+                                Font.custom("SF Pro", size: 12)
+                                    .weight(.medium)
+                            )
+                            .multilineTextAlignment(.center)
+                            .foregroundColor(Color(red: 0.6, green: 0.6, blue: 0.6))
+                        Text(book.title)
+                            .font(
+                                Font.custom("SF Pro", size: 12)
+                                    .weight(.medium)
+                            )
+                            .multilineTextAlignment(.center)
+                            .foregroundColor(.white)
+                    }
+                    Spacer()
+                    VStack{
+                        Text("Time Left")
+                        .font(
+                        Font.custom("SF Pro", size: 12)
+                        .weight(.medium)
+                        )
+                        .multilineTextAlignment(.trailing)
+                        .foregroundColor(Color(red: 0.6, green: 0.6, blue: 0.6))
+                        
+                        Text("\(formattedRemainingTime)")
+                        .font(
+                        Font.custom("SF Pro", size: 12)
+                        .weight(.medium)
+                        )
+                        .multilineTextAlignment(.trailing)
+                        .foregroundColor(.white)
+
+
+                    }
+                }
+                .padding(20)
+                .frame(maxWidth: .infinity,alignment: .center)
+                .background(Color(red: 0.11, green: 0.11, blue: 0.12))
+                .cornerRadius(8)
+            }
+            
+        }
+        .padding(.horizontal,20)
+        
+
+        .onAppear {
+            fetchReservationData()
+            startTimer()
+        }
+        .onDisappear {
+            timer?.invalidate()
+        }
+    }
+    
+    private var formattedRemainingTime: String {
+        let hours = Int(remainingTime) / 3600
+        let minutes = Int(remainingTime) % 3600 / 60
+        let seconds = Int(remainingTime) % 60
+        return String(format: "%02d:%02d:%02d", hours, minutes, seconds)
+    }
+    
+    private func fetchReservationData() {
+        let db = Firestore.firestore()
+        let currentUserID = viewModel.currentUser?.id ?? ""
+        db.collection("members").document(currentUserID).collection("reservations").addSnapshotListener { querySnapshot, error in
+            if let error = error {
+                print("Error fetching reservation data: \(error.localizedDescription)")
+                return
+            }
+            
+            guard let document = querySnapshot?.documents.first else {
+                print("No reservation document found")
+                return
+            }
+            
+            if let timestamp = document.data()["timestamp"] as? Timestamp {
+                let reservationTime = timestamp.dateValue().timeIntervalSinceNow
+                remainingTime = max(reservationTime, 0)
+            }
+            
+            // Fetch and store the bookID
+            if let bookID = document.data()["bookUID"] as? String {
+                // Fetch book data from Firestore using bookID
+                db.collection("books").document(bookID).getDocument { document, error in
+                    if let error = error {
+                        print("Error fetching book data: \(error.localizedDescription)")
+                        return
+                    }
+                    
+                    if let document = document, document.exists {
+                        if let data = document.data() {
+                            let book = Book(
+                                title: data["title"] as? String ?? "",
+                                authors: data["authors"] as? [String] ?? [],
+                                description: data["description"] as? String ?? "",
+                                edition: data["edition"] as? String ?? "",
+                                genre: data["genre"] as? String ?? "",
+                                imageUrl: data["imageUrl"] as? String ?? "",
+                                language: data["language"] as? String ?? "",
+                                noOfCopies: data["noOfCopies"] as? String ?? "",
+                                noOfPages: data["noOfPages"] as? String ?? "",
+                                publicationDate: data["publicationDate"] as? String ?? "",
+                                publisher: data["publisher"] as? String ?? "",
+                                rating: data["rating"] as? String ?? "",
+                                shelfLocation: data["shelfLocation"] as? String ?? "",
+                                uid: document.documentID,
+                                noOfRatings: data["noOfRatings"] as? String ?? ""
+                            )
+                            
+                            // Assign fetched book data to the book property
+                            self.book = book
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    private func startTimer() {
+        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
+            remainingTime -= 1
+            if remainingTime <= 0 {
+                timer?.invalidate()
+            }
         }
     }
 }

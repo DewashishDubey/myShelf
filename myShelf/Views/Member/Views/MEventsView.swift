@@ -13,7 +13,11 @@ struct MEventsView: View {
     @State private var lastReadGenre: String = "Loading..." // Default value until data is fetched
     
     var body: some View {
-        VStack {
+        VStack{
+            
+        }
+        //ReservationDetailView()
+        /*VStack {
             if let user = viewModel.currentUser {
                 Text("User ID: \(user.id)")
                 Text("Last Read Genre: \(lastReadGenre)")
@@ -23,7 +27,7 @@ struct MEventsView: View {
         }
         .onAppear {
             fetchLastReadGenre()
-        }
+        }*/
     }
     
     func fetchLastReadGenre() {
