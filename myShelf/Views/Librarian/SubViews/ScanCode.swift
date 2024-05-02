@@ -81,12 +81,28 @@ struct ScanCode: View {
                 Button(action: {
                     isImagePickerPresented = true
                 }) {
-                    Image(systemName: "qrcode.viewfinder")
-                        .font(.system(size: 35))
-                        .foregroundColor(.white)
-                        .padding(10)
+                    HStack{
+                        Text("Check-in")
+                            .font(
+                            Font.custom("SF Pro", size: 14)
+                            .weight(.medium)
+                            )
+                            .multilineTextAlignment(.center)
+                            .foregroundColor(.white)
+                        Spacer()
+                        Image(systemName: "qrcode.viewfinder")
+                            .resizable()
+                            .frame(maxWidth: 20,maxHeight: 20)
+                            .font(.system(size: 35))
+                            .foregroundColor(.white)
+                            .padding(10)
+                    }
+                    .frame(maxWidth: .infinity,maxHeight: 40)
+                    .padding(20)
+                    .background(Color(red: 0.11, green: 0.11, blue: 0.12))
+                    .cornerRadius(8)    
                 }
-                
+                Spacer()
                 
                
                 // NavigationLink to navigate to another view only when scan is successful

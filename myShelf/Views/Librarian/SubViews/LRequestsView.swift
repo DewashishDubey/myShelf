@@ -6,6 +6,7 @@
 //
 
 
+/*
 import SwiftUI
 import Firebase
 struct LRequestsView: View {
@@ -122,3 +123,136 @@ struct LRequestsView: View {
 #Preview {
     LRequestsView()
 }
+*/
+
+import SwiftUI
+
+struct LRequestsView: View {
+    @State private var selectedTab: Tab = .reservations
+    @State private var searchText: String = ""
+    @State private var showSortFilter: Bool = false
+    
+    enum Tab {
+        case reservations, renewals
+    }
+    
+    var body: some View {
+        NavigationView {
+            VStack {
+                Picker(selection: $selectedTab, label: Text("Select Tab")) {
+                    Text("Reservations").tag(Tab.reservations)
+                    Text("Renewals").tag(Tab.renewals)
+                }
+                .pickerStyle(SegmentedPickerStyle())
+                .padding()
+                
+               
+                HStack {
+                   Text(selectedTab == .reservations ? "Reservations" : "Renewals")
+                        .font(.title2)
+                        .fontWeight(.bold)
+                        .foregroundColor(.primary)
+                        .padding(.leading)
+                    
+                    Spacer()
+                    
+                    Button(action: {
+                        showSortFilter.toggle()
+                    }) {
+                        Image(systemName: "line.horizontal.3.decrease")
+                    }
+                    .padding(.trailing)
+                    .foregroundColor(.primary)
+                }
+                Spacer()
+                // List of users in rectangular sections
+                ScrollView {
+                        UserRectangularSectionView(tab: selectedTab)
+                }
+            }
+        }
+    }
+}
+
+struct UserRectangularSectionView: View {
+    let tab: LRequestsView.Tab
+    
+    var body: some View {
+        VStack {
+            if tab == .reservations {
+                LReservationsView()
+            }
+            else
+            {
+                LRenewalsView()
+            }
+            /*HStack {
+                Image(systemName: "person.circle")
+                    .resizable()
+                    .frame(width: 50, height: 50)
+                    .padding(.leading)
+                
+                VStack(alignment: .leading) {
+                    Text("User Name")
+                        .font(.headline)
+                        .foregroundColor(.primary)
+                    Text("Book Title")
+                        .font(.subheadline)
+                        .foregroundColor(.secondary)
+                }
+                
+                Spacer()
+                
+                if tab == .reservations {
+                    Text("Date & Time")
+                        .font(.subheadline)
+                        .foregroundColor(.secondary)
+                } else {
+                    HStack {
+                        Button(action: {}) {
+                            Image(systemName: "checkmark")
+                                .foregroundColor(.green)
+                        }
+                        Button(action: {}) {
+                            Image(systemName: "xmark")
+                                .foregroundColor(.red)
+                        }
+                    }
+                }
+            }
+            .padding()*/
+            
+           // Divider()
+            Spacer()
+        }
+    }
+}
+
+struct SearchBar: View {
+    @Binding var text: String
+    
+    var body: some View {
+        HStack {
+            TextField("Search", text: $text)
+                .padding(.horizontal, 25)
+                .padding(.vertical, 12)
+                .background(Color(.systemGray6))
+                .cornerRadius(8)
+                .padding(.trailing)
+            
+            Image(systemName: "magnifyingglass")
+                .foregroundColor(.gray)
+                .padding()
+        }
+        .background(Color(.systemGray6))
+        .cornerRadius(8)
+    }
+}
+
+struct RequestsView_Previews: PreviewProvider {
+    static var previews: some View {
+        LRequestsView()
+            .preferredColorScheme(.dark)
+    }
+}
+
