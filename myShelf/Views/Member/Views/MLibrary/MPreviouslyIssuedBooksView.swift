@@ -1,18 +1,20 @@
 //
-//  LReturnBookDetailView.swift
+//  MPreviouslyIssuedBooksView.swift
 //  myShelf
 //
 //  Created by Dewashish Dubey on 02/05/24.
 //
 
+
 import SwiftUI
 import Firebase
-struct LReturnBookDetailView: View {
+struct MPreviouslyIssuedBooksView: View {
     var docID : String
-    let memberID : String
     @ObservedObject var bookViewModel = PreviouslyReservedBooksViewModel()
     @EnvironmentObject var viewModel : AuthViewModel
-    @State private var returned = false
+    @State private var existingRequest = false
+    @State private var alreadyRequested = false
+    @State private var isPremium: Bool = false
     var body: some View {
         ZStack{
             Color.black.ignoresSafeArea(.all)
@@ -118,28 +120,12 @@ struct LReturnBookDetailView: View {
                         
                         
                         
-                            Button(action: {
-                                //requestExtension(reservedBookID: reservedBook.bookID)
-                                returnBookAndPayFine()
-                            }, label: {
-                                Text("Pay fine and return")
-                                    .font(Font.custom("SF Pro Text", size: 14))
-                                    .multilineTextAlignment(.center)
-                                    .foregroundColor(Color(red: 0.92, green: 0.26, blue: 0.21))
-                            })
-                            .alert(isPresented: $returned) {
-                                Alert(title: Text("Book return successful"))
-                            }
-                            
-                        
-                       
-
                     }
                 }
             }
         }
         .onAppear{
-            bookViewModel.fetchReservedBook(for: memberID, documentID: docID)
+            bookViewModel.fetchPreviouslyReservedBook(for: viewModel.currentUser?.id ?? "ILZTUpzz84e5F5b7Xoof3pUX8Hf1", documentID: docID)
         }
         
         
@@ -156,77 +142,9 @@ struct LReturnBookDetailView: View {
            }
        }
     
-    private func returnBookAndPayFine() {
-        let db = Firestore.firestore()
-        let memberRef = db.collection("members").document(memberID)
-        
-        let issuedBookRef = memberRef.collection("issued_books").document(docID)
-        issuedBookRef.getDocument { (document, error) in
-            if let document = document, document.exists {
-                let data = document.data() ?? [:]
-                let fineAmount = data["fine"] as? Int ?? 0
-                
-                let previouslyIssuedBooksRef = memberRef.collection("previously_issued_books")
-                
-                previouslyIssuedBooksRef.addDocument(data: data) { error in
-                    if let error = error {
-                        print("Error adding document to previously_issued_books: \(error.localizedDescription)")
-                    } else {
-                        issuedBookRef.delete { error in
-                            if let error = error {
-                                print("Error deleting document from issued_books: \(error.localizedDescription)")
-                            } else {
-                                self.returned = true
-                                memberRef.updateData(["no_of_issued_books": FieldValue.increment(Int64(-1))]) { error in
-                                    if let error = error {
-                                        print("Error updating no_of_issued_books in members collection: \(error.localizedDescription)")
-                                    } else {
-                                        print("no_of_issued_books updated successfully.")
-                                    }
-                                } 
-                                // Update revenue in admin collection
-                                let adminRef = db.collection("admin").document("adminDocument")
-                                db.runTransaction({ (transaction, errorPointer) -> Any? in
-                                    let adminDocument: DocumentSnapshot
-                                    do {
-                                        try adminDocument = transaction.getDocument(adminRef)
-                                    } catch let fetchError as NSError {
-                                        errorPointer?.pointee = fetchError
-                                        return nil
-                                    }
-                                    
-                                    guard let oldRevenue = adminDocument.data()?["revenue"] as? Int else {
-                                        errorPointer?.pointee = NSError(domain: "AppErrorDomain", code: -1, userInfo: [NSLocalizedDescriptionKey: "Unable to retrieve revenue from admin document"])
-                                        return nil
-                                    }
-                                    
-                                    let newRevenue = oldRevenue + fineAmount
-                                    transaction.updateData(["revenue": newRevenue], forDocument: adminRef)
-                                    
-                                    return newRevenue
-                                }) { (result, error) in
-                                    if let error = error {
-                                        print("Error updating revenue in admin collection: \(error.localizedDescription)")
-                                    } else {
-                                        print("Revenue updated successfully.")
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            } else {
-                if let error = error {
-                    print("Error getting document: \(error.localizedDescription)")
-                }
-            }
-        }
-    }
-
-    
-
 }
 
 #Preview {
-    LReturnBookDetailView(docID: "", memberID: "")
+    MPreviouslyIssuedBooksView(docID: "")
 }
+

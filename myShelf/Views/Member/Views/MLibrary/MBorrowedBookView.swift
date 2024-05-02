@@ -141,7 +141,6 @@ struct MBorrowedBookView: View {
                             }
                             
                         }
-                       
 
                     }
                 }

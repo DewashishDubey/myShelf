@@ -15,7 +15,7 @@ class PreviouslyReservedBooksViewModel: ObservableObject {
         let db = Firestore.firestore()
         let membersRef = db.collection("members")
 
-        membersRef.document(memberID).collection("previously_reserved_books").getDocuments { [weak self] (querySnapshot, error) in
+        membersRef.document(memberID).collection("previously_issued_books").getDocuments { [weak self] (querySnapshot, error) in
             guard let self = self else { return }
             if let error = error {
                 print("Error fetching reserved books: \(error)")
@@ -131,6 +131,42 @@ class PreviouslyReservedBooksViewModel: ObservableObject {
         }
     }
 
+    func fetchPreviouslyReservedBook(for memberID: String, documentID: String) {
+        let db = Firestore.firestore()
+        let issuedBookRef = db.collection("members").document(memberID).collection("previously_issued_books").document(documentID)
+
+        issuedBookRef.getDocument { [weak self] (document, error) in
+            guard let self = self else { return }
+            if let error = error {
+                print("Error fetching issued book: \(error)")
+                return
+            }
+
+            guard let document = document, document.exists else {
+                print("No issued book found for document ID \(documentID)")
+                return
+            }
+
+            let data = document.data()!
+            let bookID = data["bookID"] as? String ?? ""
+            let startDateTimestamp = data["start_date"] as? Timestamp
+            let endDateTimestamp = data["end_date"] as? Timestamp
+            let fine = data["fine"] as? Int ?? 0
+
+            // Fetch book details using bookID
+            self.fetchBookDetails(for: bookID) { book in
+                let startDateString = self.formatDate(startDateTimestamp?.dateValue())
+                let endDateString = self.formatDate(endDateTimestamp?.dateValue())
+
+                let reservedBook = ReservedBook(bookID: bookID, documentID: documentID, startDateString: startDateString, endDateString: endDateString, fine: fine, book: book)
+
+                // Append the fetched reserved book to the published property
+                DispatchQueue.main.async {
+                    self.reservedBooks.append(reservedBook)
+                }
+            }
+        }
+    }
     
     func formatDate(_ date: Date?) -> String {
         guard let date = date else {
