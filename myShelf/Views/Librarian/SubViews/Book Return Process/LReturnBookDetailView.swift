@@ -183,7 +183,7 @@ struct LReturnBookDetailView: View {
                                     } else {
                                         print("no_of_issued_books updated successfully.")
                                     }
-                                } 
+                                }
                                 // Update revenue in admin collection
                                 let adminRef = db.collection("admin").document("adminDocument")
                                 db.runTransaction({ (transaction, errorPointer) -> Any? in
