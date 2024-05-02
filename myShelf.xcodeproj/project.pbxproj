@@ -69,6 +69,7 @@
 		A1E5C7C52BE3471D0078A797 /* LRenewalsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E5C7C42BE3471D0078A797 /* LRenewalsView.swift */; };
 		A1E5C7C82BE354420078A797 /* ScanReturn.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E5C7C72BE354420078A797 /* ScanReturn.swift */; };
 		A1E5C7CA2BE3549A0078A797 /* LReturnDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E5C7C92BE3549A0078A797 /* LReturnDetailView.swift */; };
+		A1E5C7CC2BE36D980078A797 /* LReturnBookDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E5C7CB2BE36D980078A797 /* LReturnBookDetailView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -130,6 +131,7 @@
 		A1E5C7C42BE3471D0078A797 /* LRenewalsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LRenewalsView.swift; sourceTree = "<group>"; };
 		A1E5C7C72BE354420078A797 /* ScanReturn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanReturn.swift; sourceTree = "<group>"; };
 		A1E5C7C92BE3549A0078A797 /* LReturnDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LReturnDetailView.swift; sourceTree = "<group>"; };
+		A1E5C7CB2BE36D980078A797 /* LReturnBookDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LReturnBookDetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -377,6 +379,7 @@
 			children = (
 				A1E5C7C72BE354420078A797 /* ScanReturn.swift */,
 				A1E5C7C92BE3549A0078A797 /* LReturnDetailView.swift */,
+				A1E5C7CB2BE36D980078A797 /* LReturnBookDetailView.swift */,
 			);
 			path = "Book Return Process";
 			sourceTree = "<group>";
@@ -483,6 +486,7 @@
 				1FABC5CA2BD7AC2F00E730FD /* AdminView.swift in Sources */,
 				A1E5C7C82BE354420078A797 /* ScanReturn.swift in Sources */,
 				A133C85C2BDA093C00A9597B /* LLibraryView.swift in Sources */,
+				A1E5C7CC2BE36D980078A797 /* LReturnBookDetailView.swift in Sources */,
 				A12997932BDE284600099962 /* LBookIssueView.swift in Sources */,
 				A129978F2BDE21AF00099962 /* LMemebrDetailView.swift in Sources */,
 				A1993DE72BDA7CF000AF764B /* MBookDetailView.swift in Sources */,
