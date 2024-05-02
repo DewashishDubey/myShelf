@@ -120,7 +120,7 @@ struct LReturnBookDetailView: View {
                         
                             Button(action: {
                                 //requestExtension(reservedBookID: reservedBook.bookID)
-                                returnBookAndPayFine()
+                                returnBookAndPayFine(bookID: reservedBook.bookID)
                             }, label: {
                                 Text("Pay fine and return")
                                     .font(Font.custom("SF Pro Text", size: 14))
@@ -156,7 +156,7 @@ struct LReturnBookDetailView: View {
            }
        }
     
-    private func returnBookAndPayFine() {
+    private func returnBookAndPayFine(bookID: String) {
         let db = Firestore.firestore()
         let memberRef = db.collection("members").document(memberID)
         
@@ -184,6 +184,27 @@ struct LReturnBookDetailView: View {
                                         print("no_of_issued_books updated successfully.")
                                     }
                                 }
+                                
+                                // Remove document from books_issued collection
+                                                          let booksIssuedRef = db.collection("books_issued")
+                                                          booksIssuedRef.whereField("memberID", isEqualTo: memberID)
+                                                              .whereField("bookID", isEqualTo: bookID)
+                                                              .getDocuments { (querySnapshot, error) in
+                                                                  if let error = error {
+                                                                      print("Error getting documents: \(error.localizedDescription)")
+                                                                  } else {
+                                                                      for document in querySnapshot!.documents {
+                                                                          booksIssuedRef.document(document.documentID).delete { error in
+                                                                              if let error = error {
+                                                                                  print("Error removing document: \(error.localizedDescription)")
+                                                                              } else {
+                                                                                  print("Document successfully removed from books_issued collection.")
+                                                                              }
+                                                                          }
+                                                                      }
+                                                                  }
+                                                          }
+                                
                                 // Update revenue in admin collection
                                 let adminRef = db.collection("admin").document("adminDocument")
                                 db.runTransaction({ (transaction, errorPointer) -> Any? in
