@@ -74,10 +74,11 @@ struct ScanCode: View {
     @State private var isImagePickerPresented = false
     @State private var scannedCode: String?
     @State private var navigateToNextView = false // New state variable for navigation
-
+    @StateObject var allBooksViewModel = AllIssuedBooksViewModel()
     var body: some View {
-        NavigationView { // Wrap the VStack in a NavigationView
-            VStack {
+       // NavigationView { // Wrap the VStack in a NavigationView
+            VStack
+            {
                 Button(action: {
                     isImagePickerPresented = true
                 }) {
@@ -102,7 +103,8 @@ struct ScanCode: View {
                     .background(Color(red: 0.11, green: 0.11, blue: 0.12))
                     .cornerRadius(8)    
                 }
-                Spacer()
+              
+               // Spacer()
                 
                
                 // NavigationLink to navigate to another view only when scan is successful
@@ -111,7 +113,6 @@ struct ScanCode: View {
                 }
                 .isDetailLink(false)
                 .hidden()
-
                 // Show the back button programmatically
                 if navigateToNextView {
                     Button(action: {
@@ -126,7 +127,10 @@ struct ScanCode: View {
             .sheet(isPresented: $isImagePickerPresented) {
                 ImagePickerCard(isImagePickerPresented: $isImagePickerPresented, scannedCode: $scannedCode, navigateToNextView: $navigateToNextView) // Pass the navigateToNextView binding
             }
-        }
+            .onAppear {
+                allBooksViewModel.fetchIssuedBooks()
+                    }
+        //}
     }
 }
 

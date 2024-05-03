@@ -438,7 +438,7 @@ struct ReservationDetailView: View {
     
     private func fetchReservationData() {
         let db = Firestore.firestore()
-        let currentUserID = viewModel.currentUser?.id ?? ""
+        let currentUserID = viewModel.currentUser?.id ?? "ILZTUpzz84e5F5b7Xoof3pUX8Hf1"
         db.collection("members").document(currentUserID).collection("reservations").addSnapshotListener { querySnapshot, error in
             if let error = error {
                 print("Error fetching reservation data: \(error.localizedDescription)")

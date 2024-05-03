@@ -39,6 +39,8 @@
 		A14AFBF62BDBB8F800A29380 /* AEventsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A14AFBF52BDBB8F800A29380 /* AEventsView.swift */; };
 		A14AFBF92BDBC50300A29380 /* AddLibrarianView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A14AFBF82BDBC50300A29380 /* AddLibrarianView.swift */; };
 		A14AFBFB2BDBCE8400A29380 /* Librarian.swift in Sources */ = {isa = PBXBuildFile; fileRef = A14AFBFA2BDBCE8400A29380 /* Librarian.swift */; };
+		A17C5A192BE4A3EC0081A04E /* AllIssuedBooks.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17C5A182BE4A3EC0081A04E /* AllIssuedBooks.swift */; };
+		A17C5A1B2BE4AF600081A04E /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17C5A1A2BE4AF600081A04E /* TestView.swift */; };
 		A197D9912BD8F42A005C18F2 /* MFAQView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A197D9902BD8F42A005C18F2 /* MFAQView.swift */; };
 		A197D9932BD8F737005C18F2 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A197D9922BD8F737005C18F2 /* OnboardingView.swift */; };
 		A1993DE72BDA7CF000AF764B /* MBookDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1993DE62BDA7CF000AF764B /* MBookDetailView.swift */; };
@@ -106,6 +108,8 @@
 		A14AFBF52BDBB8F800A29380 /* AEventsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AEventsView.swift; sourceTree = "<group>"; };
 		A14AFBF82BDBC50300A29380 /* AddLibrarianView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLibrarianView.swift; sourceTree = "<group>"; };
 		A14AFBFA2BDBCE8400A29380 /* Librarian.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Librarian.swift; sourceTree = "<group>"; };
+		A17C5A182BE4A3EC0081A04E /* AllIssuedBooks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllIssuedBooks.swift; sourceTree = "<group>"; };
+		A17C5A1A2BE4AF600081A04E /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 		A197D9902BD8F42A005C18F2 /* MFAQView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MFAQView.swift; sourceTree = "<group>"; };
 		A197D9922BD8F737005C18F2 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		A1993DE62BDA7CF000AF764B /* MBookDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBookDetailView.swift; sourceTree = "<group>"; };
@@ -254,6 +258,7 @@
 				A1BC2DA62BDFD5E8002E3A79 /* PreviouslyIssuedBooks.swift */,
 				A19A4AEB2BE00520000604D7 /* AdminData.swift */,
 				A1A9BDEB2BE2516200EFF2F8 /* ExtensionRequests.swift */,
+				A17C5A182BE4A3EC0081A04E /* AllIssuedBooks.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -317,6 +322,7 @@
 				A1E3EAEA2BD63A6A001CC21A /* Assets.xcassets */,
 				A1300FA62BDF83D0001926E0 /* GoogleService-Info.plist */,
 				A1E3EAEC2BD63A6A001CC21A /* Preview Content */,
+				A17C5A1A2BE4AF600081A04E /* TestView.swift */,
 			);
 			path = myShelf;
 			sourceTree = "<group>";
@@ -485,6 +491,7 @@
 				A19A4AEC2BE00520000604D7 /* AdminData.swift in Sources */,
 				A14AFBFB2BDBCE8400A29380 /* Librarian.swift in Sources */,
 				A1BC2DA72BDFD5E8002E3A79 /* PreviouslyIssuedBooks.swift in Sources */,
+				A17C5A1B2BE4AF600081A04E /* TestView.swift in Sources */,
 				A197D9932BD8F737005C18F2 /* OnboardingView.swift in Sources */,
 				1FABC5CA2BD7AC2F00E730FD /* AdminView.swift in Sources */,
 				A1E5C7C82BE354420078A797 /* ScanReturn.swift in Sources */,
@@ -521,6 +528,7 @@
 				1FABC5C42BD7AB7600E730FD /* MemberView.swift in Sources */,
 				A13C0E842BD7BD760083CCDD /* MEventsView.swift in Sources */,
 				A14AFBF92BDBC50300A29380 /* AddLibrarianView.swift in Sources */,
+				A17C5A192BE4A3EC0081A04E /* AllIssuedBooks.swift in Sources */,
 				1FABC5C72BD7ABF500E730FD /* LibrarianView.swift in Sources */,
 				A14AFBEF2BDBB0DF00A29380 /* LBookDetailView.swift in Sources */,
 				A10CDA302BDAB5F400756AA0 /* StarsView.swift in Sources */,

@@ -12,7 +12,7 @@ struct AdminView: View {
     
     var body: some View {
         // Admin-specific profile view
-        if let user = viewModel.currentUser{
+       // if let user = viewModel.currentUser{
             TabView{
                 Group{
                     NavigationStack{
@@ -39,7 +39,7 @@ struct AdminView: View {
                 .toolbarBackground(.visible, for: .tabBar)
                 .toolbarColorScheme(.dark, for: .tabBar)
             }
-        }
+        //}
     }
 }
 
