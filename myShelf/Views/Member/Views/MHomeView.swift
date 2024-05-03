@@ -373,7 +373,7 @@ struct ReservationDetailView: View {
             if let book = book, remainingTime>0 {
                 HStack
                 {
-                    VStack{
+                    VStack(spacing:10){
                         Text("Book Reserved")
                             .font(
                                 Font.custom("SF Pro", size: 12)
@@ -390,7 +390,7 @@ struct ReservationDetailView: View {
                             .foregroundColor(.white)
                     }
                     Spacer()
-                    VStack{
+                    VStack(spacing:10){
                         Text("Time Left")
                         .font(
                         Font.custom("SF Pro", size: 12)

@@ -40,6 +40,7 @@
 		A14AFBF92BDBC50300A29380 /* AddLibrarianView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A14AFBF82BDBC50300A29380 /* AddLibrarianView.swift */; };
 		A14AFBFB2BDBCE8400A29380 /* Librarian.swift in Sources */ = {isa = PBXBuildFile; fileRef = A14AFBFA2BDBCE8400A29380 /* Librarian.swift */; };
 		A15835022BE4C927003331F4 /* Reservations.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15835012BE4C927003331F4 /* Reservations.swift */; };
+		A15835042BE4D0E3003331F4 /* EditBookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15835032BE4D0E3003331F4 /* EditBookView.swift */; };
 		A17C5A192BE4A3EC0081A04E /* AllIssuedBooks.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17C5A182BE4A3EC0081A04E /* AllIssuedBooks.swift */; };
 		A17C5A1B2BE4AF600081A04E /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17C5A1A2BE4AF600081A04E /* TestView.swift */; };
 		A197D9912BD8F42A005C18F2 /* MFAQView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A197D9902BD8F42A005C18F2 /* MFAQView.swift */; };
@@ -110,6 +111,7 @@
 		A14AFBF82BDBC50300A29380 /* AddLibrarianView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLibrarianView.swift; sourceTree = "<group>"; };
 		A14AFBFA2BDBCE8400A29380 /* Librarian.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Librarian.swift; sourceTree = "<group>"; };
 		A15835012BE4C927003331F4 /* Reservations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reservations.swift; sourceTree = "<group>"; };
+		A15835032BE4D0E3003331F4 /* EditBookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditBookView.swift; sourceTree = "<group>"; };
 		A17C5A182BE4A3EC0081A04E /* AllIssuedBooks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllIssuedBooks.swift; sourceTree = "<group>"; };
 		A17C5A1A2BE4AF600081A04E /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 		A197D9902BD8F42A005C18F2 /* MFAQView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MFAQView.swift; sourceTree = "<group>"; };
@@ -237,6 +239,7 @@
 				A1A9BDE92BE24F4000EFF2F8 /* LRequestsView.swift */,
 				A1E5C7C22BE346560078A797 /* LReservationsView.swift */,
 				A1E5C7C42BE3471D0078A797 /* LRenewalsView.swift */,
+				A15835032BE4D0E3003331F4 /* EditBookView.swift */,
 			);
 			path = SubViews;
 			sourceTree = "<group>";
@@ -534,6 +537,7 @@
 				A14AFBF92BDBC50300A29380 /* AddLibrarianView.swift in Sources */,
 				A17C5A192BE4A3EC0081A04E /* AllIssuedBooks.swift in Sources */,
 				1FABC5C72BD7ABF500E730FD /* LibrarianView.swift in Sources */,
+				A15835042BE4D0E3003331F4 /* EditBookView.swift in Sources */,
 				A14AFBEF2BDBB0DF00A29380 /* LBookDetailView.swift in Sources */,
 				A10CDA302BDAB5F400756AA0 /* StarsView.swift in Sources */,
 				A1E3EB072BD63BC9001CC21A /* AuthViewModel.swift in Sources */,

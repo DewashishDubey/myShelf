@@ -15,6 +15,7 @@ struct LBookDetailView: View {
     @EnvironmentObject var viewModel : AuthViewModel
     @State private var isBookmarked = false
     var body: some View {
+        NavigationStack{
             //Text(user.id)
             ScrollView(showsIndicators: false)
             {
@@ -43,10 +44,15 @@ struct LBookDetailView: View {
                                         .padding(.top,10)
                                     
                                     HStack{
-                                        Text("Edit")
-                                            .font(Font.custom("SF Pro Text", size: 16))
-                                            .foregroundColor(Color(red: 0, green: 0.48, blue: 1))
-                                            .padding(.leading,5)
+                                        NavigationLink{
+                                            EditBookView(bookUID: bookUID)
+                                        }label: {
+                                            Text("Edit")
+                                                .font(Font.custom("SF Pro Text", size: 16))
+                                                .foregroundColor(Color(red: 0, green: 0.48, blue: 1))
+                                                .padding(.leading,5)
+                                        }
+                                        
                                         Spacer()
                                         Button(action: {
                                             dismiss()
@@ -54,7 +60,7 @@ struct LBookDetailView: View {
                                             Image(systemName: "xmark.circle.fill")
                                                 .foregroundColor(.gray.opacity(0.7))
                                                 .frame(width: 20, height: 20)
-                                                //.padding(.leading, 320)
+                                            //.padding(.leading, 320)
                                         }
                                     }
                                     .frame(maxWidth: .infinity)
@@ -124,7 +130,7 @@ struct LBookDetailView: View {
                                     //                      .position(x: 190, y: -100)
                                         .padding(.top,15)
                                     
-
+                                    
                                     
                                     
                                     
@@ -303,7 +309,8 @@ struct LBookDetailView: View {
                 }
             }
             .background(Color.black.edgesIgnoringSafeArea(.all))
-            
+        }
+        
     }
     func toggleBookmark() {
             if isBookmarked {
