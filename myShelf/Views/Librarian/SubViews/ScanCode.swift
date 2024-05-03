@@ -124,6 +124,7 @@ struct ScanCode: View {
                     .padding()
                 }
             }
+            .padding(.bottom,10)
             .sheet(isPresented: $isImagePickerPresented) {
                 ImagePickerCard(isImagePickerPresented: $isImagePickerPresented, scannedCode: $scannedCode, navigateToNextView: $navigateToNextView) // Pass the navigateToNextView binding
             }

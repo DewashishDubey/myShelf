@@ -10,7 +10,8 @@ import Firebase
 struct LRenewalsView: View {
     @ObservedObject var viewModel = ExtensionRequestViewModel()
     var body: some View {
-        VStack {
+        VStack 
+        {
                    ForEach(viewModel.extensionRequests, id: \.documentID) { request in
                        VStack(alignment: .leading) 
                        {

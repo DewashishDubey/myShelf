@@ -411,7 +411,8 @@ struct MBookDetailView: View {
             let db = Firestore.firestore()
             let userRef = db.collection("members").document(userUID)
             let reservationsRef = userRef.collection("reservations")
-            
+            let globalReservationsRef = db.collection("reservations")
+        
             reservationsRef.getDocuments { snapshot, error in
                 if let error = error {
                     print("Error checking reservations: \(error.localizedDescription)")
@@ -442,6 +443,15 @@ struct MBookDetailView: View {
                             print("Book reserved successfully!")
                         }
                     }
+                    
+                    // Add reservation data to the global reservations collection
+                                globalReservationsRef.addDocument(data: reservationData) { error in
+                                    if let error = error {
+                                        print("Error adding reservation to global collection: \(error.localizedDescription)")
+                                    } else {
+                                        print("Reservation added to global collection successfully!")
+                                    }
+                                }
                 }
             }
         }
