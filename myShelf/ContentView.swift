@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     @EnvironmentObject var viewModel : AuthViewModel
+    @StateObject var storeVM = StoreVM()
     var body: some View {
         Group{
             if viewModel.userSession != nil{
@@ -19,6 +20,7 @@ struct ContentView: View {
                 //OnboardingView()
             }
         }
+        .environmentObject(storeVM)
     }
 }
 

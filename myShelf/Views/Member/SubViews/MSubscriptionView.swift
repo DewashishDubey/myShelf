@@ -6,16 +6,23 @@
 //
 
 import SwiftUI
+import Firebase
+import StoreKit
 
 struct MSubscriptionView: View {
     @State private var isMonthlySelected = false
         @State private var isYearlySelected = false
         @State private var amt = 0
+    
+    @State var isPurchased = false
+    @EnvironmentObject var storeVM: StoreVM
+    @Environment(\.presentationMode) var presentationMode
     var body: some View {
         
         NavigationView{
             ScrollView(showsIndicators: false){
-                ZStack {
+                ZStack 
+                {
                     Color.black.ignoresSafeArea(.all)
                     VStack(alignment: .center, spacing:20){
                         HStack{
@@ -46,53 +53,125 @@ struct MSubscriptionView: View {
                             .foregroundColor(Color(red: 0.6, green: 0.6, blue: 0.6))
                             .padding(.bottom,20)
                         
-                        
-                        
-                        Button(action: {
-                                                
-                                                isMonthlySelected.toggle()
-                                                isYearlySelected = false
-                                                self.amt = 99
-                                                print(amt)
-                                            }) {
-                                                HStack(alignment: .center, spacing: 5) {
+                        ForEach(storeVM.subscriptions) { product in
+                            Button(action: {
+                                Task {
+                                    await buy(product: product)
+                                    if(product.displayName == "Monthly")
+                                    {
+                                        isMonthlySelected.toggle()
+                                        isYearlySelected = false
+                                        self.amt = 99
+                                        let subscriptionStartDate = Calendar.current.date(byAdding: .month, value: isMonthlySelected ? 6 : 12, to: Date()) ?? Date()
+                                        updateSubscriptionInFirestore(isPremium: true, subscriptionStartDate: subscriptionStartDate)
+                                        updateAdminDocument(withAmount: amt)
+                                        // Dismiss the view after Firestore update
+                                        presentationMode.wrappedValue.dismiss()
+                                    }
+                                    else if(product.displayName == "Yearly")
+                                    {
+                                        isYearlySelected.toggle()
+                                        isMonthlySelected = false
+                                        self.amt = 999
+                                        let subscriptionStartDate = Calendar.current.date(byAdding: .month, value: isMonthlySelected ? 6 : 12, to: Date()) ?? Date()
+                                        updateSubscriptionInFirestore(isPremium: true, subscriptionStartDate: subscriptionStartDate)
+                                        updateAdminDocument(withAmount: amt)
+                                        // Dismiss the view after Firestore update
+                                        presentationMode.wrappedValue.dismiss()
+                                    }
+                                }
+                            })
+                            {
+                                
+                                HStack(alignment: .center, spacing: 5) {
 
-                                                    
-                                                    Text("Monthly")
-                                                        .font(Font.custom("SF Pro", size: 19))
-                                                        .foregroundColor(.white)
-                                                    
-                                                    Spacer()
-                                                    
-                                                   Text("₹")
-                                                        .foregroundColor(.white)
-                                                    
-                                                    Text("99")
-                                                        .font(Font.custom("SF Pro", size: 19))
-                                                        .foregroundColor(.white)
-                                                }
-                                                .padding(.horizontal, 15)
-                                                .padding(.vertical, 12)
-                                                .frame(width: 353, alignment: .leading)
-                                                .background(Color(red: 0.11, green: 0.11, blue: 0.12))
-                                                .cornerRadius(8)
-                                                //.padding(.bottom,20)
-                                                .overlay(
-                                                        RoundedRectangle(cornerRadius: 8)
-                                                            .stroke(isMonthlySelected ? Color.blue : Color.clear, lineWidth: 1)
-                                                        )
-                                                .padding(.bottom,20)
-                                                        
-                                                        
-                                                        }
+                                    
+                                    Text(product.displayName)
+                                        .font(Font.custom("SF Pro", size: 19))
+                                        .foregroundColor(.white)
+                                    
+                                    Spacer()
+                                    
+                                 
+                                    
+                                    Text(product.displayPrice)
+                                        .font(Font.custom("SF Pro", size: 19))
+                                        .foregroundColor(.white)
+                                }
+                                .padding(.horizontal, 15)
+                                .padding(.vertical, 12)
+                                .frame(width: 353, alignment: .leading)
+                                .background(Color(red: 0.11, green: 0.11, blue: 0.12))
+                                .cornerRadius(8)
+                                //.padding(.bottom,20)
+                                .overlay(
+                                        RoundedRectangle(cornerRadius: 8)
+                                            .stroke(isYearlySelected ? Color.blue : Color.clear, lineWidth: 1)
+                                        )
+                                .padding(.bottom,20)
+                                /*HStack {
+                                    Text(product.displayPrice)
+                                    Text(product.displayName)
+                                }*/
+                            }
+                            
+                        }
+                        /*
+                        Button(action: {
+                            
+                            isMonthlySelected.toggle()
+                            isYearlySelected = false
+                            self.amt = 99
+                            let subscriptionStartDate = Calendar.current.date(byAdding: .month, value: isMonthlySelected ? 6 : 12, to: Date()) ?? Date()
+                            updateSubscriptionInFirestore(isPremium: true, subscriptionStartDate: subscriptionStartDate)
+                            updateAdminDocument(withAmount: amt)
+                            // Dismiss the view after Firestore update
+                            presentationMode.wrappedValue.dismiss()
+                            print(amt)
+                        }) {
+                            HStack(alignment: .center, spacing: 5) {
+                                
+                                
+                                Text("Monthly")
+                                    .font(Font.custom("SF Pro", size: 19))
+                                    .foregroundColor(.white)
+                                
+                                Spacer()
+                                
+                                Text("₹")
+                                    .foregroundColor(.white)
+                                
+                                Text("99")
+                                    .font(Font.custom("SF Pro", size: 19))
+                                    .foregroundColor(.white)
+                            }
+                            .padding(.horizontal, 15)
+                            .padding(.vertical, 12)
+                            .frame(width: 353, alignment: .leading)
+                            .background(Color(red: 0.11, green: 0.11, blue: 0.12))
+                            .cornerRadius(8)
+                            //.padding(.bottom,20)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 8)
+                                    .stroke(isMonthlySelected ? Color.blue : Color.clear, lineWidth: 1)
+                            )
+                            .padding(.bottom,20)
+                            
+                            
+                        }
                                             
-                                            
-                                            Button(action: {
-                                                isYearlySelected.toggle()
-                                                isMonthlySelected = false
-                                                self.amt = 999
-                                                print(amt)
-                                            }) {
+                                        
+                        Button(action: {
+                            isYearlySelected.toggle()
+                            isMonthlySelected = false
+                            self.amt = 999
+                            let subscriptionStartDate = Calendar.current.date(byAdding: .month, value: isMonthlySelected ? 6 : 12, to: Date()) ?? Date()
+                            updateSubscriptionInFirestore(isPremium: true, subscriptionStartDate: subscriptionStartDate)
+                            updateAdminDocument(withAmount: amt)
+                            // Dismiss the view after Firestore update
+                            presentationMode.wrappedValue.dismiss()
+                            print(amt)
+                        }) {
                                                 HStack(alignment: .center, spacing: 5) {
 
                                                     
@@ -121,12 +200,16 @@ struct MSubscriptionView: View {
                                                         )
                                                 .padding(.bottom,20)
                                                         
-                                                        }
+                                                        }*/
                         
                         
-                        
-                        NavigationLink(destination: MProfileView()) {
-                            
+                       /* Button{
+                            let subscriptionStartDate = Calendar.current.date(byAdding: .month, value: isMonthlySelected ? 6 : 12, to: Date()) ?? Date()
+                            updateSubscriptionInFirestore(isPremium: true, subscriptionStartDate: subscriptionStartDate)
+                            updateAdminDocument(withAmount: amt)
+                            // Dismiss the view after Firestore update
+                            presentationMode.wrappedValue.dismiss()
+                        }label: {
                             HStack{
                                 Text("Proceed")
                                 
@@ -138,7 +221,8 @@ struct MSubscriptionView: View {
                             .frame(width: 350,height: 50)
                             .background(Color(red: 0.26, green: 0.52, blue: 0.96)).cornerRadius(8)
                             .padding(.bottom,20)
-                        }
+                        }*/
+                        
                         
                         
                         
@@ -214,7 +298,62 @@ struct MSubscriptionView: View {
                         
                     }
                 }
+                
             }
+        }
+       
+    }
+    func updateSubscriptionInFirestore(isPremium: Bool, subscriptionStartDate: Date) {
+            let db = Firestore.firestore()
+            guard let user = Auth.auth().currentUser else {
+                // User not logged in
+                return
+            }
+
+            let userRef = db.collection("members").document(user.uid)
+            userRef.updateData([
+                "is_premium": isPremium,
+                "subscription_start_date": subscriptionStartDate
+            ]) { error in
+                if let error = error {
+                    print("Error updating document: \(error)")
+                } else {
+                    print("Document successfully updated")
+                }
+            }
+        }
+    
+    func updateAdminDocument(withAmount amount: Int) {
+            let db = Firestore.firestore()
+            let adminDocumentRef = db.collection("admin").document("adminDocument")
+            
+            adminDocumentRef.getDocument { (document, error) in
+                if let document = document, document.exists {
+                    var currentRevenue = document.data()?["revenue"] as? Int ?? 0
+                    currentRevenue += amount
+                    
+                    adminDocumentRef.updateData([
+                        "revenue": currentRevenue
+                    ]) { error in
+                        if let error = error {
+                            print("Error updating admin document: \(error)")
+                        } else {
+                            print("Admin document successfully updated with revenue \(currentRevenue)")
+                        }
+                    }
+                } else {
+                    print("Admin document does not exist")
+                }
+            }
+        }
+    
+    func buy(product: Product) async {
+        do {
+            if try await storeVM.purchase(product) != nil {
+                isPurchased = true
+            }
+        } catch {
+            print("purchase failed")
         }
     }
 }
@@ -254,5 +393,6 @@ struct ButtonStyle2: SwiftUI.ButtonStyle {
 
 #Preview {
     MSubscriptionView()
+        .environmentObject( StoreVM())
         .preferredColorScheme(.dark)
 }

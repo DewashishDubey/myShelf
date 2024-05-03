@@ -6,7 +6,6 @@ struct MProfileView: View {
     @EnvironmentObject var viewModel: AuthViewModel
     @State private var isPremiumMember: Bool = false
     
-    
     @State private var qrCodeImage: UIImage?
     
     var body: some View {

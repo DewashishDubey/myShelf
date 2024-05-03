@@ -75,6 +75,8 @@
 		A1E5C7C82BE354420078A797 /* ScanReturn.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E5C7C72BE354420078A797 /* ScanReturn.swift */; };
 		A1E5C7CA2BE3549A0078A797 /* LReturnDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E5C7C92BE3549A0078A797 /* LReturnDetailView.swift */; };
 		A1E5C7CC2BE36D980078A797 /* LReturnBookDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E5C7CB2BE36D980078A797 /* LReturnBookDetailView.swift */; };
+		A1F8C6CB2BE54D36008832D1 /* product.storekit in Resources */ = {isa = PBXBuildFile; fileRef = A1F8C6CA2BE54D36008832D1 /* product.storekit */; };
+		A1F8C6CD2BE54D72008832D1 /* storeVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F8C6CC2BE54D72008832D1 /* storeVM.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -142,6 +144,8 @@
 		A1E5C7C72BE354420078A797 /* ScanReturn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanReturn.swift; sourceTree = "<group>"; };
 		A1E5C7C92BE3549A0078A797 /* LReturnDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LReturnDetailView.swift; sourceTree = "<group>"; };
 		A1E5C7CB2BE36D980078A797 /* LReturnBookDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LReturnBookDetailView.swift; sourceTree = "<group>"; };
+		A1F8C6CA2BE54D36008832D1 /* product.storekit */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = product.storekit; sourceTree = "<group>"; };
+		A1F8C6CC2BE54D72008832D1 /* storeVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = storeVM.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -329,6 +333,8 @@
 				A1300FA62BDF83D0001926E0 /* GoogleService-Info.plist */,
 				A1E3EAEC2BD63A6A001CC21A /* Preview Content */,
 				A17C5A1A2BE4AF600081A04E /* TestView.swift */,
+				A1F8C6CA2BE54D36008832D1 /* product.storekit */,
+				A1F8C6CC2BE54D72008832D1 /* storeVM.swift */,
 			);
 			path = myShelf;
 			sourceTree = "<group>";
@@ -469,6 +475,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A1F8C6CB2BE54D36008832D1 /* product.storekit in Resources */,
 				A1E3EAEE2BD63A6A001CC21A /* Preview Assets.xcassets in Resources */,
 				A1E3EAEB2BD63A6A001CC21A /* Assets.xcassets in Resources */,
 				A1300FA72BDF83D0001926E0 /* GoogleService-Info.plist in Resources */,
@@ -538,6 +545,7 @@
 				A17C5A192BE4A3EC0081A04E /* AllIssuedBooks.swift in Sources */,
 				1FABC5C72BD7ABF500E730FD /* LibrarianView.swift in Sources */,
 				A15835042BE4D0E3003331F4 /* EditBookView.swift in Sources */,
+				A1F8C6CD2BE54D72008832D1 /* storeVM.swift in Sources */,
 				A14AFBEF2BDBB0DF00A29380 /* LBookDetailView.swift in Sources */,
 				A10CDA302BDAB5F400756AA0 /* StarsView.swift in Sources */,
 				A1E3EB072BD63BC9001CC21A /* AuthViewModel.swift in Sources */,

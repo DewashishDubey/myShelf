@@ -10,6 +10,7 @@ import SwiftUI
 
 struct MemberView: View {
     @EnvironmentObject var viewModel : AuthViewModel
+    //@StateObject var storeVM = StoreVM()
     var body: some View {
         // Member-specific profile view
         if viewModel.currentUser != nil{
@@ -36,6 +37,7 @@ struct MemberView: View {
                     }
                     .tabItem {  Label("Library", systemImage: "books.vertical") }
                 }
+                //.environmentObject(storeVM)
                 .toolbarBackground(.black, for: .tabBar)
                 .toolbarBackground(.visible, for: .tabBar)
                 .toolbarColorScheme(.dark, for: .tabBar)
