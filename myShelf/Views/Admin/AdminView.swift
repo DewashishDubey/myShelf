@@ -32,6 +32,7 @@ struct AdminView: View {
                     
                     NavigationStack{
                         AEventsView()
+                        //EventListView()
                     }
                     .tabItem {  Label("Events", systemImage: "theatermasks") }
                 }
