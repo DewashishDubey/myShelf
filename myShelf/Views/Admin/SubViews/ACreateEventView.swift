@@ -18,6 +18,7 @@ struct ACreateEventView: View {
     @State private var capacity = ""
     @State private var summary = ""
     @State private var showAlert = false
+    @Environment(\.presentationMode) var presentationMode
     var body: some View {
         ZStack{
             Color.black.ignoresSafeArea(.all)
@@ -154,8 +155,7 @@ struct ACreateEventView: View {
                     }
                     .alert(isPresented: $showAlert) {
                         Alert(title: Text("Event added"), dismissButton: .default(Text("OK")) {
-                            // Navigate back
-                            // You can use NavigationLink, presentationMode, or any other navigation method
+                            presentationMode.wrappedValue.dismiss()
                         })
                     }
                     Spacer()

@@ -35,7 +35,7 @@ struct LEventsView: View {
                     
                     ForEach(eventsViewModel.events) { event in
                         NavigationLink{
-                            AEventDetailView(eventID : event.uid,title: event.title)
+                            LEventDetailView(eventID : event.uid,title: event.title)
                         }label: {
                             HStack(alignment: .center, spacing: 10) {
                                 Rectangle()
