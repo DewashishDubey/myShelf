@@ -12,6 +12,7 @@ struct LReturnBookDetailView: View {
     let memberID : String
     @ObservedObject var bookViewModel = PreviouslyReservedBooksViewModel()
     @EnvironmentObject var viewModel : AuthViewModel
+    @Environment(\.presentationMode) var presentationMode
     @State private var returned = false
     var body: some View {
         ZStack{
@@ -121,6 +122,7 @@ struct LReturnBookDetailView: View {
                             Button(action: {
                                 //requestExtension(reservedBookID: reservedBook.bookID)
                                 returnBookAndPayFine(bookID: reservedBook.bookID)
+                                presentationMode.wrappedValue.dismiss()
                             }, label: {
                                 Text("Pay fine and return")
                                     .font(Font.custom("SF Pro Text", size: 14))
@@ -176,8 +178,9 @@ struct LReturnBookDetailView: View {
                             if let error = error {
                                 print("Error deleting document from issued_books: \(error.localizedDescription)")
                             } else {
-                                self.returned = true
-                                memberRef.updateData(["no_of_issued_books": FieldValue.increment(Int64(-1))]) { error in
+                                returned = true
+                                memberRef.updateData(["no_of_issued_books": FieldValue.increment(Int64(-1)),
+                                                      "books_read": FieldValue.increment(Int64(1))]) { error in
                                     if let error = error {
                                         print("Error updating no_of_issued_books in members collection: \(error.localizedDescription)")
                                     } else {

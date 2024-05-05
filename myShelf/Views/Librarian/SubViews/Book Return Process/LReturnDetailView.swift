@@ -148,7 +148,7 @@ struct LReturnDetailView: View {
         }
         .onAppear {
             fetchMemberDetails(memberID: MemberID)
-            issuedBooksViewModel.fetchIssuedBooks(for: member?.id ?? "ILZTUpzz84e5F5b7Xoof3pUX8Hf1")
+            issuedBooksViewModel.fetchIssuedBooks(for: MemberID)
         }
     }
     

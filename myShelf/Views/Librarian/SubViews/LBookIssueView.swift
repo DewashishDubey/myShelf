@@ -126,6 +126,7 @@ struct LBookIssueView: View {
     @State private var showAlert = false
     @State private var alertMessage = ""
     @ObservedObject var firebaseManager = FirebaseManager()
+    @Environment(\.presentationMode) var presentationMode
     var body: some View {
         VStack(spacing:10) {
             if let book = firebaseManager.books.first(where: { $0.uid == bookID })
@@ -260,11 +261,14 @@ struct LBookIssueView: View {
                     .cornerRadius(6)
                 }
                 .padding(.top, 20)
+                .alert(isPresented: $showAlert) {
+                    Alert(title: Text("Alert"), message: Text(alertMessage), dismissButton: .default(Text("OK")){
+                        presentationMode.wrappedValue.dismiss()
+                    })
             }
             Spacer()
         }
-        .alert(isPresented: $showAlert) {
-            Alert(title: Text("Alert"), message: Text(alertMessage), dismissButton: .default(Text("OK")))
+       
         }
         .onAppear {
             fetchMemberDetails(memberID: MemberID)
@@ -281,6 +285,7 @@ struct LBookIssueView: View {
             if member.isPremium && member.numberOfIssuedBooks < 5 {
                 // Issue the book for premium member
                 issueBook(startDate: Date(), endDate: Date().addingTimeInterval(15 * 24 * 60 * 60))
+               
             } else {
                 showAlert = true
                 alertMessage = "Book issue limit reached"
@@ -289,15 +294,12 @@ struct LBookIssueView: View {
             if !member.isPremium && member.numberOfIssuedBooks < 1 {
                 // Issue the book for non-premium member
                 issueBook(startDate: Date(), endDate: Date().addingTimeInterval(7 * 24 * 60 * 60))
+                
             }
             else if member.isPremium
             {
                 issueBook(startDate: Date(), endDate: Date().addingTimeInterval(15 * 24 * 60 * 60))
-            }
-            else
-            {
-                showAlert = true
-                alertMessage = "Book issue limit reached"
+               
             }
         }
     }
@@ -352,7 +354,8 @@ struct LBookIssueView: View {
                             return
                         }
                         let documentID = document.documentID
-                        
+                        showAlert = true
+                        alertMessage = "Book issued Successfully"
                         // Update the document with the UID
                         issuedBooksRef.document(documentID).setData(["documentID": documentID], merge: true) { error in
                             if let error = error {
