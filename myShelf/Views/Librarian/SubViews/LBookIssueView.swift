@@ -125,35 +125,150 @@ struct LBookIssueView: View {
     @State private var member: Member?
     @State private var showAlert = false
     @State private var alertMessage = ""
-    
+    @ObservedObject var firebaseManager = FirebaseManager()
     var body: some View {
-        VStack {
-            if let member = member {
-                Text("Member Name: \(member.name)")
-                Text("Is Premium: \(member.isPremium ? "Yes" : "No")")
-                Text("Last Read Genre: \(member.lastReadGenre)")
-                Text("Number of Issued Books: \(member.numberOfIssuedBooks)")
-                Text("Subscription Start Date: \(formattedDate(member.subscriptionStartDate))")
-            } else {
-                Text("Loading...")
-            }
-            Button(action: {
-                submitButtonTapped()
-            }) {
-                Text("Submit")
-                    .font(.title)
-                    .padding()
-                    .background(Color.blue)
+        VStack(spacing:10) {
+            if let book = firebaseManager.books.first(where: { $0.uid == bookID })
+            {
+                Text("BOOK")
+                    .font(
+                        Font.custom("SF Pro", size: 20)
+                            .weight(.semibold)
+                    )
                     .foregroundColor(.white)
+                    .frame(maxWidth: .infinity,alignment: .leading)
+                    .padding(.horizontal)
+                    .padding(.bottom,10)
+                HStack(alignment: .top) {
+                    // Space Between
+                    AsyncImage(url: URL(string: book.imageUrl)) { phase in
+                        switch phase {
+                        case .empty:
+                            ProgressView()
+                        case .success(let image):
+                            image
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: 90, height: 140)
+                                .clipped()
+                                .cornerRadius(10)
+                        case .failure:
+                            Image(systemName: "photo")
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: 90, height: 140)
+                                .clipped()
+                                .cornerRadius(10)
+                        @unknown default:
+                            Text("Unknown")
+                        }
+                    }
+                    .frame(width: 90, height: 140)
+                    .clipped()
                     .cornerRadius(10)
+                    
+                    VStack(alignment:.leading,spacing:5){
+                        Text(book.title)
+                            .font(
+                            Font.custom("SF Pro", size: 20)
+                            .weight(.semibold)
+                            )
+                            .foregroundColor(.white)
+                            .padding(.top,20)
+                        Text(book.authors[0])
+                            .font(
+                            Font.custom("SF Pro", size: 16)
+                            .weight(.medium)
+                            )
+                            .foregroundColor(Color(red: 0.6, green: 0.6, blue: 0.6))
+                        Text(book.genre)
+                            .font(
+                            Font.custom("SF Pro", size: 16)
+                            .weight(.medium)
+                            )
+                            .foregroundColor(Color(red: 0.6, green: 0.6, blue: 0.6))
+                        Text(book.publisher)
+                            .font(
+                            Font.custom("SF Pro", size: 16)
+                            .weight(.medium)
+                            )
+                            .foregroundColor(Color(red: 0.6, green: 0.6, blue: 0.6))
+                    }
+                }
+                .padding(0)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.horizontal)
+                
+                Rectangle()
+                .foregroundColor(.clear)
+                .frame(width: 353, height: 1)
+                .background(Color(red: 0.19, green: 0.19, blue: 0.19))
+                .padding(.bottom,10)
+                Text("USER")
+                    .font(
+                        Font.custom("SF Pro", size: 20)
+                            .weight(.semibold)
+                    )
+                    .foregroundColor(.white)
+                    .frame(maxWidth: .infinity,alignment: .leading)
+                    .padding(.horizontal)
+                    .padding(.bottom,10)
+                if let member = member {
+                    HStack{
+                        Image(systemName: "person.crop.circle")
+                            .resizable()
+                            .frame(width: 40,height: 40)
+                        VStack(alignment:.leading){
+                            Text(member.name)
+                                .font(
+                                Font.custom("SF Pro", size: 20)
+                                .weight(.semibold)
+                                )
+                                .foregroundColor(.white)
+                            Text(member.isPremium == true  ? "Premium Member" : "Basic Memebr")
+                                .font(
+                                Font.custom("SF Pro", size: 16)
+                                .weight(.medium)
+                                )
+                                .foregroundColor(Color(red: 0.6, green: 0.6, blue: 0.6))
+                        }
+                    }
+                    .frame(maxWidth: .infinity,alignment: .leading)
+                    .padding(.horizontal)
+                    Rectangle()
+                    .foregroundColor(.clear)
+                    .frame(width: 353, height: 1)
+                    .background(Color(red: 0.19, green: 0.19, blue: 0.19))
+                } else {
+                    Text("Loading...")
+                }
+                Button(action: {
+                    submitButtonTapped()
+                }) {
+                    VStack(alignment: .center, spacing: 10) {
+                        Text("Issue Book")
+                        .font(
+                        Font.custom("SF Pro Text", size: 14)
+                        .weight(.semibold)
+                        )
+                        .multilineTextAlignment(.center)
+                        .foregroundColor(.white)
+                    }
+                    .padding(20)
+                    .frame(width: 353, alignment: .center)
+                    .background(Color(red: 0.26, green: 0.52, blue: 0.96))
+                    .cornerRadius(6)
+                }
+                .padding(.top, 20)
             }
-            .padding(.top, 20)
+            Spacer()
         }
         .alert(isPresented: $showAlert) {
             Alert(title: Text("Alert"), message: Text(alertMessage), dismissButton: .default(Text("OK")))
         }
         .onAppear {
             fetchMemberDetails(memberID: MemberID)
+            firebaseManager.fetchBooks()
         }
     }
     

@@ -18,10 +18,23 @@ struct LScanMember: View {
             Button(action: {
                 isImagePickerPresented = true
             }) {
-                Image(systemName: "qrcode.viewfinder")
+                VStack(alignment: .center, spacing: 10) {
+                    Text("Scan Member QR")
+                    .font(
+                    Font.custom("SF Pro Text", size: 14)
+                    .weight(.semibold)
+                    )
+                    .multilineTextAlignment(.center)
+                    .foregroundColor(.white)
+                }
+                .padding(20)
+                .frame(width: 353, alignment: .center)
+                .background(Color(red: 0.26, green: 0.52, blue: 0.96))
+                .cornerRadius(6)
+                /*Image(systemName: "qrcode.viewfinder")
                     .font(.system(size: 35))
                     .foregroundColor(.white)
-                    .padding(10)
+                    .padding(10)*/
             }
 
             

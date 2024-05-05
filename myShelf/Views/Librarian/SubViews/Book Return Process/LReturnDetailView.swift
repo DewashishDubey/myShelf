@@ -20,7 +20,7 @@ struct LReturnDetailView: View {
                     .resizable()
                     .frame(width: 40,height: 40)
                     //.padding(.leading,10)
-                VStack{
+                VStack(alignment:.leading){
                         Text(member?.name ?? "")
                             .font(
                                 Font.custom("SF Pro", size: 18)
