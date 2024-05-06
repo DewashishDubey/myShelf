@@ -8,7 +8,7 @@
 import SwiftUI
 import FirebaseFirestore
 import FirebaseAuth
-
+import StoreKit
 struct BookUID: Identifiable {
     let id: String
 }
@@ -509,6 +509,8 @@ struct PopularBooksView: View {
     @EnvironmentObject var viewModel: AuthViewModel // Injecting AuthViewModel
     @State private var showingSheet = false
     @State private var selectedBookUID: BookUID?
+   // @State private var dueAmount: Int = 0
+    //@StateObject var storeVM = StoreVM()
     var body: some View {
         VStack(alignment: .leading) {
             Text("Popular Books")
@@ -568,6 +570,7 @@ struct PopularBooksView: View {
             .onAppear {
                 fetchLastReadGenre() // Fetch last read genre on view appear
                 firebaseManager.fetchBooks()
+               
             }
             .sheet(item: $selectedBookUID) { selectedUID in // Use item form of sheet
                             MBookDetailView(bookUID: selectedUID.id) // Pass selected book UID

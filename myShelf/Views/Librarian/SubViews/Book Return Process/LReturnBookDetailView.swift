@@ -233,13 +233,31 @@ struct LReturnBookDetailView: View {
                                         print("Error updating revenue in admin collection: \(error.localizedDescription)")
                                     } else {
                                         print("Revenue updated successfully.")
+                                        let memberRef = db.collection("members").document(memberID)
+                                                memberRef.getDocument { (document, error) in
+                                                    if let document = document, document.exists {
+                                                        var currentDue = document.get("due") as? Int ?? 0
+                                                        currentDue += fineAmount
+                                                        
+                                                        memberRef.updateData(["due": currentDue]) { error in
+                                                            if let error = error {
+                                                                print("Error updating due amount in members collection: \(error.localizedDescription)")
+                                                            } else {
+                                                                print("Due amount updated successfully.")
+                                                            }
+                                                        }
+                                                    } else {
+                                                        print("Member document not found.")
+                                                    }
+                                                }
+                                            }
                                     }
                                 }
                             }
                         }
                     }
                 }
-            } else {
+             else {
                 if let error = error {
                     print("Error getting document: \(error.localizedDescription)")
                 }

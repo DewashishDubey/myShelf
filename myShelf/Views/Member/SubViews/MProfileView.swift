@@ -152,6 +152,35 @@ struct MProfileView: View {
                     .background(Color(red: 0.19, green: 0.19, blue: 0.19))
                     
                     NavigationLink {
+                        MPayFineView()
+                    } label: {
+                        HStack(alignment: .center) {
+                            Image(systemName: "dollarsign")
+                                .foregroundColor(Color(red: 0, green: 0.48, blue: 1))
+                            
+                                .frame(width: 25, alignment: .top)
+                            // Space Between
+                            Text("OverDue Fines")
+                                .font(
+                                    Font.custom("SF Pro", size: 14)
+                                        .weight(.medium)
+                                )
+                                .foregroundColor(.white)
+                            Spacer()
+                            // Alternative Views and Spacers
+                            Image(systemName: "chevron.right")
+                                .foregroundColor(Color(red: 0.6, green: 0.6, blue: 0.6))
+                        }
+                        .padding(.horizontal, 0)
+                        .frame(width: 313, alignment: .center)
+                    }
+                    
+                    Rectangle()
+                    .foregroundColor(.clear)
+                    .frame(width: 313, height: 0.5)
+                    .background(Color(red: 0.19, green: 0.19, blue: 0.19))
+                    
+                    NavigationLink {
                         MFAQView()
                     } label: {
                         HStack(alignment: .center) {

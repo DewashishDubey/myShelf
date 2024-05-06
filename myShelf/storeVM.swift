@@ -17,8 +17,8 @@ class StoreVM: ObservableObject {
     @Published private(set) var subscriptions: [Product] = []
     @Published private(set) var purchasedSubscriptions: [Product] = []
     @Published private(set) var subscriptionGroupStatus: RenewalState?
-    
-    
+    @Published private(set) var consumables: [Product] = [] // New array for consumables
+    private let consumableProductIds: [String] = ["fine.payment"]
     private let productIds: [String] = ["subscription.yearly", "subscription.monthly"]
     
     var updateListenerTask : Task<Void, Error>? = nil
@@ -66,6 +66,7 @@ class StoreVM: ObservableObject {
         do {
             // request from the app store using the product ids (hardcoded)
             subscriptions = try await Product.products(for: productIds)
+            consumables = try await Product.products(for: consumableProductIds)
             print(subscriptions)
         } catch {
             print("Failed product request from app store server: \(error)")
@@ -131,7 +132,18 @@ class StoreVM: ObservableObject {
         }
     }
     
-    
+    // Method for purchasing consumables
+    func purchaseConsumable(product: Product, completion: @escaping (Error?) -> Void) {
+        Task {
+            do {
+                let result = try await product.purchase()
+                await updateCustomerProductStatus()
+            } catch {
+                print("Failed to purchase  \(error)")
+                completion(error) // Call completion handler with error
+            }
+        }
+    }
 }
 
 

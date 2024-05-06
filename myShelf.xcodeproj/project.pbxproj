@@ -57,6 +57,7 @@
 		A1A9BDEA2BE24F4000EFF2F8 /* LRequestsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A9BDE92BE24F4000EFF2F8 /* LRequestsView.swift */; };
 		A1A9BDEC2BE2516200EFF2F8 /* ExtensionRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A9BDEB2BE2516200EFF2F8 /* ExtensionRequests.swift */; };
 		A1AD8F1C2BDBF8AC00C720EF /* LibrarianDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1AD8F1B2BDBF8AC00C720EF /* LibrarianDetailView.swift */; };
+		A1B5715E2BE8985500D79116 /* MPayFineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B5715D2BE8985500D79116 /* MPayFineView.swift */; };
 		A1BC2DA32BDFC753002E3A79 /* MLibraryGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1BC2DA22BDFC753002E3A79 /* MLibraryGridView.swift */; };
 		A1BC2DA52BDFCF3A002E3A79 /* IssuedBooks.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1BC2DA42BDFCF3A002E3A79 /* IssuedBooks.swift */; };
 		A1BC2DA72BDFD5E8002E3A79 /* PreviouslyIssuedBooks.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1BC2DA62BDFD5E8002E3A79 /* PreviouslyIssuedBooks.swift */; };
@@ -136,6 +137,7 @@
 		A1A9BDE92BE24F4000EFF2F8 /* LRequestsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LRequestsView.swift; sourceTree = "<group>"; };
 		A1A9BDEB2BE2516200EFF2F8 /* ExtensionRequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionRequests.swift; sourceTree = "<group>"; };
 		A1AD8F1B2BDBF8AC00C720EF /* LibrarianDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibrarianDetailView.swift; sourceTree = "<group>"; };
+		A1B5715D2BE8985500D79116 /* MPayFineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPayFineView.swift; sourceTree = "<group>"; };
 		A1BC2DA22BDFC753002E3A79 /* MLibraryGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLibraryGridView.swift; sourceTree = "<group>"; };
 		A1BC2DA42BDFCF3A002E3A79 /* IssuedBooks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssuedBooks.swift; sourceTree = "<group>"; };
 		A1BC2DA62BDFD5E8002E3A79 /* PreviouslyIssuedBooks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviouslyIssuedBooks.swift; sourceTree = "<group>"; };
@@ -218,6 +220,7 @@
 				A126F8AD2BDAF30F00693474 /* MWishlistView.swift */,
 				A11EAAF32BE0FE1C00B46B47 /* MSubscriptionView.swift */,
 				A13E559F2BE642B4004ED7B7 /* MEventDetailView.swift */,
+				A1B5715D2BE8985500D79116 /* MPayFineView.swift */,
 			);
 			path = SubViews;
 			sourceTree = "<group>";
@@ -558,6 +561,7 @@
 				A1E3EB0B2BD63BC9001CC21A /* RegistrationView.swift in Sources */,
 				A1AD8F1C2BDBF8AC00C720EF /* LibrarianDetailView.swift in Sources */,
 				A133C85E2BDA094E00A9597B /* LEventsView.swift in Sources */,
+				A1B5715E2BE8985500D79116 /* MPayFineView.swift in Sources */,
 				A14AFBF42BDBB88E00A29380 /* ALibrarianView.swift in Sources */,
 				A133C8602BDA095C00A9597B /* LProfileView.swift in Sources */,
 				A14AFBEC2BDBA6A900A29380 /* AddBookView.swift in Sources */,

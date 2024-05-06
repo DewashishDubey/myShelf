@@ -4,7 +4,21 @@
 
   ],
   "products" : [
-
+    {
+      "displayPrice" : "10",
+      "familyShareable" : false,
+      "internalID" : "744A1D01",
+      "localizations" : [
+        {
+          "description" : "",
+          "displayName" : "",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "fine.payment",
+      "referenceName" : "Fine",
+      "type" : "Consumable"
+    }
   ],
   "settings" : {
     "_failTransactionsEnabled" : false,
