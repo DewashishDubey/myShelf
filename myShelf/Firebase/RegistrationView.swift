@@ -158,6 +158,7 @@ struct RegistrationView: View {
                             .foregroundStyle(Color.indigo)
                     }
                     .font(.system(size: 16))
+                    .padding(.top,10)
                 }
             }
             .padding(.top,40)
