@@ -294,7 +294,8 @@ struct AddBookView: View {
                 "noOfPages": noOfPages,
                 "language": book.language ?? "",
                 "shelfLocation": shelfLocation,
-                "noOfRatings" : "10"
+                "noOfRatings" : "10",
+                "issued" : 0
             ]
 
             // Add book data to Firestore collection "books"

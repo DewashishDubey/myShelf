@@ -208,6 +208,15 @@ struct LReturnBookDetailView: View {
                                                                   }
                                                           }
                                 
+                                let bookRef = db.collection("books").document(bookID)
+                                        bookRef.updateData(["issued": FieldValue.increment(Int64(-1))]) { error in
+                                            if let error = error {
+                                                print("Error decrementing issued count for the book: \(error.localizedDescription)")
+                                            } else {
+                                                print("Issued count decremented successfully for the book.")
+                                            }
+                                        }
+                                
                                 // Update revenue in admin collection
                                 let adminRef = db.collection("admin").document("adminDocument")
                                 db.runTransaction({ (transaction, errorPointer) -> Any? in

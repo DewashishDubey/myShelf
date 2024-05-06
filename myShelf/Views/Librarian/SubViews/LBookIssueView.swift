@@ -409,7 +409,9 @@ struct LBookIssueView: View {
                             var noOfCopies = Int(noOfCopiesString) {
                             noOfCopies -= 1
                             bookData["noOfCopies"] = String(noOfCopies)
-                            
+                            var issued = bookData["issued"] as? Int ?? 0
+                            issued += 1
+                            bookData["issued"] = issued
                             // Update the book document with reduced number of copies
                             booksRef.setData(bookData) { error in
                                 if let error = error {

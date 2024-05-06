@@ -257,7 +257,7 @@ struct EditBookView: View {
     @State private var isEditing = false
     @State private var showAlert = false // State variable to control the alert
     @State private var isDeleted = false // State variable to track if the book is deleted
-    
+    @State private var alertMsg = ""
     init(bookUID: String) {
         self.bookUID = bookUID
         UINavigationBar.appearance().backgroundColor = .clear // Set navigation bar background color
@@ -349,14 +349,10 @@ struct EditBookView: View {
         .alert(isPresented: $showAlert) {
             Alert(
                 title: Text("Book Deleted"),
-                message: Text("The book has been successfully deleted."),
+                message: Text("\(alertMsg)"),
                 dismissButton: .default(Text("OK")) {
                     // Dismiss the sheet after the alert is dismissed
-                    if isDeleted {
-                        // Pop to the root view (LLibraryView) by dismissing twice
-                        presentationMode.wrappedValue.dismiss() // Dismiss the EditBookView
-                        presentationMode.wrappedValue.dismiss() // Dismiss the previous view
-                    }
+                    presentationMode.wrappedValue.dismiss()
                 }
             )
         }    }
@@ -373,17 +369,35 @@ struct EditBookView: View {
         // Reference to the document of the book
         let bookRef = db.collection("books").document(bookUID)
         
-        // Delete the document
-        bookRef.delete { error in
-            if let error = error {
-                print("Error deleting book: \(error.localizedDescription)")
+        // Fetch the document
+        bookRef.getDocument { (document, error) in
+            if let document = document, document.exists {
+                // Check if the "issued" attribute is 0
+                if let issuedCount = document.data()?["issued"] as? Int, issuedCount == 0 {
+                    // Delete the document
+                    bookRef.delete { error in
+                        if let error = error {
+                            print("Error deleting book: \(error.localizedDescription)")
+                        } else {
+                            print("Book deleted successfully!")
+                            showAlert = true // Show the alert when the book is deleted successfully
+                            isDeleted = true // Set the flag to indicate that the book is deleted
+                            alertMsg = "Book deleted Sucessfully"
+                        }
+                    }
+                } else {
+                    // "issued" attribute is not 0, so don't delete the book
+                    print("Book cannot be deleted because it is currently issued.")
+                    showAlert = true // Show an alert indicating that the book cannot be deleted
+                    isDeleted = false // Set the flag to indicate that the book is not deleted
+                    alertMsg = "Can't delete,Book is borrowed by someone"
+                }
             } else {
-                print("Book deleted successfully!")
-                showAlert = true // Show the alert when the book is deleted successfully
-                isDeleted = true // Set the flag to indicate that the book is deleted
+                print("Document does not exist")
             }
         }
     }
+
     
     // Function to update the location of a book in Firebase
     func updateBookLocation(newLocation: String, forBookUID bookUID: String, completion: @escaping (Error?) -> Void) {
