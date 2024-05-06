@@ -72,7 +72,7 @@ struct MLibraryGridView: View {
                     previouslyIssuedBooksViewModel.fetchReservedBooks(for: viewModel.currentUser?.id ?? "ILZTUpzz84e5F5b7Xoof3pUX8Hf1")
                 }
             }
-            .searchable(text: $searchText, isPresented: $searchIsActive)
+            //.searchable(text: $searchText, isPresented: $searchIsActive)
         }
     }
 }

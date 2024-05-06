@@ -19,13 +19,13 @@ struct MLibraryView: View {
             NavigationStack {
                 ScrollView(showsIndicators: false) 
                 {
-                    HStack {
+                    /*HStack {
                         TagsView(text: "All Books")
                             .padding(.leading)
                         TagsView(text: "Borrowed")
                         TagsView(text: "Reserved")
                         Spacer()
-                    }
+                    }*/
                     HStack {
                         Text("All Books")
                             .font(Font.custom("SF Pro", size: 20))
@@ -58,7 +58,7 @@ struct MLibraryView: View {
                         BorrowedBooks() // Display list view
                     }
                 }
-                .searchable(text: $searchText, isPresented: $searchIsActive)
+                //.searchable(text: $searchText, isPresented: $searchIsActive)
             }
             
             //.preferredColorScheme(.dark)

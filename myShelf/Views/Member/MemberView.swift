@@ -35,7 +35,7 @@ struct MemberView: View {
                         MLibraryView()
                         //TestView()
                     }
-                    .tabItem {  Label("Library", systemImage: "books.vertical") }
+                    .tabItem {  Label("My Library", systemImage: "books.vertical") }
                 }
                 //.environmentObject(storeVM)
                 .toolbarBackground(.black, for: .tabBar)
