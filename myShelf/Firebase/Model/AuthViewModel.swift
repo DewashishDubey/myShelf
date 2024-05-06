@@ -259,7 +259,8 @@ class AuthViewModel: ObservableObject {
                     "lastReadGenre" : "Fiction",
                     "membership_duration" : 0,
                     "books_read" : 0,
-                    "due" : 0
+                    "due" : 0,
+                    "gender" : gender == .male ? "male" : "female"
                 ]
                 try await membersRef.setData(memberData)
                 

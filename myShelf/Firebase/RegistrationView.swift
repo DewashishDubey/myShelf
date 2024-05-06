@@ -15,6 +15,7 @@ struct RegistrationView: View {
     @State private var selectedRole = "Member" // Default selection
     @Environment(\.dismiss) var dismiss
     @EnvironmentObject var viewModel: AuthViewModel
+    @State var selectedGender: Gender = .male
     
     let roles = ["Member", "Librarian", "Admin"] // Define roles
     
@@ -66,6 +67,26 @@ struct RegistrationView: View {
                             }
                         }
                     }
+                        HStack {
+                            Text("Gender")
+                            Spacer()
+                            Picker("", selection: $selectedGender) {
+                                Text("Male").tag(Gender.male)
+                                Text("Female").tag(Gender.female)
+                            }
+                            .pickerStyle(DefaultPickerStyle())
+                            .foregroundColor(.white)
+                            .padding(0)
+                            .frame(width: 110)
+                            .accentColor(.white)
+                        }
+                        .padding(.horizontal, 15)
+                        .padding(.vertical, 12)
+                        .frame(maxWidth: .infinity, minHeight: 50, maxHeight: 50, alignment: .leading)
+                        .background(Color(red: 0.19, green: 0.19, blue: 0.19))
+                        .foregroundColor(.white)
+                        .cornerRadius(8)
+                    Divider()
                     
     //                HStack(spacing:130){
     //                    Text("Select Role")
@@ -122,7 +143,7 @@ struct RegistrationView: View {
                                                        }
                                                    }
                                                }
-                                            try await viewModel.createUser(withEmail: email, password: password, fullname: fullname, userType: .member)
+                                            try await viewModel.createUser(withEmail: email, password: password, fullname: fullname, userType: .member,gender: selectedGender)
                                         } catch {
                                             print("Failed to create user: \(error.localizedDescription)")
                                         }

@@ -5,7 +5,7 @@ import CoreImage.CIFilterBuiltins
 struct MProfileView: View {
     @EnvironmentObject var viewModel: AuthViewModel
     @State private var isPremiumMember: Bool = false
-    
+    @State private var gender = ""
     @State private var qrCodeImage: UIImage?
     
     var body: some View {
@@ -14,7 +14,7 @@ struct MProfileView: View {
             {
                 VStack{
                     HStack(alignment: .center, spacing: 15){
-                        Image(systemName: "person.crop.circle")
+                        Image(gender == "male" ? "male" : "female")
                             .resizable()
                             .frame(width: 70, height: 70)
                             .foregroundColor(.white)
@@ -209,7 +209,7 @@ struct MProfileView: View {
                     .background(Color(red: 0.19, green: 0.19, blue: 0.19))
                     
                     NavigationLink {
-                        MFAQView()
+                        MHelpAndSupportView()
                     } label: {
                         HStack(alignment: .center) {
                             Image(systemName: "message")
@@ -277,6 +277,9 @@ struct MProfileView: View {
                 if let document = document, document.exists {
                     if let isPremium = document.data()?["is_premium"] as? Bool {
                         self.isPremiumMember = isPremium
+                    }
+                    if let gender = document.data()?["gender"] as? String {
+                        self.gender = gender
                     }
                 } else {
                     print("Member document does not exist or could not be retrieved: \(error?.localizedDescription ?? "Unknown error")")

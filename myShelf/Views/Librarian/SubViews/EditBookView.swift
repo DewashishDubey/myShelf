@@ -359,9 +359,6 @@ struct EditBookView: View {
     
     // Delete the book from Firebase and navigate back to the search page
     func deleteBook() {
-        guard let userUID = viewModel.currentUser?.id else {
-            return
-        }
         
         // Reference to the Firebase database
         let db = Firestore.firestore()

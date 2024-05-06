@@ -161,9 +161,11 @@ struct MHomeView: View {
 struct HeaderView: View {
     @EnvironmentObject var viewModel : AuthViewModel
     @State private var isPremiumMember: Bool = false
+    @State private var gender = ""
     var body: some View {
         if let user = viewModel.currentUser{
-            HStack {
+            HStack 
+            {
                 VStack(alignment: .leading) {
                     let name = Name(fullName: user.fullname)
                     Text("Welcome, \(name.first)")
@@ -175,18 +177,18 @@ struct HeaderView: View {
                         .foregroundColor(.yellow)
                 }
                 Spacer()
-                Image(systemName: "bell")
-                    .foregroundColor(.white)
                 NavigationLink(destination: MProfileView().navigationBarBackButtonHidden(false)) {
-                    Image(systemName: "person.crop.circle")
+                    Image(gender == "male" ? "male" : "female")
                         .resizable()
-                        .frame(width: 36,height: 36)
+                        .frame(width: 40,height: 40)
                         .foregroundColor(.white)
                 }
                 
             }
             .onAppear {
                 fetchMemberData()
+               
+                                       
             }
             .padding()
         }
@@ -201,6 +203,9 @@ struct HeaderView: View {
                 if let document = document, document.exists {
                     if let isPremium = document.data()?["is_premium"] as? Bool {
                         self.isPremiumMember = isPremium
+                    }
+                    if let gender = document.data()?["gender"] as? String {
+                        self.gender = gender
                     }
                 } else {
                     print("Member document does not exist or could not be retrieved: \(error?.localizedDescription ?? "Unknown error")")
