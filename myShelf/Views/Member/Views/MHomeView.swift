@@ -42,6 +42,7 @@ struct MHomeView: View {
                                         checkAndUpdateFines(for: currentUserUID)
                     deleteExpiredReservation(for: currentUserUID)
                                     }
+                
             }
         }
         .background(Color.black.edgesIgnoringSafeArea(.all))
@@ -50,44 +51,66 @@ struct MHomeView: View {
         let db = Firestore.firestore()
         let issuedBooksRef = db.collection("members").document(userID).collection("issued_books")
         
-        issuedBooksRef.getDocuments { snapshot, error in
+        // Fetch the finePerDay attribute from the admin document
+        let adminCollection = db.collection("admin")
+        let adminDocument = adminCollection.document("VtD7uAEOUTXDKKNFfqR7")
+        
+        adminDocument.getDocument { document, error in
             if let error = error {
-                print("Error getting documents: \(error)")
+                print("Error fetching finePerDay: \(error)")
                 return
             }
             
-            guard let documents = snapshot?.documents else {
-                print("No documents found")
+            guard let document = document, document.exists else {
+                print("Admin document not found")
                 return
             }
             
-            let currentDate = Date()
+            guard let finePerDay = document.data()?["fine"] as? Int else {
+                print("FinePerDay attribute not found")
+                return
+            }
             
-            for document in documents {
-                let data = document.data()
-                guard let timestamp = data["end_date"] as? Timestamp else {
-                    continue
+            // Continue with the finePerDay value
+            issuedBooksRef.getDocuments { snapshot, error in
+                if let error = error {
+                    print("Error getting documents: \(error)")
+                    return
                 }
                 
-                let endDate = timestamp.dateValue() // Convert Timestamp to Date
+                guard let documents = snapshot?.documents else {
+                    print("No documents found")
+                    return
+                }
                 
-                if currentDate > endDate {
-                    // Calculate the difference in days
-                    let calendar = Calendar.current
-                    let components = calendar.dateComponents([.day], from: endDate, to: currentDate)
-                    guard let daysOverdue = components.day else {
+                let currentDate = Date()
+                
+                for document in documents {
+                    let data = document.data()
+                    guard let timestamp = data["end_date"] as? Timestamp else {
                         continue
                     }
                     
-                    // Calculate fine
-                    let fine = daysOverdue * 5
+                    let endDate = timestamp.dateValue() // Convert Timestamp to Date
                     
-                    // Update the document with the updated fine
-                    issuedBooksRef.document(document.documentID).updateData(["fine": fine]) { error in
-                        if let error = error {
-                            print("Error updating document: \(error)")
-                        } else {
-                            print("Fine updated successfully")
+                    if currentDate > endDate {
+                        // Calculate the difference in days
+                        let calendar = Calendar.current
+                        let components = calendar.dateComponents([.day], from: endDate, to: currentDate)
+                        guard let daysOverdue = components.day else {
+                            continue
+                        }
+                        
+                        // Calculate fine
+                        let fine = daysOverdue * finePerDay
+                        
+                        // Update the document with the updated fine
+                        issuedBooksRef.document(document.documentID).updateData(["fine": fine]) { error in
+                            if let error = error {
+                                print("Error updating document: \(error)")
+                            } else {
+                                print("Fine updated successfully")
+                            }
                         }
                     }
                 }
