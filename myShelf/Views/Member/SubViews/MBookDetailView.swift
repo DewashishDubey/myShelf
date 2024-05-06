@@ -15,6 +15,7 @@ struct MBookDetailView: View {
     @EnvironmentObject var viewModel : AuthViewModel
     @State private var isBookmarked = false
     @State private var showAlert = false
+    @State private var AlertMsg = ""
     var body: some View {
             //Text(user.id)
             ScrollView(showsIndicators: false)
@@ -186,7 +187,7 @@ struct MBookDetailView: View {
                                     }
                                     .padding(.top, 30)
                                     .alert(isPresented: $showAlert) {
-                                                Alert(title: Text("Alert"), message: Text("You cannot issue more than one book."), dismissButton: .default(Text("OK")))
+                                                Alert(title: Text("Alert"), message: Text("\(AlertMsg)"), dismissButton: .default(Text("OK")))
                                             }
                                     
                                     
@@ -422,6 +423,7 @@ struct MBookDetailView: View {
                 if let snapshot = snapshot, !snapshot.isEmpty {
                     // Show alert if reservations exist
                     showAlert = true
+                    AlertMsg = "You cannot issue more than one book."
                 } else {
                     // Proceed with reservation
                     let currentTime = Date()
@@ -440,6 +442,8 @@ struct MBookDetailView: View {
                         if let error = error {
                             print("Error reserving book: \(error.localizedDescription)")
                         } else {
+                            showAlert = true
+                            AlertMsg = "Book reserved successfully!"
                             print("Book reserved successfully!")
                         }
                     }

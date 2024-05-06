@@ -170,7 +170,7 @@ struct AddBookView: View {
                 HStack{
                     HStack{
                         Image(systemName: "location")
-                        Text("Self Location")
+                        Text("Shelf Location")
                         Rectangle()
                         .foregroundColor(.clear)
                         .frame(width: 3, height: 20)
