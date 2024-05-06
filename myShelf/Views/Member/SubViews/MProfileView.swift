@@ -29,9 +29,6 @@ struct MProfileView: View {
                                 
                                 Spacer()
                                 
-                                Text("Edit")
-                                .font(Font.custom("SF Pro", size: 14))
-                                .foregroundColor(Color(red: 0, green: 0.48, blue: 1))
                             
                             }
                             .padding(0)

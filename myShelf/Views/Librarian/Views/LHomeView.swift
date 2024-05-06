@@ -33,7 +33,7 @@ struct LHomeView: View {
                                 Spacer()
                                 Image(systemName: "bell")
                                     .foregroundColor(.white)
-                                NavigationLink(destination: MProfileView().navigationBarBackButtonHidden(false)) {
+                                NavigationLink(destination: LProfileView().navigationBarBackButtonHidden(false)) {
                                     Image(systemName: "person.crop.circle")
                                         .resizable()
                                         .frame(width: 36,height: 36)

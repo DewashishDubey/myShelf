@@ -62,6 +62,7 @@
 		A1BC2DA52BDFCF3A002E3A79 /* IssuedBooks.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1BC2DA42BDFCF3A002E3A79 /* IssuedBooks.swift */; };
 		A1BC2DA72BDFD5E8002E3A79 /* PreviouslyIssuedBooks.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1BC2DA62BDFD5E8002E3A79 /* PreviouslyIssuedBooks.swift */; };
 		A1D600992BE60EF1004EAA43 /* Events.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D600982BE60EF1004EAA43 /* Events.swift */; };
+		A1D93F5C2BE8C4520051F44D /* AProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D93F5B2BE8C4520051F44D /* AProfileView.swift */; };
 		A1E3EAE72BD63A68001CC21A /* myShelfApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E3EAE62BD63A68001CC21A /* myShelfApp.swift */; };
 		A1E3EAE92BD63A68001CC21A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E3EAE82BD63A68001CC21A /* ContentView.swift */; };
 		A1E3EAEB2BD63A6A001CC21A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1E3EAEA2BD63A6A001CC21A /* Assets.xcassets */; };
@@ -142,6 +143,7 @@
 		A1BC2DA42BDFCF3A002E3A79 /* IssuedBooks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssuedBooks.swift; sourceTree = "<group>"; };
 		A1BC2DA62BDFD5E8002E3A79 /* PreviouslyIssuedBooks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviouslyIssuedBooks.swift; sourceTree = "<group>"; };
 		A1D600982BE60EF1004EAA43 /* Events.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Events.swift; sourceTree = "<group>"; };
+		A1D93F5B2BE8C4520051F44D /* AProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AProfileView.swift; sourceTree = "<group>"; };
 		A1E3EAE32BD63A68001CC21A /* myShelf.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = myShelf.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1E3EAE62BD63A68001CC21A /* myShelfApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = myShelfApp.swift; sourceTree = "<group>"; };
 		A1E3EAE82BD63A68001CC21A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -310,6 +312,7 @@
 				A19A4AE92BDFF243000604D7 /* FinePolicyView.swift */,
 				A1895CDB2BE5FD8700898ED6 /* ACreateEventView.swift */,
 				A13E559B2BE63320004ED7B7 /* AEventDetailView.swift */,
+				A1D93F5B2BE8C4520051F44D /* AProfileView.swift */,
 			);
 			path = SubViews;
 			sourceTree = "<group>";
@@ -532,6 +535,7 @@
 				A15835022BE4C927003331F4 /* Reservations.swift in Sources */,
 				A1E5C7CA2BE3549A0078A797 /* LReturnDetailView.swift in Sources */,
 				A13E55A22BE64C22004ED7B7 /* LEventDetailView.swift in Sources */,
+				A1D93F5C2BE8C4520051F44D /* AProfileView.swift in Sources */,
 				A197D9912BD8F42A005C18F2 /* MFAQView.swift in Sources */,
 				A19A4AEC2BE00520000604D7 /* AdminData.swift in Sources */,
 				A14AFBFB2BDBCE8400A29380 /* Librarian.swift in Sources */,

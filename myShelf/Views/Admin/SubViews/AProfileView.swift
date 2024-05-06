@@ -1,15 +1,16 @@
 //
-//  LProfileView.swift
+//  AProfileView.swift
 //  myShelf
 //
-//  Created by Dewashish Dubey on 25/04/24.
+//  Created by Dewashish Dubey on 06/05/24.
 //
+
 
 import SwiftUI
 import FirebaseFirestore
 import CoreImage.CIFilterBuiltins
 
-struct LProfileView: View {
+struct AProfileView: View {
     @EnvironmentObject var viewModel: AuthViewModel
     @State private var isPremiumMember: Bool = false
     
@@ -36,7 +37,6 @@ struct LProfileView: View {
                                 
                                 Spacer()
                                 
-                               
                             
                             }
                             .padding(0)
@@ -49,7 +49,7 @@ struct LProfileView: View {
                                         .weight(.medium)
                                 )
                                 .foregroundColor(Color(red: 0.6, green: 0.6, blue: 0.6))
-                            Text("Librarian")
+                            Text("Admin")
                                 .font(
                                     Font.custom("SF Pro", size: 14)
                                         .weight(.medium)
@@ -74,7 +74,6 @@ struct LProfileView: View {
                 VStack(alignment: .leading, spacing: 20) {
                     
                     
-                   
                     
                     NavigationLink {
                         MFAQView()
@@ -203,5 +202,5 @@ struct LProfileView: View {
 
 
 #Preview {
-    LProfileView()
+    AProfileView()
 }

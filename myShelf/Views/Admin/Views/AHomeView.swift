@@ -29,7 +29,7 @@ struct AHomeView: View {
                         Spacer()
                         Image(systemName: "bell")
                             .foregroundColor(.white)
-                        NavigationLink(destination: MProfileView().navigationBarBackButtonHidden(false)) {
+                        NavigationLink(destination: AProfileView().navigationBarBackButtonHidden(false)) {
                             Image(systemName: "person.crop.circle")
                                 .resizable()
                                 .frame(width: 36,height: 36)

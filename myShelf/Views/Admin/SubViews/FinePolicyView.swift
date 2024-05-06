@@ -76,6 +76,7 @@ struct FinePolicyView: View {
                         DropdownView2(selectedOption: $selectedReservation, options: reservationOptions, label: "Reservation", icon: "calendar")
                         
                     }
+                    /*
                     VStack(alignment: .leading, spacing: 15) {
                         HStack(alignment: .center, spacing: 10) {
                             Image(systemName: "list.bullet.clipboard")
@@ -156,7 +157,7 @@ struct FinePolicyView: View {
                     .frame(width: 353, height: 350, alignment: .leading)
                     .background(Color(red: 0.11, green: 0.11, blue: 0.12))
                     .cornerRadius(8)
-                    .padding(.bottom,15)
+                    .padding(.bottom,15)*/
                     
 
                 }
