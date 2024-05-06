@@ -128,13 +128,18 @@ struct RegistrationView: View {
                                         }
                                     }
                                 }) {
-                    HStack {
-                        Text("Sign up")
-                            .fontWeight(.semibold)
-                        Image(systemName: "arrow.right")
-                    }
-                    .foregroundColor(.white)
-                    .frame(width: UIScreen.main.bounds.width - 32, height: 48)
+                                    HStack {
+                                        Text("Sign Up")
+                                            .padding(.horizontal, 25)
+                                            .padding(.vertical, 22)
+                                            .frame(maxWidth: .infinity, alignment: .center)
+                                            .background(Color.indigo)
+                                        
+                                            .cornerRadius(8)
+                                            .fontWeight(.bold)
+                                    }
+                                    .foregroundColor(.white)
+                                    .frame(width: UIScreen.main.bounds.width - 32, height: 48)
                 }
                 .background(Color.indigo)
                 .cornerRadius(10)
@@ -152,7 +157,7 @@ struct RegistrationView: View {
                             .fontWeight(.bold)
                             .foregroundStyle(Color.indigo)
                     }
-                    .font(.system(size: 14))
+                    .font(.system(size: 16))
                 }
             }
             .padding(.top,40)

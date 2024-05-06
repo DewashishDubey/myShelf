@@ -98,12 +98,12 @@ struct LoginView: View {
                         HStack(spacing: 3) {
                             Text("Don't have a member account?")
                                 .foregroundStyle(.white)
-                                .font(.system(size: 14))
+                                .font(.system(size: 16))
                                 .padding(.leading,10)
                             Text("Create one!")
                                 .foregroundStyle(.indigo)
                                 .fontWeight(.bold)
-                                .font(.system(size: 14))
+                                .font(.system(size: 16))
                         }
                         .font(.system(size: 14))
                     }
