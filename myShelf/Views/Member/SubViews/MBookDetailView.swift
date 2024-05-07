@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Firebase
+import AVFoundation
 struct MBookDetailView: View {
     
     @Environment(\.dismiss) var dismiss
@@ -18,6 +19,8 @@ struct MBookDetailView: View {
     @State private var AlertMsg = ""
     @State private var isPremiumMember: Bool = false
     @State private var showingSheet = false
+    @State private var isSpeaking = false
+    @State private var speechSynthesizer = AVSpeechSynthesizer()
     var body: some View {
             //Text(user.id)
             ScrollView(showsIndicators: false)
@@ -46,16 +49,32 @@ struct MBookDetailView: View {
                                         .cornerRadius(2.5)
                                         .padding(.top,10)
                                     
-                                    Button(action: {
-                                        dismiss()
-                                    }) {
-                                        Image(systemName: "xmark.circle.fill")
-                                            .foregroundColor(.gray.opacity(0.7))
-                                            .frame(width: 20, height: 20)
-                                            .padding(.leading, 320)
+                                    HStack{
+                                        Button(action: {
+                                            if isSpeaking {
+                                                speechSynthesizer.stopSpeaking(at: .immediate) // Stop speaking if already speaking
+                                            } else {
+                                                speakBookDetails(book: book)
+                                            }
+                                            isSpeaking.toggle() // Toggle isSpeaking state
+                                        }) {
+                                            Image(systemName: isSpeaking ? "speaker.slash.fill" : "speaker.wave.2.fill")
+                                                .foregroundColor(.gray.opacity(0.7))
+                                                .frame(width: 20, height: 20)
+                                        }
+                                        Spacer()
+                                        Button(action: {
+                                            dismiss()
+                                        }) {
+                                            Image(systemName: "xmark.circle.fill")
+                                                .foregroundColor(.gray.opacity(0.7))
+                                                .frame(width: 20, height: 20)
+                                               // .padding(.leading, 320)
+                                        }
+                                        
                                     }
-                                    
-                                    
+                                    .frame(maxWidth: .infinity)
+                                    .padding(.horizontal)
                                     AsyncImage(url: URL(string: book.imageUrl)) { phase in
                                         switch phase {
                                         case .empty:
@@ -98,6 +117,9 @@ struct MBookDetailView: View {
                                         .frame(width: 313)
                                         .padding(.top,30)
                                     //                        .position(x: 190, y: -150) // Adjust position to make the text visible
+                                    
+                                    
+                                    
                                     
                                     Text(book.authors.joined(separator: ", "))
                                         .font(
@@ -379,6 +401,12 @@ struct MBookDetailView: View {
             .background(Color.black.edgesIgnoringSafeArea(.all))
             
     }
+    
+    func speakBookDetails(book: Book) {
+            let utterance = AVSpeechUtterance(string: "\(book.title), by \(book.authors.joined(separator: ", ")). \(book.description)") // Customize the book details as needed
+            utterance.voice = AVSpeechSynthesisVoice(language: "en-US") // Specify the language
+            speechSynthesizer.speak(utterance)
+        }
     
     func fetchMemberData() {
         if let userId = viewModel.currentUser?.id {
