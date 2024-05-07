@@ -13,6 +13,7 @@ struct AEventDetailView: View {
     @StateObject var viewModel = EventViewModel()
     @Environment(\.presentationMode) var presentationMode
     @State private var showAlert = false
+    @State private var participantsCount: Int = 0
     var body: some View {
         ZStack{
             Color.black.ignoresSafeArea(.all)
@@ -100,7 +101,6 @@ struct AEventDetailView: View {
                                             )
                                             .foregroundColor(.white)
                                             .frame(maxWidth: .infinity,alignment: .leading)
-                                           
                                     }
                                     
                                    
@@ -108,6 +108,72 @@ struct AEventDetailView: View {
                                 .padding(0)
                                 .frame(maxWidth: .infinity,alignment: .leading)
                                 .padding(.horizontal)
+                                
+
+                                NavigationLink{
+                                    ParticipantsView(eventID: event.id)
+                                } label: {
+                                    if(participantsCount==1)
+                                    {
+                                        HStack{
+                                           Image("male")
+                                                .resizable()
+                                                .frame(width: 40, height: 40)
+                                            Text("1 Going")
+                                                .font(
+                                                Font.custom("SF Pro", size: 12)
+                                                .weight(.medium)
+                                                )
+                                                .foregroundColor(Color(red: 0.6, green: 0.6, blue: 0.6))
+
+
+                                        }
+                                        .frame(maxWidth: .infinity,alignment: .leading)
+                                        .padding(.horizontal)
+                                    }
+                                    else if(participantsCount == 2){
+                                        HStack{
+                                           Image("male")
+                                                .resizable()
+                                                .frame(width: 40, height: 40)
+                                            Text("+1 Going")
+                                                .font(
+                                                Font.custom("SF Pro", size: 12)
+                                                .weight(.medium)
+                                                )
+                                                .foregroundColor(Color(red: 0.6, green: 0.6, blue: 0.6))
+                                            
+
+                                            
+                                        }
+                                        .frame(maxWidth: .infinity,alignment: .leading)
+                                        .padding(.horizontal)
+                                    }
+                                    else
+                                    {
+                                        HStack{
+                                           Image("male")
+                                                .resizable()
+                                                .frame(width: 40, height: 40)
+                                            Image("female")
+                                                .resizable()
+                                                .frame(width: 40, height: 40)
+                                                .offset(x:-20)
+                                            Text("+\(participantsCount-2) Going")
+                                                .font(
+                                                Font.custom("SF Pro", size: 12)
+                                                .weight(.medium)
+                                                )
+                                                .foregroundColor(Color(red: 0.6, green: 0.6, blue: 0.6))
+                                                .offset(x:-20)
+
+
+                                        }
+                                        .frame(maxWidth: .infinity,alignment: .leading)
+                                        .padding(.horizontal)
+                                    }
+                                    
+                                }
                                 
                                 VStack(spacing:20){
                                     Text("Event Overview")
@@ -148,6 +214,7 @@ struct AEventDetailView: View {
             }
             .onAppear {
                 viewModel.fetchEvent(forUID: eventID)
+                countParticipants()
             }
             .navigationTitle(title)
             .navigationBarTitleDisplayMode(.inline)
@@ -201,6 +268,22 @@ struct AEventDetailView: View {
                }
            }
        }
+    
+    func countParticipants() {
+            let db = Firestore.firestore()
+            let participantsRef = db.collection("events").document(eventID).collection("participants")
+            
+            participantsRef.getDocuments { snapshot, error in
+                if let error = error {
+                    print("Error getting participants: \(error)")
+                    return
+                }
+                
+                if let snapshot = snapshot {
+                    participantsCount = snapshot.documents.count
+                }
+            }
+        }
     
 }
 
