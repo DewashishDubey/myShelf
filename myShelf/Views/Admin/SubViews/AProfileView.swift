@@ -76,7 +76,7 @@ struct AProfileView: View {
                     
                     
                     NavigationLink {
-                        MFAQView()
+                        AFAQView()
                     } label: {
                         HStack(alignment: .center) {
                             Image(systemName: "info.circle")

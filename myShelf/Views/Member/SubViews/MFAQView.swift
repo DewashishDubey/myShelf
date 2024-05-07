@@ -8,37 +8,60 @@
 import SwiftUI
 
 struct MFAQView: View {
+    @ObservedObject var viewModel = FAQViewModel()
     var body: some View {
-        ScrollView{
-            VStack(alignment: .center, spacing: 20) {
-                HStack(alignment: .center, spacing: 10) {
-                    Text("404")
-                    .font(Font.custom("SF Pro", size: 30))
-                    .foregroundColor(.white)
-
-                }
-                .padding(.horizontal, 30)
-                .padding(.vertical, 25)
-                .background(Color(red: 0, green: 0.48, blue: 1))
-                .cornerRadius(8)
-                
-                Text("Page not Found")
-                .font(
-                Font.custom("SF Pro", size: 20)
-                .weight(.bold)
-                )
-                .foregroundColor(.white)
-                
-                Text("We’re still working on this feature.")
-                .font(Font.custom("SF Pro Text", size: 11))
-                .multilineTextAlignment(.center)
-                .foregroundColor(.white.opacity(0.5))
-                
-            }
-            .padding(0)
+        ZStack
+        {
+            Color.black.ignoresSafeArea(.all)
+            ScrollView {
+                      VStack(spacing: 20) {
+                          ForEach(viewModel.FAQs) { faq in
+                              MQuestions(questions: faq.question, answers: faq.solution,id : faq.id ?? "")
+                          }
+                      }
+                      .padding()
+                  }
+                  .onAppear {
+                      viewModel.fetchData()
+                  }
+                  .padding()
         }
-        .frame(maxWidth:.infinity)
-        .background(Color.black.ignoresSafeArea(.all))
+        .navigationTitle("FAQ")
+    }
+}
+
+struct MQuestions: View{
+    let questions: String
+    let answers: String
+    let id : String
+    @State private var offsets = [CGSize](repeating: CGSize.zero, count: 6)
+    var body: some View{
+        HStack{
+            
+            DisclosureGroup
+            {
+                
+                Text(answers)
+                    .foregroundColor(Color(red: 0.63, green: 0.63, blue: 0.63))
+                    .font(.custom("SF Pro Text", size: 14))
+                    .padding(.bottom,10)
+               // Text(id)
+            }
+        label: {
+            
+            Text(questions)
+                .foregroundColor(.white)
+                .font(.custom("SF Pro Text", size: 16))
+                .multilineTextAlignment(.leading)
+        }
+        .foregroundColor(.white)
+            
+            
+        }
+        .padding(12)
+        .frame(width: 353)
+        .background(Color(red: 0.11, green: 0.11, blue: 0.12))
+        .cornerRadius(8)
     }
 }
 

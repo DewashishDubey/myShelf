@@ -44,6 +44,9 @@
 		A14AFBFB2BDBCE8400A29380 /* Librarian.swift in Sources */ = {isa = PBXBuildFile; fileRef = A14AFBFA2BDBCE8400A29380 /* Librarian.swift */; };
 		A15835022BE4C927003331F4 /* Reservations.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15835012BE4C927003331F4 /* Reservations.swift */; };
 		A15835042BE4D0E3003331F4 /* EditBookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15835032BE4D0E3003331F4 /* EditBookView.swift */; };
+		A16243182BEA1198001C286F /* AFAQView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A16243172BEA1197001C286F /* AFAQView.swift */; };
+		A162431A2BEA16E7001C286F /* FAQ.swift in Sources */ = {isa = PBXBuildFile; fileRef = A16243192BEA16E7001C286F /* FAQ.swift */; };
+		A162431D2BEA2E74001C286F /* MGriveanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A162431C2BEA2E74001C286F /* MGriveanceView.swift */; };
 		A17C5A192BE4A3EC0081A04E /* AllIssuedBooks.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17C5A182BE4A3EC0081A04E /* AllIssuedBooks.swift */; };
 		A17C5A1B2BE4AF600081A04E /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17C5A1A2BE4AF600081A04E /* TestView.swift */; };
 		A1895CDA2BE5F99800898ED6 /* MCheckMembershipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1895CD92BE5F99800898ED6 /* MCheckMembershipView.swift */; };
@@ -126,6 +129,9 @@
 		A14AFBFA2BDBCE8400A29380 /* Librarian.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Librarian.swift; sourceTree = "<group>"; };
 		A15835012BE4C927003331F4 /* Reservations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reservations.swift; sourceTree = "<group>"; };
 		A15835032BE4D0E3003331F4 /* EditBookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditBookView.swift; sourceTree = "<group>"; };
+		A16243172BEA1197001C286F /* AFAQView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AFAQView.swift; sourceTree = "<group>"; };
+		A16243192BEA16E7001C286F /* FAQ.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FAQ.swift; sourceTree = "<group>"; };
+		A162431C2BEA2E74001C286F /* MGriveanceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MGriveanceView.swift; sourceTree = "<group>"; };
 		A17C5A182BE4A3EC0081A04E /* AllIssuedBooks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllIssuedBooks.swift; sourceTree = "<group>"; };
 		A17C5A1A2BE4AF600081A04E /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 		A1895CD92BE5F99800898ED6 /* MCheckMembershipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCheckMembershipView.swift; sourceTree = "<group>"; };
@@ -226,6 +232,7 @@
 				A13E559F2BE642B4004ED7B7 /* MEventDetailView.swift */,
 				A1B5715D2BE8985500D79116 /* MPayFineView.swift */,
 				A1C890F72BE8FD0600B52463 /* MHelpAndSupportView.swift */,
+				A162431C2BEA2E74001C286F /* MGriveanceView.swift */,
 			);
 			path = SubViews;
 			sourceTree = "<group>";
@@ -293,6 +300,7 @@
 				A17C5A182BE4A3EC0081A04E /* AllIssuedBooks.swift */,
 				A15835012BE4C927003331F4 /* Reservations.swift */,
 				A1D600982BE60EF1004EAA43 /* Events.swift */,
+				A16243192BEA16E7001C286F /* FAQ.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -316,6 +324,7 @@
 				A1895CDB2BE5FD8700898ED6 /* ACreateEventView.swift */,
 				A13E559B2BE63320004ED7B7 /* AEventDetailView.swift */,
 				A1D93F5B2BE8C4520051F44D /* AProfileView.swift */,
+				A16243172BEA1197001C286F /* AFAQView.swift */,
 			);
 			path = SubViews;
 			sourceTree = "<group>";
@@ -537,6 +546,7 @@
 				A126F8B02BDAF36100693474 /* WishlistManager.swift in Sources */,
 				A15835022BE4C927003331F4 /* Reservations.swift in Sources */,
 				A1E5C7CA2BE3549A0078A797 /* LReturnDetailView.swift in Sources */,
+				A16243182BEA1198001C286F /* AFAQView.swift in Sources */,
 				A13E55A22BE64C22004ED7B7 /* LEventDetailView.swift in Sources */,
 				A1D93F5C2BE8C4520051F44D /* AProfileView.swift in Sources */,
 				A197D9912BD8F42A005C18F2 /* MFAQView.swift in Sources */,
@@ -574,11 +584,13 @@
 				A14AFBEC2BDBA6A900A29380 /* AddBookView.swift in Sources */,
 				A14004542BE3848500F5615F /* MPreviouslyIssuedBooksView.swift in Sources */,
 				A1A9BDE82BE24AF400EFF2F8 /* MBorrowedBookView.swift in Sources */,
+				A162431D2BEA2E74001C286F /* MGriveanceView.swift in Sources */,
 				A1E3EB0C2BD63BC9001CC21A /* SettingsRowView.swift in Sources */,
 				A133C86A2BDA2EC800A9597B /* FirebaseManager.swift in Sources */,
 				A1895CDA2BE5F99800898ED6 /* MCheckMembershipView.swift in Sources */,
 				A13C0E862BD7BD840083CCDD /* MLibraryView.swift in Sources */,
 				A1E3EB092BD63BC9001CC21A /* LoginView.swift in Sources */,
+				A162431A2BEA16E7001C286F /* FAQ.swift in Sources */,
 				A1E5C7C52BE3471D0078A797 /* LRenewalsView.swift in Sources */,
 				A1C890F82BE8FD0600B52463 /* MHelpAndSupportView.swift in Sources */,
 				A1E3EB0A2BD63BC9001CC21A /* ProfileView.swift in Sources */,
