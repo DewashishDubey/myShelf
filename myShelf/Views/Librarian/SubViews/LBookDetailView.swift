@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Firebase
+import AVFoundation
 struct LBookDetailView: View {
     
     @Environment(\.dismiss) var dismiss
@@ -14,6 +15,8 @@ struct LBookDetailView: View {
     @ObservedObject var firebaseManager = FirebaseManager()
     @EnvironmentObject var viewModel : AuthViewModel
     @State private var isBookmarked = false
+    @State private var isSpeaking = false
+    @State private var speechSynthesizer = AVSpeechSynthesizer()
     var body: some View {
         NavigationStack{
             //Text(user.id)
@@ -203,16 +206,33 @@ struct LBookDetailView: View {
                                         .frame(maxWidth: .infinity)
                                         .padding(.top, 10)
                                         
-                                        
-                                        Text("Summary")
-                                            .font(
-                                                Font.custom("SF Pro Text", size: 14)
-                                                    .weight(.semibold)
-                                            )
-                                            .foregroundColor(.white)
-                                            .frame(maxWidth: .infinity, alignment: .topLeading)
-                                            .padding(.leading,25)
-                                            .padding(.top,30)
+                                        HStack{
+                                            Text("Summary")
+                                                .font(
+                                                    Font.custom("SF Pro Text", size: 14)
+                                                        .weight(.semibold)
+                                                )
+                                                .foregroundColor(.white)
+                                                .frame(maxWidth: .infinity, alignment: .topLeading)
+                                                //.padding(.leading,25)
+                                               
+                                            
+                                            Button(action: {
+                                                if isSpeaking {
+                                                    speechSynthesizer.stopSpeaking(at: .immediate) // Stop speaking if already speaking
+                                                } else {
+                                                    speakBookDetails(book: book)
+                                                }
+                                                isSpeaking.toggle() // Toggle isSpeaking state
+                                            }) {
+                                                Image(systemName: isSpeaking ? "speaker.slash.fill" : "speaker.wave.2.fill")
+                                                    .foregroundColor(.gray.opacity(0.7))
+                                                    .frame(width: 20, height: 20)
+                                            }
+                                        }
+                                        .frame(maxWidth: .infinity)
+                                        .padding(.top,30)
+                                        .padding(.horizontal,25)
                                         
                                         Text(book.description)
                                             .font(Font.custom("SF Pro Text", size: 12))
@@ -312,6 +332,13 @@ struct LBookDetailView: View {
         }
         
     }
+    
+    func speakBookDetails(book: Book) {
+            let utterance = AVSpeechUtterance(string: "\(book.title), by \(book.authors.joined(separator: ", ")). \(book.description)") // Customize the book details as needed
+            utterance.voice = AVSpeechSynthesisVoice(language: "en-US") // Specify the language
+            speechSynthesizer.speak(utterance)
+        }
+    
     func toggleBookmark() {
             if isBookmarked {
                 removeFromWishlist()
