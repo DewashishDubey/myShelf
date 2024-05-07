@@ -9,6 +9,39 @@ import SwiftUI
 import Firebase
 struct MEventsView: View {
     @EnvironmentObject var viewModel : AuthViewModel
+    @State private var isPremiumMember: Bool = false
+    var body: some View {
+        VStack{
+            MPremiumEventsView()
+        }
+        .onAppear {
+            fetchMemberData()                            
+        }
+    }
+    func fetchMemberData() {
+        if let userId = viewModel.currentUser?.id {
+            let membersRef = Firestore.firestore().collection("members").document(userId)
+            membersRef.getDocument { document, error in
+                if let document = document, document.exists {
+                    if let isPremium = document.data()?["is_premium"] as? Bool {
+                        self.isPremiumMember = isPremium
+                    }
+                } else {
+                    print("Member document does not exist or could not be retrieved: \(error?.localizedDescription ?? "Unknown error")")
+                }
+            }
+        }
+    }
+}
+
+struct MEventsView_Previews: PreviewProvider {
+    static var previews: some View {
+        MEventsView().environmentObject(AuthViewModel())
+    }
+}
+
+struct MPremiumEventsView: View {
+    @EnvironmentObject var viewModel : AuthViewModel
     @State private var searchText = ""
     @State private var searchIsActive = false
     @State private var selectedTag: String?
@@ -39,33 +72,33 @@ struct MEventsView: View {
                                 VStack(spacing:5){
                                     Text(event.title)
                                         .font(
-                                        Font.custom("SF Pro Text", size: 14)
-                                        .weight(.medium)
+                                            Font.custom("SF Pro Text", size: 14)
+                                                .weight(.medium)
                                         )
                                         .foregroundColor(.white)
-
+                                    
                                         .frame(maxWidth: .infinity, alignment: .topLeading)
                                     
                                     if let extractedDate = extractDate(from: event.selectedDate) {
                                         let formattedDate = DateFormatter.localizedString(from: extractedDate, dateStyle: .medium, timeStyle: .none)
                                         Text("\(formattedDate)")
                                             .font(
-                                            Font.custom("SF Pro Text", size: 12)
-                                            .weight(.medium)
+                                                Font.custom("SF Pro Text", size: 12)
+                                                    .weight(.medium)
                                             )
                                             .foregroundColor(Color(red: 0.6, green: 0.6, blue: 0.6))
-
+                                        
                                             .frame(maxWidth: .infinity, alignment: .topLeading)
                                     }
                                     
                                     if let extractedTime = extractTime(from: event.selectedTime) {
                                         Text("\(extractedTime)")
                                             .font(
-                                            Font.custom("SF Pro Text", size: 12)
-                                            .weight(.medium)
+                                                Font.custom("SF Pro Text", size: 12)
+                                                    .weight(.medium)
                                             )
                                             .foregroundColor(Color(red: 0.6, green: 0.6, blue: 0.6))
-
+                                        
                                             .frame(maxWidth: .infinity, alignment: .topLeading)
                                     }
                                 }
@@ -93,8 +126,8 @@ struct MEventsView: View {
             }
             
         }
-       
-}
+        
+    }
     func extractDate(from timestampString: String) -> Date? {
         // Create a date formatter
         let dateFormatter = DateFormatter()
@@ -127,11 +160,7 @@ struct MEventsView: View {
             return nil
         }
     }
-
 }
 
-struct MEventsView_Previews: PreviewProvider {
-    static var previews: some View {
-        MEventsView().environmentObject(AuthViewModel())
-    }
-}
+
+

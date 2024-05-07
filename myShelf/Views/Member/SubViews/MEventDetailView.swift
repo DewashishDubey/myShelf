@@ -16,6 +16,9 @@ struct MEventDetailView: View {
     @State private var showRegistrationAlert = false
     //@State private var showWithdrawAlert = false
     @State private var isRegistered = false
+    @State private var AlertMsg = ""
+    @State private var showingSheet = false
+    @State private var isPremiumMember: Bool = false
     var body: some View {
         ZStack{
             Color.black.ignoresSafeArea(.all)
@@ -114,12 +117,16 @@ struct MEventDetailView: View {
 
                                 VStack(spacing:20){
                                     Button(action: {
-                                        if isRegistered {
-                                            unregister()
-                                        } else {
-                                                   // User is not registered, register for the event
-                                                   registerForEvent()
-                                               }
+                                        if isPremiumMember {
+                                                if isRegistered {
+                                                    unregister()
+                                                } else {
+                                                    // User is not registered, register for the event
+                                                    registerForEvent()
+                                                }
+                                            } else {
+                                                showingSheet = true // Show premium membership sheet
+                                            }
                                     }) {
                                         HStack(alignment: .center, spacing: 10) {
                                             Text(isRegistered ? "Withdraw Registration" : "Register")
@@ -137,11 +144,15 @@ struct MEventDetailView: View {
                                     }
                                     .alert(isPresented: $showRegistrationAlert) {
                                                    Alert(
-                                                       title: Text("Success"),
-                                                       message: Text("Registered Successfully"),
+                                                       title: Text("Alert"),
+                                                       message: Text("\(AlertMsg)"),
                                                        dismissButton: .default(Text("OK"))
                                                    )
                                                }
+                                    .sheet(isPresented: $showingSheet) {
+                                                MSubscriptionView()
+                                            .presentationBackground(.black)
+                                            }
                                     
                                     
                                     Text("Event Overview")
@@ -168,6 +179,7 @@ struct MEventDetailView: View {
             .onAppear {
                 viewModel.fetchEvent(forUID: eventID)
                 checkRegistration()
+                fetchMemberData()
             }
             .navigationTitle(title)
             .navigationBarTitleDisplayMode(.inline)
@@ -185,6 +197,21 @@ struct MEventDetailView: View {
         } else {
             print("Unable to parse timestamp string: \(timestampString)")
             return nil
+        }
+    }
+    
+    func fetchMemberData() {
+        if let userId = auth.currentUser?.id {
+            let membersRef = Firestore.firestore().collection("members").document(userId)
+            membersRef.addSnapshotListener { document, error in
+                if let document = document, document.exists {
+                    if let isPremium = document.data()?["is_premium"] as? Bool {
+                        self.isPremiumMember = isPremium
+                    }
+                } else {
+                    print("Member document does not exist or could not be retrieved: \(error?.localizedDescription ?? "Unknown error")")
+                }
+            }
         }
     }
     
@@ -209,28 +236,33 @@ struct MEventDetailView: View {
     
     // Function to register for the event
     private func registerForEvent() {
-        guard let currentUserUID =  auth.currentUser?.id else {
+        guard let currentUserUID = auth.currentUser?.id else {
             print("Current user UID not available")
             return
         }
         
-        let db = Firestore.firestore()
-        let eventRef = db.collection("events").document(eventID)
-        let participantsRef = eventRef.collection("participants")
-        
-        let participantData: [String: Any] = [
-            "memberID": currentUserUID,
-            "eventID": eventID
-        ]
-        
-        participantsRef.addDocument(data: participantData) { error in
-            if let error = error {
-                print("Error adding participant: \(error)")
-            } else {
-                showRegistrationAlert = true
-                print("Successfully registered for the event!")
-                // Optionally, you can show an alert or perform any other action upon successful registration
+        if isPremiumMember {
+            let db = Firestore.firestore()
+            let eventRef = db.collection("events").document(eventID)
+            let participantsRef = eventRef.collection("participants")
+            
+            let participantData: [String: Any] = [
+                "memberID": currentUserUID,
+                "eventID": eventID
+            ]
+            
+            participantsRef.addDocument(data: participantData) { error in
+                if let error = error {
+                    print("Error adding participant: \(error)")
+                } else {
+                    showRegistrationAlert = true
+                    AlertMsg = "Successfully registered for the event!"
+                    print("Successfully registered for the event!")
+                    // Optionally, you can show an alert or perform any other action upon successful registration
+                }
             }
+        } else {
+            showingSheet = true
         }
     }
     

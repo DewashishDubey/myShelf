@@ -16,6 +16,8 @@ struct MBookDetailView: View {
     @State private var isBookmarked = false
     @State private var showAlert = false
     @State private var AlertMsg = ""
+    @State private var isPremiumMember: Bool = false
+    @State private var showingSheet = false
     var body: some View {
             //Text(user.id)
             ScrollView(showsIndicators: false)
@@ -170,9 +172,11 @@ struct MBookDetailView: View {
                                     }
                                     
                                     Button(action: {
-                                        // Action for Reserve button
-                                        //Text(viewModel.currentUser?.id ?? "")
-                                        reserveBook()
+                                        if isPremiumMember {
+                                               reserveBook()
+                                            } else {
+                                                showingSheet = true // Show premium membership sheet
+                                            }
                                     }) {
                                         Text("Reserve Book")
                                             .font(
@@ -188,6 +192,10 @@ struct MBookDetailView: View {
                                     .padding(.top, 30)
                                     .alert(isPresented: $showAlert) {
                                                 Alert(title: Text("Alert"), message: Text("\(AlertMsg)"), dismissButton: .default(Text("OK")))
+                                            }
+                                    .sheet(isPresented: $showingSheet) {
+                                                MSubscriptionView()
+                                            .presentationBackground(.black)
                                             }
                                     
                                     
@@ -365,11 +373,28 @@ struct MBookDetailView: View {
                 .onAppear {
                     firebaseManager.fetchBooks()
                     checkBookmarkStatus()
+                    fetchMemberData()
                 }
             }
             .background(Color.black.edgesIgnoringSafeArea(.all))
             
     }
+    
+    func fetchMemberData() {
+        if let userId = viewModel.currentUser?.id {
+            let membersRef = Firestore.firestore().collection("members").document(userId)
+            membersRef.addSnapshotListener { document, error in
+                if let document = document, document.exists {
+                    if let isPremium = document.data()?["is_premium"] as? Bool {
+                        self.isPremiumMember = isPremium
+                    }
+                } else {
+                    print("Member document does not exist or could not be retrieved: \(error?.localizedDescription ?? "Unknown error")")
+                }
+            }
+        }
+    }
+    
     func toggleBookmark() {
             if isBookmarked {
                 removeFromWishlist()

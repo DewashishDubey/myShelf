@@ -72,7 +72,9 @@ struct MProfileView: View {
                     if let qrCodeImage = qrCodeImage {
                         Image(uiImage: qrCodeImage)
                             .resizable()
+                            .interpolation(.none)
                             .frame(width: 80, height: 80)
+                        
                     }
                     
                 }
