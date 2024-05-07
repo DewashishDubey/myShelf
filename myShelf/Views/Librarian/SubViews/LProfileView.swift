@@ -14,14 +14,14 @@ struct LProfileView: View {
     @State private var isPremiumMember: Bool = false
     
     @State private var qrCodeImage: UIImage?
-    
+    @State private var gender = ""
     var body: some View {
         if let user = viewModel.currentUser{
             ScrollView
             {
                 VStack{
                     HStack(alignment: .center, spacing: 15){
-                        Image(systemName: "person.crop.circle")
+                        Image(gender == "male" ? "male" : "female")
                             .resizable()
                             .frame(width: 70, height: 70)
                             .foregroundColor(.white)
@@ -166,24 +166,6 @@ struct LProfileView: View {
 
     }
     
-    func fetchMemberData() {
-        if let userId = viewModel.currentUser?.id {
-            if let qrImage = generateQRCode(from: userId) {
-                            qrCodeImage = qrImage
-                        }
-            let membersRef = Firestore.firestore().collection("members").document(userId)
-            membersRef.getDocument { document, error in
-                if let document = document, document.exists {
-                    if let isPremium = document.data()?["is_premium"] as? Bool {
-                        self.isPremiumMember = isPremium
-                    }
-                } else {
-                    print("Member document does not exist or could not be retrieved: \(error?.localizedDescription ?? "Unknown error")")
-                }
-            }
-        }
-    }
-    
     func generateQRCode(from string: String) -> UIImage? {
         let context = CIContext()
         let filter = CIFilter.qrCodeGenerator()
@@ -197,8 +179,20 @@ struct LProfileView: View {
         }
         return nil
     }
-    
-    
+    func fetchMemberData() {
+        if let userId = viewModel.currentUser?.id {
+            let membersRef = Firestore.firestore().collection("librarians").document(userId)
+            membersRef.getDocument { document, error in
+                if let document = document, document.exists {
+                    if let gender = document.data()?["gender"] as? String {
+                        self.gender = gender
+                    }
+                } else {
+                    print("Librarian document does not exist or could not be retrieved: \(error?.localizedDescription ?? "Unknown error")")
+                }
+            }
+        }
+    }
 }
 
 

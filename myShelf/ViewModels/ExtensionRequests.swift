@@ -137,7 +137,9 @@ extension ExtensionRequestData {
                                         membershipDuration: data["membership_duration"] as? Int ?? 0,
                                         name: data["name"] as? String ?? "",
                                         noOfIssuedBooks: data["no_of_issued_books"] as? Int ?? 0,
-                                        subscriptionStartDate: data["subscription_start_date"] as? Timestamp ?? Timestamp())
+                                        subscriptionStartDate: data["subscription_start_date"] as? Timestamp ?? Timestamp(),
+                                        gender: data["gender"] as? String ?? ""
+                )
                 completion(.success(fetchedUser))
             } else {
                 completion(.failure(error ?? FirebaseError.unknownError))
@@ -153,6 +155,7 @@ struct User1 {
     let name: String
     let noOfIssuedBooks: Int
     let subscriptionStartDate: Timestamp
+    let gender : String
 }
 
 

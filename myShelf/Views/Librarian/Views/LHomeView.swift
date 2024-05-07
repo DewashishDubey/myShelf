@@ -6,12 +6,14 @@
 //
 
 import SwiftUI
-
+import Firebase
 struct LHomeView: View {
     @EnvironmentObject var viewModel : AuthViewModel
     @StateObject var adminViewModel = AdminViewModel()
     @ObservedObject var librarianManager = LibrarianManager()
     @StateObject var allBooksViewModel = AllIssuedBooksViewModel()
+    @State private var isPremiumMember: Bool = false
+    @State private var gender = ""
     var body: some View {
        // if let user = viewModel.currentUser{
             ZStack{
@@ -31,10 +33,11 @@ struct LHomeView: View {
                                         .foregroundColor(.red)
                                 }
                                 Spacer()
-                                Image(systemName: "bell")
-                                    .foregroundColor(.white)
+                                
+                                /*Image(systemName: "bell")
+                                    .foregroundColor(.white)*/
                                 NavigationLink(destination: LProfileView().navigationBarBackButtonHidden(false)) {
-                                    Image(systemName: "person.crop.circle")
+                                    Image(gender == "male" ? "male" : "female")
                                         .resizable()
                                         .frame(width: 36,height: 36)
                                         .foregroundColor(.white)
@@ -133,7 +136,7 @@ struct LHomeView: View {
                                         ForEach(allBooksViewModel.issuedBooks) { issuedBook in
                                             VStack(alignment: .leading) {
                                                 HStack{
-                                                    Image(systemName: "person.crop.circle")
+                                                    Image(issuedBook.user?.gender == "male" ? "male" : "female")
                                                         .resizable()
                                                         .aspectRatio(contentMode: .fill)
                                                         .frame(width: 40, height: 40)
@@ -186,6 +189,7 @@ struct LHomeView: View {
                             adminViewModel.fetchData()
                     librarianManager.fetchLibrarians()
                     allBooksViewModel.fetchIssuedBooks()
+                        fetchMemberData()
                         }
                 /*
                 ScrollView{
@@ -224,6 +228,23 @@ struct LHomeView: View {
                 }*/
             }
         //}
+    }
+    func fetchMemberData() {
+        if let userId = viewModel.currentUser?.id {
+            let membersRef = Firestore.firestore().collection("librarians").document(userId)
+            membersRef.getDocument { document, error in
+                if let document = document, document.exists {
+                    if let isPremium = document.data()?["is_premium"] as? Bool {
+                        self.isPremiumMember = isPremium
+                    }
+                    if let gender = document.data()?["gender"] as? String {
+                        self.gender = gender
+                    }
+                } else {
+                    print("Member document does not exist or could not be retrieved: \(error?.localizedDescription ?? "Unknown error")")
+                }
+            }
+        }
     }
 }
 
