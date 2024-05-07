@@ -367,9 +367,9 @@
 				A1E3EAEA2BD63A6A001CC21A /* Assets.xcassets */,
 				A1300FA62BDF83D0001926E0 /* GoogleService-Info.plist */,
 				A1E3EAEC2BD63A6A001CC21A /* Preview Content */,
-				A17C5A1A2BE4AF600081A04E /* TestView.swift */,
 				A1F8C6CA2BE54D36008832D1 /* product.storekit */,
 				A1F8C6CC2BE54D72008832D1 /* storeVM.swift */,
+				A17C5A1A2BE4AF600081A04E /* TestView.swift */,
 			);
 			path = myShelf;
 			sourceTree = "<group>";
