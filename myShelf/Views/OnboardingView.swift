@@ -13,18 +13,20 @@ struct OnboardingView: View {
         ZStack {
             Color.black
                 .ignoresSafeArea()
-            
-            VStack {
-                if isVisible {
-                    onboarding()
-                }
-            }
-        }
-        .onAppear {
-            DispatchQueue.main.asyncAfter(deadline: .now()) {
-                withAnimation {
-                    isVisible = true
-                }
+            VStack
+            {
+                Image("logo")
+                    .resizable()
+                    .frame(width: 64,height: 64)
+                    .foregroundStyle(.white)
+                    .font(.system(size: 40))
+                    .padding(.bottom, 10)
+                
+                Text("Welcome to MyShelf")
+                    .font(.system(size: 20, weight: .semibold))
+                    .foregroundStyle(.white)
+                    .padding(.bottom, 60)
+                
             }
         }
     }
