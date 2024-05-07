@@ -22,7 +22,7 @@ struct AProfileView: View {
             {
                 VStack{
                     HStack(alignment: .center, spacing: 15){
-                        Image(systemName: "person.crop.circle")
+                        Image("female")
                             .resizable()
                             .frame(width: 70, height: 70)
                             .foregroundColor(.white)

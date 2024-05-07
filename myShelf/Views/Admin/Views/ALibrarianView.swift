@@ -73,7 +73,7 @@ struct ALibrarianView: View {
                             }label: {
                                 VStack{
                                     HStack{
-                                        Image(systemName: "person.crop.circle.fill")
+                                        Image(librarian.gender == "male" ? "male" : "female")
                                             .resizable()
                                             .aspectRatio(contentMode: .fill)
                                             .frame(width: 40, height: 40)

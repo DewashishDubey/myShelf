@@ -27,10 +27,10 @@ struct AHomeView: View {
                                 .foregroundColor(.red)
                         }
                         Spacer()
-                        Image(systemName: "bell")
-                            .foregroundColor(.white)
+                        /*Image(systemName: "bell")
+                            .foregroundColor(.white)*/
                         NavigationLink(destination: AProfileView().navigationBarBackButtonHidden(false)) {
-                            Image(systemName: "person.crop.circle")
+                           Image("female")
                                 .resizable()
                                 .frame(width: 36,height: 36)
                                 .foregroundColor(.white)
@@ -170,7 +170,7 @@ struct AHomeView: View {
                         VStack
                         {
                             HStack{
-                                Image(systemName: "person.crop.circle.fill")
+                                Image(librarian.gender == "male" ? "male" : "female")
                                     .resizable()
                                     .aspectRatio(contentMode: .fill)
                                     .frame(width: 40, height: 40)
