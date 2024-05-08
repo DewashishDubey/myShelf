@@ -112,7 +112,9 @@ extension ReservationRequestData {
                                        rating: data["rating"] as? String ?? "",
                                        shelfLocation: data["shelfLocation"] as? String ?? "",
                                        uid: document.documentID,
-                                       noOfRatings: data["noOfRatings"] as? String ?? "")
+                                       noOfRatings: data["noOfRatings"] as? String ?? "",
+                                       isActive: data["isActive"] as? Bool ?? true
+                )
                 completion(.success(fetchedBook))
             } else {
                 completion(.failure(error ?? FirebaseError.unknownError))

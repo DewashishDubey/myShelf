@@ -148,6 +148,7 @@ struct EditBookView: View {
         }
     }
     
+    /*
     // Delete the book from Firebase and navigate back to the search page
     func deleteBook() {
         
@@ -184,7 +185,43 @@ struct EditBookView: View {
                 print("Document does not exist")
             }
         }
+    }*/
+    func deleteBook() {
+        // Reference to the Firebase database
+        let db = Firestore.firestore()
+        
+        // Reference to the document of the book
+        let bookRef = db.collection("books").document(bookUID)
+        
+        // Fetch the document
+        bookRef.getDocument { (document, error) in
+            if let document = document, document.exists {
+                // Check if the "issued" attribute is 0
+                if let issuedCount = document.data()?["issued"] as? Int, issuedCount == 0 {
+                    // Update the document to mark it as inactive
+                    bookRef.updateData(["isActive": false]) { error in
+                        if let error = error {
+                            print("Error deactivating book: \(error.localizedDescription)")
+                        } else {
+                            print("Book deactivated successfully!")
+                            showAlert = true // Show the alert when the book is deactivated successfully
+                            isDeleted = true // Set the flag to indicate that the book is deactivated
+                            alertMsg = "Book deactivated successfully"
+                        }
+                    }
+                } else {
+                    // "issued" attribute is not 0, so don't deactivate the book
+                    print("Book cannot be deactivated because it is currently issued.")
+                    showAlert = true // Show an alert indicating that the book cannot be deactivated
+                    isDeleted = false // Set the flag to indicate that the book is not deactivated
+                    alertMsg = "Can't deactivate, Book is borrowed by someone"
+                }
+            } else {
+                print("Document does not exist")
+            }
+        }
     }
+
 
     
     // Function to update the location of a book in Firebase

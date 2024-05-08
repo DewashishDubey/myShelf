@@ -23,5 +23,6 @@ struct Book {
     let shelfLocation: String
     let uid: String
     let noOfRatings : String
+    let isActive : Bool
 }
 

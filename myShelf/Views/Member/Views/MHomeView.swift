@@ -509,7 +509,8 @@ struct ReservationDetailView: View {
                                 rating: data["rating"] as? String ?? "",
                                 shelfLocation: data["shelfLocation"] as? String ?? "",
                                 uid: document.documentID,
-                                noOfRatings: data["noOfRatings"] as? String ?? ""
+                                noOfRatings: data["noOfRatings"] as? String ?? "",
+                                isActive: data["isActive"] as? Bool ?? true
                             )
                             
                             // Assign fetched book data to the book property

@@ -35,7 +35,8 @@ class FirebaseManager: ObservableObject {
                               let rating = data["rating"] as? String,
                               let shelfLocation = data["shelfLocation"] as? String,
                               let uid = data["uid"] as? String,
-                              let noOfRatings = data["noOfRatings"] as? String
+                              let noOfRatings = data["noOfRatings"] as? String,
+                              let isActive = data["isActive"] as? Bool
                         else {
                             return nil
                         }
@@ -54,7 +55,8 @@ class FirebaseManager: ObservableObject {
                                     rating: rating,
                                     shelfLocation: shelfLocation,
                                     uid: uid,
-                                    noOfRatings: noOfRatings
+                                    noOfRatings: noOfRatings,
+                                    isActive: isActive
                         )
                     }
                 }

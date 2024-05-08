@@ -87,7 +87,8 @@ class PreviouslyReservedBooksViewModel: ObservableObject {
                 rating: data["rating"] as! String,
                 shelfLocation: data["shelfLocation"] as! String,
                 uid: data["uid"] as! String,
-                noOfRatings: data["noOfRatings"] as! String
+                noOfRatings: data["noOfRatings"] as! String,
+                isActive: data["isActive"] as! Bool
             )
 
             completion(book)
