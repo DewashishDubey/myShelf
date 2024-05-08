@@ -106,8 +106,10 @@ struct AProfileView: View {
                     .frame(width: 313, height: 0.5)
                     .background(Color(red: 0.19, green: 0.19, blue: 0.19))
                     
+
+                    
                     NavigationLink {
-                        MFAQView()
+                        AGriveanceView()
                     } label: {
                         HStack(alignment: .center) {
                             Image(systemName: "message")

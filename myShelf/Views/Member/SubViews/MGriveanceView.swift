@@ -295,7 +295,7 @@ struct DropdownView: View {
     }
 }
 
-struct GrievanceEntry: Codable { // Make it Codable for Firestore
+struct GrievanceEntry: Codable,Identifiable { // Make it Codable for Firestore
     var id: String? // Document ID (UID)
     let memberID: String
     let category: String

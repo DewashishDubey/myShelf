@@ -48,6 +48,8 @@
 		A162431A2BEA16E7001C286F /* FAQ.swift in Sources */ = {isa = PBXBuildFile; fileRef = A16243192BEA16E7001C286F /* FAQ.swift */; };
 		A162431D2BEA2E74001C286F /* MGriveanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A162431C2BEA2E74001C286F /* MGriveanceView.swift */; };
 		A16440492BEB39790064A867 /* Member.swift in Sources */ = {isa = PBXBuildFile; fileRef = A16440482BEB39790064A867 /* Member.swift */; };
+		A164404B2BEB4BCA0064A867 /* griveance.swift in Sources */ = {isa = PBXBuildFile; fileRef = A164404A2BEB4BCA0064A867 /* griveance.swift */; };
+		A164404D2BEB4BFD0064A867 /* AGriveanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A164404C2BEB4BFD0064A867 /* AGriveanceView.swift */; };
 		A17C5A192BE4A3EC0081A04E /* AllIssuedBooks.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17C5A182BE4A3EC0081A04E /* AllIssuedBooks.swift */; };
 		A17C5A1B2BE4AF600081A04E /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17C5A1A2BE4AF600081A04E /* TestView.swift */; };
 		A1895CDA2BE5F99800898ED6 /* MCheckMembershipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1895CD92BE5F99800898ED6 /* MCheckMembershipView.swift */; };
@@ -68,6 +70,7 @@
 		A1C890F82BE8FD0600B52463 /* MHelpAndSupportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1C890F72BE8FD0600B52463 /* MHelpAndSupportView.swift */; };
 		A1D600992BE60EF1004EAA43 /* Events.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D600982BE60EF1004EAA43 /* Events.swift */; };
 		A1D93F5C2BE8C4520051F44D /* AProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D93F5B2BE8C4520051F44D /* AProfileView.swift */; };
+		A1DAFD062BEB7463005B6FF2 /* LGriveanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1DAFD052BEB7463005B6FF2 /* LGriveanceView.swift */; };
 		A1E3EAE72BD63A68001CC21A /* myShelfApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E3EAE62BD63A68001CC21A /* myShelfApp.swift */; };
 		A1E3EAE92BD63A68001CC21A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E3EAE82BD63A68001CC21A /* ContentView.swift */; };
 		A1E3EAEB2BD63A6A001CC21A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1E3EAEA2BD63A6A001CC21A /* Assets.xcassets */; };
@@ -136,6 +139,8 @@
 		A16243192BEA16E7001C286F /* FAQ.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FAQ.swift; sourceTree = "<group>"; };
 		A162431C2BEA2E74001C286F /* MGriveanceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MGriveanceView.swift; sourceTree = "<group>"; };
 		A16440482BEB39790064A867 /* Member.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Member.swift; sourceTree = "<group>"; };
+		A164404A2BEB4BCA0064A867 /* griveance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = griveance.swift; sourceTree = "<group>"; };
+		A164404C2BEB4BFD0064A867 /* AGriveanceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AGriveanceView.swift; sourceTree = "<group>"; };
 		A17C5A182BE4A3EC0081A04E /* AllIssuedBooks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllIssuedBooks.swift; sourceTree = "<group>"; };
 		A17C5A1A2BE4AF600081A04E /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 		A1895CD92BE5F99800898ED6 /* MCheckMembershipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCheckMembershipView.swift; sourceTree = "<group>"; };
@@ -156,6 +161,7 @@
 		A1C890F72BE8FD0600B52463 /* MHelpAndSupportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MHelpAndSupportView.swift; sourceTree = "<group>"; };
 		A1D600982BE60EF1004EAA43 /* Events.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Events.swift; sourceTree = "<group>"; };
 		A1D93F5B2BE8C4520051F44D /* AProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AProfileView.swift; sourceTree = "<group>"; };
+		A1DAFD052BEB7463005B6FF2 /* LGriveanceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LGriveanceView.swift; sourceTree = "<group>"; };
 		A1E3EAE32BD63A68001CC21A /* myShelf.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = myShelf.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1E3EAE62BD63A68001CC21A /* myShelfApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = myShelfApp.swift; sourceTree = "<group>"; };
 		A1E3EAE82BD63A68001CC21A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -280,6 +286,7 @@
 				A1E5C7C42BE3471D0078A797 /* LRenewalsView.swift */,
 				A15835032BE4D0E3003331F4 /* EditBookView.swift */,
 				A13E55A12BE64C22004ED7B7 /* LEventDetailView.swift */,
+				A1DAFD052BEB7463005B6FF2 /* LGriveanceView.swift */,
 			);
 			path = SubViews;
 			sourceTree = "<group>";
@@ -309,6 +316,7 @@
 				A16243192BEA16E7001C286F /* FAQ.swift */,
 				A1EFF8FF2BEA55B500E6F85C /* Participants.swift */,
 				A16440482BEB39790064A867 /* Member.swift */,
+				A164404A2BEB4BCA0064A867 /* griveance.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -334,6 +342,7 @@
 				A1D93F5B2BE8C4520051F44D /* AProfileView.swift */,
 				A16243172BEA1197001C286F /* AFAQView.swift */,
 				A1EFF8FD2BEA538D00E6F85C /* ParticipantsView.swift */,
+				A164404C2BEB4BFD0064A867 /* AGriveanceView.swift */,
 			);
 			path = SubViews;
 			sourceTree = "<group>";
@@ -564,6 +573,7 @@
 				A1BC2DA72BDFD5E8002E3A79 /* PreviouslyIssuedBooks.swift in Sources */,
 				A17C5A1B2BE4AF600081A04E /* TestView.swift in Sources */,
 				A197D9932BD8F737005C18F2 /* OnboardingView.swift in Sources */,
+				A164404B2BEB4BCA0064A867 /* griveance.swift in Sources */,
 				1FABC5CA2BD7AC2F00E730FD /* AdminView.swift in Sources */,
 				A1E5C7C82BE354420078A797 /* ScanReturn.swift in Sources */,
 				A1EFF8FE2BEA538D00E6F85C /* ParticipantsView.swift in Sources */,
@@ -573,6 +583,7 @@
 				A129978F2BDE21AF00099962 /* LMemebrDetailView.swift in Sources */,
 				A1993DE72BDA7CF000AF764B /* MBookDetailView.swift in Sources */,
 				A13C0E822BD7BA630083CCDD /* MHomeView.swift in Sources */,
+				A1DAFD062BEB7463005B6FF2 /* LGriveanceView.swift in Sources */,
 				A19A4AEA2BDFF243000604D7 /* FinePolicyView.swift in Sources */,
 				A12997912BDE253A00099962 /* LScanMember.swift in Sources */,
 				1FABC5C22BD7A9AF00E730FD /* MExploreView.swift in Sources */,
@@ -607,6 +618,7 @@
 				A1C890F82BE8FD0600B52463 /* MHelpAndSupportView.swift in Sources */,
 				A1E3EB0A2BD63BC9001CC21A /* ProfileView.swift in Sources */,
 				1FABC5C42BD7AB7600E730FD /* MemberView.swift in Sources */,
+				A164404D2BEB4BFD0064A867 /* AGriveanceView.swift in Sources */,
 				A13C0E842BD7BD760083CCDD /* MEventsView.swift in Sources */,
 				A14AFBF92BDBC50300A29380 /* AddLibrarianView.swift in Sources */,
 				A17C5A192BE4A3EC0081A04E /* AllIssuedBooks.swift in Sources */,

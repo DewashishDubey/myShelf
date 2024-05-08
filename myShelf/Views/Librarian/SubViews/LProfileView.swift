@@ -108,7 +108,7 @@ struct LProfileView: View {
                     .background(Color(red: 0.19, green: 0.19, blue: 0.19))
                     
                     NavigationLink {
-                        MFAQView()
+                        LGriveanceView()
                     } label: {
                         HStack(alignment: .center) {
                             Image(systemName: "message")
