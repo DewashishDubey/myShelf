@@ -8,7 +8,6 @@
 import SwiftUI
 import Firebase
 
-import SwiftUI
 enum Gender {
     case male
     case female
@@ -24,6 +23,7 @@ struct AddLibrarianView: View {
     @State private var salary = ""
     @State private var phoneNumber: String = ""
     @Environment(\.dismiss) var dismiss
+    @State private var isActive = true
     private var genders = [
     "female",
     "male"]
@@ -87,6 +87,7 @@ struct AddLibrarianView: View {
                                            }
                                        }
                                    }
+                                
                                 try await viewModel.createUser(withEmail: email, password: password, fullname: name, userType: userType, gender: selectedGender)
                                 dismiss()
                             }                        }) {
@@ -100,26 +101,7 @@ struct AddLibrarianView: View {
                         .padding(.bottom,20)
                         .padding(.top,20)
                     VStack(alignment: .center, spacing: 20) {
-                        /*
-                        Rectangle()
-                            .foregroundColor(.clear)
-                            .frame(width: 100, height: 100)
-                            .background(
-                                selectedGender == .male ?
-                                                        Image("photo").resizable()
-                                    
-                                    .aspectRatio(contentMode: .fill) :
-                                                        Image("photo3").resizable().aspectRatio(contentMode: .fill)
-                                    
-//                                Image("photo")
-//                                    .resizable()
-//                                    .aspectRatio(contentMode: .fill)
-//                                    .frame(width: 100, height: 100)
-//                                    .clipped()
-                            )
-                            .cornerRadius(100)
-                            .padding(.leading,0)
-                            .padding(.bottom,20)*/
+  
                         
                         
                         HStack(alignment: .center, spacing: 15) {Image(systemName: "person.fill")
@@ -174,16 +156,7 @@ struct AddLibrarianView: View {
                                             .frame(width: 110)
                                             .accentColor(.white)
                                         }
-//                            HStack(alignment: .center, spacing: 10) {
-                                
-//                                    .foregroundColor(.white)
-//                                    .padding(0)
-//                                    .frame(width: 110)
-//                                    .accentColor(.white)
-//
-//                            }
-//                            .padding(0)
-//                            .frame(width: 110, alignment: .leading)
+
                         }
                         .padding(.horizontal, 15)
                         .padding(.vertical, 12)
@@ -269,6 +242,7 @@ struct AddLibrarianView: View {
             
         
         }
+        
        
     }
 }

@@ -4,7 +4,6 @@
 //
 //  Created by Dewashish Dubey on 26/04/24.
 //
-
 import SwiftUI
 import Firebase
 
@@ -13,6 +12,7 @@ struct LibrarianDetailView: View {
     @State private var librarian: Librarian?
     @State private var libName = ""
     @State private var showAlert = false
+    @Environment(\.presentationMode) var presentationMode
     var body: some View {
         ZStack {
             Color.black.ignoresSafeArea(.all)
@@ -59,20 +59,20 @@ struct LibrarianDetailView: View {
                             .padding(.top, 20)
                     }
                     .alert(isPresented: $showAlert) {
-                                           Alert(title: Text("Success"), message: Text("Data updated successfully"), dismissButton: .default(Text("OK")))
+                        Alert(title: Text("Success"), message: Text("Data updated successfully"), dismissButton: .default(Text("OK")){presentationMode.wrappedValue.dismiss()})
                                        }
                     
                     Button(action: {
-                        
+                        deleteAccount()
                     }) {
                         Text("Delete Account")
                             .padding(.top,20)
-                        .font(Font.custom("SF Pro Text", size: 14))
-                        .multilineTextAlignment(.center)
-                        .foregroundColor(Color(red: 0.92, green: 0.26, blue: 0.21))
+                            .font(Font.custom("SF Pro Text", size: 14))
+                            .multilineTextAlignment(.center)
+                            .foregroundColor(Color(red: 0.92, green: 0.26, blue: 0.21))
                     }
                     .alert(isPresented: $showAlert) {
-                                           Alert(title: Text("Success"), message: Text("Librarian removed successfully"), dismissButton: .default(Text("OK")))
+                        Alert(title: Text("Success"), message: Text("Librarian removed successfully"), dismissButton: .default(Text("OK")){presentationMode.wrappedValue.dismiss()})
                                        }
                     
                     
@@ -111,7 +111,7 @@ struct LibrarianDetailView: View {
                 return
             }
             
-            self.librarian = Librarian(name: name, gender: gender, email: email,uid: document.documentID)
+            self.librarian = Librarian(name: name, gender: gender, email: email, uid: document.documentID, isActive: true)
         }
     }
     
@@ -145,7 +145,35 @@ struct LibrarianDetailView: View {
         }
     }
     
-
+    private func deleteAccount() {
+        guard let librarian = librarian else {
+            print("Librarian data not available")
+            return
+        }
+        
+        let db = Firestore.firestore()
+        
+        // Set isActive to false in librarian collection
+        db.collection("librarians").document(librarian.uid).updateData(["isActive": false]) { error in
+            if let error = error {
+                print("Error updating isActive in librarian collection: \(error)")
+                return
+            } else {
+                print("isActive set to false in librarian collection")
+            }
+        }
+        
+        // Set isActive to false in users collection
+        db.collection("users").document(librarian.uid).updateData(["isActive": false]) { error in
+            if let error = error {
+                print("Error updating isActive in users collection: \(error)")
+                return
+            } else {
+                print("isActive set to false in users collection")
+                showAlert = true
+            }
+        }
+    }
 }
 
 struct LibrarianDetailView_Previews: PreviewProvider {
@@ -154,10 +182,6 @@ struct LibrarianDetailView_Previews: PreviewProvider {
     }
 }
 
-
-#Preview {
-    LibrarianDetailView(libID: "")
-}
 
 extension View {
     func placeholder1<Content: View>(

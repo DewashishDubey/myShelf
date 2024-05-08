@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Firebase
 
 struct ALibrarianView: View {
     @State private var searchText = ""
@@ -16,29 +17,29 @@ struct ALibrarianView: View {
     @State private var selectedBookUID: BookUID?
     @ObservedObject var librarianManager = LibrarianManager()
    // @ObservedObject var viewModel : AuthViewModel
+    
+    var activeLibrarians: [Librarian] {
+        librarianManager.librarians.filter { $0.isActive }
+    }
+    
     var body: some View {
         ZStack{
             Color.black.ignoresSafeArea(.all)
             ScrollView
             {
-                
                 NavigationStack
                 {
                     VStack
                     {
                         HStack(alignment: .center) {
-                        
                             Text("Add a New Librarian")
-                            .font(
-                            Font.custom("SF Pro", size: 14)
-                            .weight(.medium)
-                            )
-                            .multilineTextAlignment(.center)
-                            .foregroundColor(.white)
-                        Spacer()
-                        
-                           Image(systemName: "plus.circle")
-                            .foregroundColor(Color(red: 0.6, green: 0.6, blue: 0.6))
+                                .font(Font.custom("SF Pro", size: 14)
+                                .weight(.medium))
+                                .multilineTextAlignment(.center)
+                                .foregroundColor(.white)
+                            Spacer()
+                            Image(systemName: "plus.circle")
+                                .foregroundColor(Color(red: 0.6, green: 0.6, blue: 0.6))
                         }
                         .padding(20)
                         .frame(maxWidth: .infinity, alignment: .center)
@@ -49,17 +50,14 @@ struct ALibrarianView: View {
                             showingSheet.toggle()
                         }
                         .padding(20)
-                        //.padding(.horizontal)
                         
                         HStack(alignment: .center)
                         {
                             Text("Librarians")
-                            .font(
-                            Font.custom("SF Pro", size: 20)
-                            .weight(.semibold)
-                            )
-                            .foregroundColor(.white)
-                        Spacer()
+                                .font(Font.custom("SF Pro", size: 20)
+                                .weight(.semibold))
+                                .foregroundColor(.white)
+                            Spacer()
                         }
                         .padding(0)
                         .frame(maxWidth: .infinity, alignment: .center)
@@ -67,12 +65,12 @@ struct ALibrarianView: View {
                         .padding(.leading,10)
                         .padding(.horizontal)
                         
-                        ForEach(librarianManager.librarians, id: \.uid) { librarian in
-                            NavigationLink{
+                        ForEach(activeLibrarians, id: \.uid) { librarian in
+                            NavigationLink {
                                 LibrarianDetailView(libID: librarian.uid)
-                            }label: {
-                                VStack{
-                                    HStack{
+                            } label: {
+                                VStack {
+                                    HStack {
                                         Image(librarian.gender == "male" ? "male" : "female")
                                             .resizable()
                                             .aspectRatio(contentMode: .fill)
@@ -80,12 +78,10 @@ struct ALibrarianView: View {
                                             .clipped()
                                             .foregroundColor(.white)
                                             .padding(.leading,10)
-                                        VStack{
+                                        VStack {
                                             Text(librarian.name)
-                                                .font(
-                                                    Font.custom("SF Pro", size: 14)
-                                                        .weight(.medium)
-                                                )
+                                                .font(Font.custom("SF Pro", size: 14)
+                                                .weight(.medium))
                                                 .foregroundColor(.white)
                                                 .padding(.leading,10)
                                         }
@@ -103,12 +99,10 @@ struct ALibrarianView: View {
                                 }
                                 .padding()
                             }
-                            
                         }
                         
                     }
                     .searchable(text: $searchText, isPresented: $searchIsActive)
-                    
                 }
             }
             .sheet(isPresented: $showingSheet) {
@@ -124,3 +118,4 @@ struct ALibrarianView: View {
 #Preview {
     ALibrarianView()
 }
+

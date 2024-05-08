@@ -163,7 +163,7 @@ struct AHomeView: View {
                     .padding(.leading,5)
                     .padding(.bottom,20)
                 
-                ForEach(librarianManager.librarians, id: \.uid) { librarian in
+                ForEach(librarianManager.librarians.filter { $0.isActive }, id: \.uid) { librarian in
                     NavigationLink{
                         LibrarianDetailView(libID: librarian.uid)
                     }label: {

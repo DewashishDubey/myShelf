@@ -14,7 +14,9 @@ struct Librarian {
     var name: String
     var gender: String
     var email: String
-    var uid: String // Add uid property
+    var uid: String
+    var isActive: Bool
+    // Add uid property
 }
 
 
@@ -34,7 +36,8 @@ class LibrarianManager: ObservableObject {
                         guard let name = data["name"] as? String,
                               let gender = data["gender"] as? String,
                               let email = data["email"] as? String,
-                              let uid = data["uid"] as? String
+                              let uid = data["uid"] as? String,
+                              let isActive = data["isActive"] as? Bool
                         else {
                             return nil
                         }
@@ -42,7 +45,8 @@ class LibrarianManager: ObservableObject {
                         return Librarian(name: name,
                                          gender: gender,
                                          email: email,
-                                         uid: uid
+                                         uid: uid,
+                                         isActive: isActive 
                         )
                     }
                 }
