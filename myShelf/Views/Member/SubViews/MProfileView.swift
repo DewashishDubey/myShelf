@@ -211,7 +211,7 @@ struct MProfileView: View {
                     .background(Color(red: 0.19, green: 0.19, blue: 0.19))
                     
                     NavigationLink {
-                        MGriveanceView()
+                        MGriveanceView(memberID: viewModel.currentUser?.id ?? "")
                     } label: {
                         HStack(alignment: .center) {
                             Image(systemName: "message")

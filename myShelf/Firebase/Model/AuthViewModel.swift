@@ -276,7 +276,8 @@ class AuthViewModel: ObservableObject {
                     "uid": newUser.id,
                     "name": newUser.fullname,
                     "gender": gender == .male ? "male" : "female",
-                    "email": newUser.email
+                    "email": newUser.email,
+                    "isActive" : true
                 ]
                 try await librarianRef.setData(librarianData)
             }

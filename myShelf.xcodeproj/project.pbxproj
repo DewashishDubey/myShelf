@@ -47,6 +47,7 @@
 		A16243182BEA1198001C286F /* AFAQView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A16243172BEA1197001C286F /* AFAQView.swift */; };
 		A162431A2BEA16E7001C286F /* FAQ.swift in Sources */ = {isa = PBXBuildFile; fileRef = A16243192BEA16E7001C286F /* FAQ.swift */; };
 		A162431D2BEA2E74001C286F /* MGriveanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A162431C2BEA2E74001C286F /* MGriveanceView.swift */; };
+		A16440492BEB39790064A867 /* Member.swift in Sources */ = {isa = PBXBuildFile; fileRef = A16440482BEB39790064A867 /* Member.swift */; };
 		A17C5A192BE4A3EC0081A04E /* AllIssuedBooks.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17C5A182BE4A3EC0081A04E /* AllIssuedBooks.swift */; };
 		A17C5A1B2BE4AF600081A04E /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17C5A1A2BE4AF600081A04E /* TestView.swift */; };
 		A1895CDA2BE5F99800898ED6 /* MCheckMembershipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1895CD92BE5F99800898ED6 /* MCheckMembershipView.swift */; };
@@ -134,6 +135,7 @@
 		A16243172BEA1197001C286F /* AFAQView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AFAQView.swift; sourceTree = "<group>"; };
 		A16243192BEA16E7001C286F /* FAQ.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FAQ.swift; sourceTree = "<group>"; };
 		A162431C2BEA2E74001C286F /* MGriveanceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MGriveanceView.swift; sourceTree = "<group>"; };
+		A16440482BEB39790064A867 /* Member.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Member.swift; sourceTree = "<group>"; };
 		A17C5A182BE4A3EC0081A04E /* AllIssuedBooks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllIssuedBooks.swift; sourceTree = "<group>"; };
 		A17C5A1A2BE4AF600081A04E /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 		A1895CD92BE5F99800898ED6 /* MCheckMembershipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCheckMembershipView.swift; sourceTree = "<group>"; };
@@ -306,6 +308,7 @@
 				A1D600982BE60EF1004EAA43 /* Events.swift */,
 				A16243192BEA16E7001C286F /* FAQ.swift */,
 				A1EFF8FF2BEA55B500E6F85C /* Participants.swift */,
+				A16440482BEB39790064A867 /* Member.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -588,6 +591,7 @@
 				A1B5715E2BE8985500D79116 /* MPayFineView.swift in Sources */,
 				A14AFBF42BDBB88E00A29380 /* ALibrarianView.swift in Sources */,
 				A133C8602BDA095C00A9597B /* LProfileView.swift in Sources */,
+				A16440492BEB39790064A867 /* Member.swift in Sources */,
 				A14AFBEC2BDBA6A900A29380 /* AddBookView.swift in Sources */,
 				A14004542BE3848500F5615F /* MPreviouslyIssuedBooksView.swift in Sources */,
 				A1A9BDE82BE24AF400EFF2F8 /* MBorrowedBookView.swift in Sources */,
