@@ -856,34 +856,37 @@ struct Arc: View {
         VStack{
             Text("Reading Goals")
                 .font(
-                Font.custom("SF Pro Text", size: 30))
+                    Font.custom("SF Pro Text", size: 30))
                 .padding(.bottom,10)
             Text("Find a great book, set a goal and make reading")
                 .font(
-                Font.custom("SF Pro Text", size: 14)
+                    Font.custom("SF Pro Text", size: 14)
                 )
                 .foregroundColor(.white.opacity(0.6))
             Text("a daily habit")
                 .font(
-                Font.custom("SF Pro Text", size: 14))
+                    Font.custom("SF Pro Text", size: 14))
                 .foregroundColor(.white.opacity(0.6))
                 .padding(.bottom,8)
             
-           
-                ProgressBar(progress: self.$count, maxCount: maxCount)
-                    .frame(width: 250.0, height: 250.0)
-                    .padding(20)
-                
+            
+            ProgressBar(progress: self.$count, maxCount: maxCount)
+                .frame(width: 250.0, height: 250.0)
+                .padding(20)
+            
             
         }
         .padding(.leading,50)
     }
     
     struct ProgressBar: View {
+        @State private var showHalfSheet = false
+        @State private var number = 1
         @Binding var progress: Int
         let maxCount: Int
         
         var body: some View {
+            
             ZStack {
                 Path { path in
                     let width: CGFloat = 250.0
@@ -893,55 +896,107 @@ struct Arc: View {
                 .stroke(style: StrokeStyle(lineWidth: 12.0, lineCap: .round, lineJoin: .round))
                 .opacity(0.3)
                 .foregroundColor(Color.gray)
+                //                .rotationEffect(.degrees(54.5))
+                
                 if(progress>maxCount){
                     Path { path in
                         let width: CGFloat = 250.0
                         let height: CGFloat = 125.0
-                        path.addArc(center: CGPoint(x: width / 2, y: height), radius: width / 2, startAngle: .degrees(180), endAngle: .degrees(360) , clockwise: false)
+                        path.addArc(center: CGPoint(x: width / 2, y: height), radius: width / 2, startAngle: .degrees(180), endAngle: .degrees(360), clockwise: false)
                     }
                     .stroke(style: StrokeStyle(lineWidth: 12.0, lineCap: .round, lineJoin: .round))
-                    .fill(Color(red: 0.26, green: 0.52, blue: 0.96))
+                    .fill(.blue)
                 }
                 else{
+                    
                     Path { path in
                         let width: CGFloat = 250.0
                         let height: CGFloat = 125.0
                         path.addArc(center: CGPoint(x: width / 2, y: height), radius: width / 2, startAngle: .degrees(180), endAngle: .degrees(180 + (Double(self.progress) / Double(self.maxCount)) * 180), clockwise: false)
                     }
                     .stroke(style: StrokeStyle(lineWidth: 12.0, lineCap: .round, lineJoin: .round))
-                    .fill(Color(red: 0.26, green: 0.52, blue: 0.96))
+                    .fill(.blue)
+                    
+                    
+                    
+                    
                 }
                 VStack {
-                    Text("Complete your Collection")
-                        .font(
-                            Font.custom("SF Pro Text", size: 14)
-                                .weight(.medium)
-                        )
-                        .foregroundColor(.white)
-                    Text("\(progress)/\(maxCount)")
-                        .foregroundColor(.white)
-                        .font(Font.custom("SF Pro Text", size: 30)
-                            .weight(.medium)
-                              )
+                    HStack{
+                        VStack(spacing:10) {
+                            Text("\(progress)")
+                                .foregroundColor(.white)
+                                .font(.largeTitle)
+                            HStack{
+                                Text("of \(maxCount) books read")
+                                    .foregroundColor(.white)
+                                
+                                Button {
+                                    showHalfSheet.toggle()
+                                } label: {
+                                    Image(systemName: "chevron.right")
+                                        .resizable()
+                                        .frame(width:8,height: 10)
+                                    
+                                }
+                                .sheet(isPresented: $showHalfSheet) {
+                                    
+                                    VStack
+                                    {
+                                            Text("Select Goal")
+                                            .font(
+                                                Font.custom("SF Pro Text", size: 20))
+                                            .foregroundStyle(.white)
+                                            .padding(.top,20)
+                                        ZStack(alignment:.leading){
+                                            Color(red: 0.11, green: 0.11, blue: 0.12)
+                                                .ignoresSafeArea(.all)
+                                                .presentationDetents([.fraction(0.3)]) // Allow resizing to half screen
+                                            
+                                            
+                                            
+                                            Picker("", selection: $number) {
+                                                ForEach(1...60, id: \.self) {
+                                                    Text("\($0)")
+                                                        .foregroundStyle(Color.white)
+                                                }
+                                            }
+                                            .pickerStyle(WheelPickerStyle())
+                                        }
+                                        Button("Done") {
+                                            print("Selected count:", number)
+                                        }
+                                        Spacer()
+                                            
+                                    }
+                                    .background(Color(red: 0.11, green: 0.11, blue: 0.12))
+                                    
+                                    
+                                }
+                                
+                                
+                                
+                            }
+                            
+                        }
                         
-                        .padding()
+                        
+                    }
                     
                     Button(action: {
                         // Action to complete the collection
                     }) {
-                        HStack(alignment: .center, spacing: 0) {
-                            Text("Complete your Collection")
-                                .foregroundColor(.white)
-                                .font(
-                                Font.custom("SF Pro Text", size: 12)
-                                .weight(.medium)
-                                )
-                        }
-                        .padding(.horizontal, 30)
-                        .padding(.top, 12)
-                        .padding(.bottom, 12)
-                        .background(Color(red: 0.26, green: 0.52, blue: 0.96))
-                        .cornerRadius(500)
+                        Text("Complete your Collection")
+                            .font(
+                                Font.custom("SF Pro Text", size: 10)
+                                    .weight(.medium)
+                            )
+                            .foregroundColor(.white)
+                            .padding()
+                            .background(Color.blue)
+                            .cornerRadius(25)
+                            .padding(.bottom,45)
+                            .padding(.top,5)
                     }
                 }
             }
@@ -950,7 +1005,6 @@ struct Arc: View {
     
     
 }
-
 
 
 
