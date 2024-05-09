@@ -955,7 +955,7 @@ struct Arc: View {
                                         ZStack(alignment:.leading){
                                             Color(red: 0.11, green: 0.11, blue: 0.12)
                                                 .ignoresSafeArea(.all)
-                                                .presentationDetents([.fraction(0.3)]) // Allow resizing to half screen
+                                                   .presentationDetents([.fraction(0.3)]) // Allow resizing to half screen
                                             
                                             
                                             

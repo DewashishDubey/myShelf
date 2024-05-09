@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct AHomeView: View {
+    @State private var showHalfSheet = false
+    @State private var showHalfSheet2 = false
     @EnvironmentObject var viewModel : AuthViewModel
     @StateObject var adminViewModel = AdminViewModel()
     @ObservedObject var librarianManager = LibrarianManager()
@@ -41,26 +43,39 @@ struct AHomeView: View {
                     .padding(.top,10)
                 }
                 HStack(spacing:15){
-                    VStack(spacing:15){
-                        Text("BOOKS")
-                            .font(
-                                Font.custom("SF Pro", size: 12)
-                                    .weight(.medium)
-                            )
-                            .multilineTextAlignment(.center)
-                            .foregroundColor(Color(red: 0.6, green: 0.6, blue: 0.6))
-                        Text("\(adminViewModel.adminData?.books ?? 0)")
-                            .font(
-                                Font.custom("SF Pro", size: 20)
-                                    .weight(.bold)
-                            )
-                            .multilineTextAlignment(.center)
-                            .foregroundColor(.white)
+                    Button(action:{
+                        showHalfSheet.toggle()
+                    }){
+                        VStack(spacing:15){
+                            Text("BOOKS")
+                                .font(
+                                    Font.custom("SF Pro", size: 12)
+                                        .weight(.medium)
+                                )
+                                .multilineTextAlignment(.center)
+                                .foregroundColor(Color(red: 0.6, green: 0.6, blue: 0.6))
+                            Text("\(adminViewModel.adminData?.books ?? 0)")
+                                .font(
+                                    Font.custom("SF Pro", size: 20)
+                                        .weight(.bold)
+                                )
+                                .multilineTextAlignment(.center)
+                                .foregroundColor(.white)
+                        }
+                        .frame(maxWidth: .infinity, alignment: .center)
+                        .padding(15)
+                        .background(Color(red: 0.11, green: 0.11, blue: 0.12))
+                        .cornerRadius(8)
                     }
-                    .frame(maxWidth: .infinity, alignment: .center)
-                    .padding(15)
-                    .background(Color(red: 0.11, green: 0.11, blue: 0.12))
-                    .cornerRadius(8)
+                    .sheet(isPresented: $showHalfSheet){
+                        Color(red: 0.11, green: 0.11, blue: 0.12)
+                                                            .ignoresSafeArea(.all)
+                                                            .presentationDetents([.fraction(1)])
+                                                        
+                                                        VStack{
+                                                            BooksAnalyticsView()
+                                                        }
+                    }
                     
                     VStack(spacing:15){
                         Text("LIBRARIANS")
@@ -105,27 +120,39 @@ struct AHomeView: View {
                     .padding(15)
                     .background(Color(red: 0.11, green: 0.11, blue: 0.12))
                     .cornerRadius(8)
-                    
-                    VStack(spacing:15){
-                        Text("MEMBERS")
-                            .font(
-                                Font.custom("SF Pro", size: 12)
-                                    .weight(.medium)
-                            )
-                            .multilineTextAlignment(.center)
-                            .foregroundColor(Color(red: 0.6, green: 0.6, blue: 0.6))
-                        Text("\(adminViewModel.adminData?.members ?? 0)")
-                            .font(
-                                Font.custom("SF Pro", size: 20)
-                                    .weight(.bold)
-                            )
-                            .multilineTextAlignment(.center)
-                            .foregroundColor(.white)
+                    Button(action:{
+                        showHalfSheet2.toggle()
+                    }){
+                        VStack(spacing:15){
+                            Text("MEMBERS")
+                                .font(
+                                    Font.custom("SF Pro", size: 12)
+                                        .weight(.medium)
+                                )
+                                .multilineTextAlignment(.center)
+                                .foregroundColor(Color(red: 0.6, green: 0.6, blue: 0.6))
+                            Text("\(adminViewModel.adminData?.members ?? 0)")
+                                .font(
+                                    Font.custom("SF Pro", size: 20)
+                                        .weight(.bold)
+                                )
+                                .multilineTextAlignment(.center)
+                                .foregroundColor(.white)
+                        }
+                        .frame(maxWidth: .infinity, alignment: .center)
+                        .padding(15)
+                        .background(Color(red: 0.11, green: 0.11, blue: 0.12))
+                        .cornerRadius(8)
                     }
-                    .frame(maxWidth: .infinity, alignment: .center)
-                    .padding(15)
-                    .background(Color(red: 0.11, green: 0.11, blue: 0.12))
-                    .cornerRadius(8)
+                    .sheet(isPresented: $showHalfSheet2){
+                        Color(red: 0.11, green: 0.11, blue: 0.12)
+                                                            .ignoresSafeArea(.all)
+                                                            .presentationDetents([.fraction(0.5)])
+                                                        
+                                                        VStack{
+                                                           MembersAnalyticsView()
+                                                        }
+                    }
                 }
                 .padding(.bottom,10)
 
