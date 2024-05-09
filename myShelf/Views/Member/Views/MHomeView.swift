@@ -884,7 +884,10 @@ struct Arc: View {
         @State private var number = 1
         @Binding var progress: Int
         let maxCount: Int
-        
+        @State private var userGoal: Int = 0
+        @EnvironmentObject var viewModel: AuthViewModel
+        @Environment(\.presentationMode) var presentationMode
+        @State private var previouslyIssuedBooksCount: Int = 0
         var body: some View {
             
             ZStack {
@@ -898,7 +901,7 @@ struct Arc: View {
                 .foregroundColor(Color.gray)
                 //                .rotationEffect(.degrees(54.5))
                 
-                if(progress>maxCount){
+                if(previouslyIssuedBooksCount>userGoal){
                     Path { path in
                         let width: CGFloat = 250.0
                         let height: CGFloat = 125.0
@@ -912,7 +915,7 @@ struct Arc: View {
                     Path { path in
                         let width: CGFloat = 250.0
                         let height: CGFloat = 125.0
-                        path.addArc(center: CGPoint(x: width / 2, y: height), radius: width / 2, startAngle: .degrees(180), endAngle: .degrees(180 + (Double(self.progress) / Double(self.maxCount)) * 180), clockwise: false)
+                        path.addArc(center: CGPoint(x: width / 2, y: height), radius: width / 2, startAngle: .degrees(180), endAngle: .degrees(180 + (Double(self.previouslyIssuedBooksCount) / Double(self.userGoal)) * 180), clockwise: false)
                     }
                     .stroke(style: StrokeStyle(lineWidth: 12.0, lineCap: .round, lineJoin: .round))
                     .fill(.blue)
@@ -921,14 +924,15 @@ struct Arc: View {
                     
                     
                 }
-                VStack {
+                VStack
+                {
                     HStack{
                         VStack(spacing:10) {
-                            Text("\(progress)")
+                            Text("\(previouslyIssuedBooksCount)")
                                 .foregroundColor(.white)
                                 .font(.largeTitle)
                             HStack{
-                                Text("of \(maxCount) books read")
+                                Text("of \(userGoal) books read")
                                     .foregroundColor(.white)
                                 
                                 Button {
@@ -943,7 +947,7 @@ struct Arc: View {
                                     
                                     VStack
                                     {
-                                            Text("Select Goal")
+                                        Text("Select Goal")
                                             .font(
                                                 Font.custom("SF Pro Text", size: 20))
                                             .foregroundStyle(.white)
@@ -964,10 +968,13 @@ struct Arc: View {
                                             .pickerStyle(WheelPickerStyle())
                                         }
                                         Button("Done") {
-                                            print("Selected count:", number)
+                                           
+                                            updateUserGoal(goal: number)
+                                            showHalfSheet.toggle()
+                                            
                                         }
                                         Spacer()
-                                            
+                                        
                                     }
                                     .background(Color(red: 0.11, green: 0.11, blue: 0.12))
                                     
@@ -999,11 +1006,72 @@ struct Arc: View {
                             .padding(.top,5)
                     }
                 }
+                .onAppear {
+                    // Fetch user's goal when the view appears
+                    fetchUserGoal()
+                    fetchPreviouslyIssuedBooksCount()
+                }
             }
         }
+        func updateUserGoal(goal: Int) {
+            let db = Firestore.firestore()
+            // Get current user ID (you need to implement this)
+            guard let currentUserID = viewModel.currentUser?.id else {
+                print("Error: Current user ID not found")
+                return
+            }
+            
+            // Update user's goal attribute in Firestore
+            db.collection("members").document(currentUserID).updateData([
+                "goal": goal
+            ]) { error in
+                if let error = error {
+                    print("Error updating user goal: \(error)")
+                } else {
+                    print("User goal updated successfully")
+                   
+                }
+            }
+        }
+        
+        func fetchUserGoal() {
+            let db = Firestore.firestore()
+            // Get current user ID (you need to implement this)
+            guard let currentUserID = viewModel.currentUser?.id else {
+                print("Error: Current user ID not found")
+                return
+            }
+            
+            // Fetch user's goal from Firestore
+            db.collection("members").document(currentUserID).addSnapshotListener { document, error in
+                if let error = error {
+                    print("Error fetching user goal: \(error)")
+                } else if let document = document, document.exists {
+                    if let goal = document.data()?["goal"] as? Int {
+                        self.userGoal = goal
+                    }
+                }
+            }
+        }
+        
+        func fetchPreviouslyIssuedBooksCount() {
+                    let db = Firestore.firestore()
+                    // Get current user ID (you need to implement this)
+                    guard let currentUserID = viewModel.currentUser?.id else {
+                        print("Error: Current user ID not found")
+                        return
+                    }
+                    
+                    // Fetch the count of documents in the subcollection
+                    db.collection("members").document(currentUserID).collection("previously_issued_books").addSnapshotListener { snapshot, error in
+                        if let error = error {
+                            print("Error fetching previously issued books count: \(error)")
+                        } else {
+                            self.previouslyIssuedBooksCount = snapshot?.documents.count ?? 0
+                        }
+                    }
+                }
     }
-    
-    
 }
 
 
