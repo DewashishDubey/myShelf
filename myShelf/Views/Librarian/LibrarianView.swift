@@ -7,34 +7,52 @@
 
 
 import SwiftUI
-
+import Firebase
 struct LibrarianView: View {
     @EnvironmentObject var viewModel : AuthViewModel
-    
+    @State private var isActive = false
     var body: some View {
         // Librarian-specific profile view
-        if viewModel.currentUser != nil{
-            TabView{
-                Group{
-                    NavigationStack{
-                        LHomeView()
+        VStack{
+            if viewModel.currentUser != nil{
+                if isActive == false{
+                    Text("Not Authorized")
+                    Button{
+                        viewModel.signOut()
+                    } label: {
+                        SettingsRowView(imageName: "arrow.left.circle.fill", title: "Sign Out", tintColor: .red)
+                            
                     }
-                    .tabItem {  Label("Home", systemImage: "book") }
-                    
-                    NavigationStack{
-                        LLibraryView()
-                    }
-                    .tabItem {  Label("Library", systemImage: "books.vertical") }
-                    
-                    NavigationStack{
-                        LEventsView()
-                    }
-                    .tabItem {  Label("Events", systemImage: "theatermasks") }
                 }
-                .toolbarBackground(.black, for: .tabBar)
-                .toolbarBackground(.visible, for: .tabBar)
-                .toolbarColorScheme(.dark, for: .tabBar)
+                else
+                {
+                    TabView{
+                        Group{
+                            NavigationStack{
+                                LHomeView()
+                            }
+                            .tabItem {  Label("Home", systemImage: "book") }
+                            
+                            NavigationStack{
+                                LLibraryView()
+                            }
+                            .tabItem {  Label("Library", systemImage: "books.vertical") }
+                            
+                            NavigationStack{
+                                LEventsView()
+                            }
+                            .tabItem {  Label("Events", systemImage: "theatermasks") }
+                        }
+                        .toolbarBackground(.black, for: .tabBar)
+                        .toolbarBackground(.visible, for: .tabBar)
+                        .toolbarColorScheme(.dark, for: .tabBar)
+                    }
+                }
+                   
             }
+        }
+        .onAppear {
+            fetchIsActive()
         }
         /*if let user = viewModel.currentUser{
             VStack{
@@ -53,6 +71,32 @@ struct LibrarianView: View {
             }
         }*/
     }
+    private func fetchIsActive() {
+        guard let currentUserUID = viewModel.currentUser?.id else {
+               return // No current user, cannot fetch isActive
+           }
+           
+           let db = Firestore.firestore()
+           let librarianRef = db.collection("librarians").document(currentUserUID)
+           
+           librarianRef.getDocument { document, error in
+               if let error = error {
+                   print("Error fetching document: \(error)")
+                   return
+               }
+               
+               guard let document = document, document.exists else {
+                   print("Document does not exist")
+                   return
+               }
+               
+               if let isActive = document.data()?["isActive"] as? Bool {
+                   self.isActive = isActive
+               } else {
+                   print("isActive field not found or not boolean")
+               }
+           }
+       }
 }
 
 #Preview {

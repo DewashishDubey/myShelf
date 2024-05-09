@@ -19,52 +19,61 @@ struct MLibraryGridView: View {
             ScrollView(showsIndicators: false) {
                 LazyVGrid(columns: [GridItem(.adaptive(minimum: 100))]) {
                     ForEach(issuedBooksViewModel.issuedBooks) { issuedBook in
-                        AsyncImage(url: URL(string: issuedBook.book.imageUrl)) { phase in
-                            switch phase {
-                            case .empty:
-                                ProgressView()
-                            case .success(let image):
-                                image
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(width: 104, height: 154.64)
-                                    .padding(5)
-                            case .failure:
-                                Image(systemName: "photo")
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(width: 104, height: 154.64)
-                                    .padding(5)
-                            @unknown default:
-                                Text("Unknown")
+                        NavigationLink{
+                            MBorrowedBookView(docID: issuedBook.documentID)
+                        }label: {
+                            AsyncImage(url: URL(string: issuedBook.book.imageUrl)) { phase in
+                                switch phase {
+                                case .empty:
+                                    ProgressView()
+                                case .success(let image):
+                                    image
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fit)
+                                        .frame(width: 104, height: 154.64)
+                                        .padding(5)
+                                case .failure:
+                                    Image(systemName: "photo")
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fit)
+                                        .frame(width: 104, height: 154.64)
+                                        .padding(5)
+                                @unknown default:
+                                    Text("Unknown")
+                                }
                             }
+                            .frame(width: 104, height: 154.64)
+                            .padding(5)
                         }
-                        .frame(width: 104, height: 154.64)
-                        .padding(5)
+                        
                     }
                     ForEach(previouslyIssuedBooksViewModel.reservedBooks) { PreviouslyReservedBook in
                         AsyncImage(url: URL(string: PreviouslyReservedBook.book.imageUrl)) { phase in
-                            switch phase {
-                            case .empty:
-                                ProgressView()
-                            case .success(let image):
-                                image
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(width: 104, height: 154.64)
-                                    .padding(5)
-                            case .failure:
-                                Image(systemName: "photo")
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(width: 104, height: 154.64)
-                                    .padding(5)
-                            @unknown default:
-                                Text("Unknown")
+                            NavigationLink{
+                                MPreviouslyIssuedBooksView(docID: PreviouslyReservedBook.documentID)
+                            }label: {
+                                switch phase {
+                                case .empty:
+                                    ProgressView()
+                                case .success(let image):
+                                    image
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fit)
+                                        .frame(width: 104, height: 154.64)
+                                        .padding(5)
+                                case .failure:
+                                    Image(systemName: "photo")
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fit)
+                                        .frame(width: 104, height: 154.64)
+                                        .padding(5)
+                                @unknown default:
+                                    Text("Unknown")
+                                }
                             }
+                            .frame(width: 104, height: 154.64)
+                            .padding(5)
                         }
-                        .frame(width: 104, height: 154.64)
-                        .padding(5)
                     }
                 }
                 .onAppear {

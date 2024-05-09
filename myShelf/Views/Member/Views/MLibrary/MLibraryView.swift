@@ -27,7 +27,7 @@ struct MLibraryView: View {
                         Spacer()
                     }*/
                     HStack {
-                        Text("All Books")
+                        Text("\(isGridViewActive ? "myShelf" : "All Books")")
                             .font(Font.custom("SF Pro", size: 20))
                             .padding(.top,20)
                             .padding(.bottom,20)
