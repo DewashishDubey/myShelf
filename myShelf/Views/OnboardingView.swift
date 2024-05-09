@@ -55,7 +55,7 @@ struct onboarding: View {
                         HStack {
                             Image(systemName: "list.bullet.rectangle.fill")
                                 .imageScale(.large)
-                                .foregroundColor(.indigo)
+                                .foregroundColor(Color(red:0.26,green:0.52,blue:0.96))
                                 .font(.system(size: 25))
                             Text("Your gateway to the world of books and information.")
                                 .foregroundStyle(.white)
@@ -66,7 +66,7 @@ struct onboarding: View {
                         HStack {
                             Image(systemName: "list.bullet.rectangle.fill")
                                 .imageScale(.large)
-                                .foregroundColor(.indigo)
+                                .foregroundColor(Color(red:0.26,green:0.52,blue:0.96))
                                 .font(.system(size: 25))
                             Text("Explore, Borrow and Return books from libraries")
                                 .foregroundStyle(.white)
@@ -77,7 +77,7 @@ struct onboarding: View {
                         HStack {
                             Image(systemName: "list.bullet.rectangle.fill")
                                 .imageScale(.large)
-                                .foregroundColor(.indigo)
+                                .foregroundColor(Color(red:0.26,green:0.52,blue:0.96))
                                 .font(.system(size: 25))
                             Text("Seamlessly manage your library experience. ")
                                 .foregroundStyle(.white)
@@ -91,7 +91,7 @@ struct onboarding: View {
                             .foregroundStyle(Color(uiColor: .white))
                             .frame(maxWidth: .infinity)
                             .padding(.vertical)
-                            .background(Color(uiColor: .systemIndigo).opacity(0.9))
+                            .background(Color(red:0.26,green:0.52,blue:0.96)).opacity(0.9)
                             .cornerRadius(10)
                             .padding(.horizontal, 10)
                     }

@@ -848,7 +848,7 @@ struct NewThumbnailView: View {
 struct Arc: View {
     
     @State private var degrees: Double = -110
-    @State private var count: Int = 2000
+    @State private var count: Int = 5000
     @State private var maxCount: Int = 3546
     
     
@@ -869,18 +869,12 @@ struct Arc: View {
                 .foregroundColor(.white.opacity(0.6))
                 .padding(.bottom,8)
             
-            if count > maxCount {
-                ProgressBar2(progress: self.$count, maxCount: maxCount)
-                    .frame(width: 250.0, height: 250.0)
-                    .padding(20)
-                
-            }
-            else {
+           
                 ProgressBar(progress: self.$count, maxCount: maxCount)
                     .frame(width: 250.0, height: 250.0)
                     .padding(20)
                 
-            }
+            
         }
         .padding(.leading,50)
     }
@@ -899,15 +893,24 @@ struct Arc: View {
                 .stroke(style: StrokeStyle(lineWidth: 12.0, lineCap: .round, lineJoin: .round))
                 .opacity(0.3)
                 .foregroundColor(Color.gray)
-                
-                Path { path in
-                    let width: CGFloat = 250.0
-                    let height: CGFloat = 125.0
-                    path.addArc(center: CGPoint(x: width / 2, y: height), radius: width / 2, startAngle: .degrees(180), endAngle: .degrees(180 + (Double(self.progress) / Double(self.maxCount)) * 180), clockwise: false)
+                if(progress>maxCount){
+                    Path { path in
+                        let width: CGFloat = 250.0
+                        let height: CGFloat = 125.0
+                        path.addArc(center: CGPoint(x: width / 2, y: height), radius: width / 2, startAngle: .degrees(180), endAngle: .degrees(360) , clockwise: false)
+                    }
+                    .stroke(style: StrokeStyle(lineWidth: 12.0, lineCap: .round, lineJoin: .round))
+                    .fill(Color(red: 0.26, green: 0.52, blue: 0.96))
                 }
-                .stroke(style: StrokeStyle(lineWidth: 12.0, lineCap: .round, lineJoin: .round))
-                .fill(Color(red: 0.26, green: 0.52, blue: 0.96))
-                
+                else{
+                    Path { path in
+                        let width: CGFloat = 250.0
+                        let height: CGFloat = 125.0
+                        path.addArc(center: CGPoint(x: width / 2, y: height), radius: width / 2, startAngle: .degrees(180), endAngle: .degrees(180 + (Double(self.progress) / Double(self.maxCount)) * 180), clockwise: false)
+                    }
+                    .stroke(style: StrokeStyle(lineWidth: 12.0, lineCap: .round, lineJoin: .round))
+                    .fill(Color(red: 0.26, green: 0.52, blue: 0.96))
+                }
                 VStack {
                     Text("Complete your Collection")
                         .font(
@@ -952,60 +955,6 @@ struct Arc: View {
 
 
 
-struct ProgressBar2: View {
-    @Binding var progress: Int
-    let maxCount: Int
-    
-    var body: some View {
-        ZStack {
-            Path { path in
-                let width: CGFloat = 250.0
-                let height: CGFloat = 125.0
-                path.addArc(center: CGPoint(x: width / 2, y: height), radius: width / 2, startAngle: .degrees(180), endAngle: .degrees(360), clockwise: false)
-            }
-            .stroke(style: StrokeStyle(lineWidth: 12.0, lineCap: .round, lineJoin: .round))
-            .opacity(0.3)
-            .foregroundColor(Color.gray)
-//                .rotationEffect(.degrees(54.5))
-            
-            Path { path in
-                let width: CGFloat = 250.0
-                let height: CGFloat = 125.0
-                path.addArc(center: CGPoint(x: width / 2, y: height), radius: width / 2, startAngle: .degrees(180), endAngle: .degrees(360), clockwise: false)
-            }
-            .stroke(style: StrokeStyle(lineWidth: 12.0, lineCap: .round, lineJoin: .round))
-            .fill(.white)
-//                .rotationEffect(.degrees(54.5))
-            
-            VStack {
-                Text("Complete your Collection")
-                    .font(
-                        Font.custom("SF Pro Text", size: 14)
-                            .weight(.medium)
-                    )
-                    .foregroundColor(.white)
-                Text("\(progress)/\(maxCount)")
-                    .foregroundColor(.white)
-                    .font(.largeTitle)
-                    .padding()
-                
-                Button(action: {
-                    // Action to complete the collection
-                }) {
-                    Text("Complete your Collection")
-                        .font(
-                            Font.custom("SF Pro Text", size: 10)
-                                .weight(.medium)
-                        )
-                        .foregroundColor(.white)
-                        .padding()
-                        .background(Color.blue)
-                        .cornerRadius(25)
-                }
-            }
-        }
-    }
-}
 
 
 

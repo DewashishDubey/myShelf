@@ -154,7 +154,7 @@ struct RegistrationView: View {
                                             .padding(.horizontal, 25)
                                             .padding(.vertical, 22)
                                             .frame(maxWidth: .infinity, alignment: .center)
-                                            .background(Color.indigo)
+                                            .background(Color(red:0.26,green:0.52,blue:0.96))
                                         
                                             .cornerRadius(8)
                                             .fontWeight(.bold)
@@ -162,7 +162,7 @@ struct RegistrationView: View {
                                     .foregroundColor(.white)
                                     .frame(width: UIScreen.main.bounds.width - 32, height: 48)
                 }
-                .background(Color.indigo)
+                                .background(Color(red:0.26,green:0.52,blue:0.96))
                 .cornerRadius(10)
                 .padding(.top, 24)
                 
@@ -176,7 +176,7 @@ struct RegistrationView: View {
                             .foregroundStyle(Color.white)
                         Text("Sign in")
                             .fontWeight(.bold)
-                            .foregroundStyle(Color.indigo)
+                            .foregroundStyle(Color(red:0.26,green:0.52,blue:0.96))
                     }
                     .font(.system(size: 16))
                     .padding(.top,10)

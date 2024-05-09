@@ -86,7 +86,7 @@ struct LoginView: View {
                                     .padding(.horizontal, 25)
                                     .padding(.vertical, 18)
                                     .frame(maxWidth: .infinity, alignment: .center)
-                                    .background(Color.indigo)
+                                    .background(Color(red:0.26,green:0.52,blue:0.96))
                                 
                                     .cornerRadius(8)
                                     .fontWeight(.bold)
@@ -107,7 +107,7 @@ struct LoginView: View {
                                     .font(.system(size: 16))
                                     .padding(.leading,10)
                                 Text("Create one!")
-                                    .foregroundStyle(.indigo)
+                                    .foregroundStyle(Color(red:0.26,green:0.52,blue:0.96))
                                     .fontWeight(.bold)
                                     .font(.system(size: 16))
                             }
