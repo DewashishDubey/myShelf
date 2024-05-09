@@ -93,7 +93,7 @@ struct MExploreView: View {
                                             .frame(maxWidth: .infinity, alignment: .topLeading)
                                             .lineLimit(5)
                                             .padding(.bottom,10)
-                                        StarsView(rating: Float(book.rating) ?? 0.0, maxRating: 5)
+                                        StarsView(rating: ((Float(book.rating) ?? 1)/(Float(book.noOfRatings) ?? 1)), maxRating: 5)
                                     }
                                     .padding(0)
                                     .frame(alignment: .leading)

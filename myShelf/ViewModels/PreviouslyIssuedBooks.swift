@@ -36,7 +36,7 @@ class PreviouslyReservedBooksViewModel: ObservableObject {
                 let endDateTimestamp = document["end_date"] as? Timestamp
                 let startDateTimestamp = document["start_date"] as? Timestamp
                 let fine = document["fine"] as? Int ?? 0
-
+                let hasRated = document["hasRated"] as? Bool ?? false
                 dispatchGroup.enter() // Enter the dispatch group
 
                 // Fetch the details of the book using its bookID
@@ -44,7 +44,7 @@ class PreviouslyReservedBooksViewModel: ObservableObject {
                     let endDateString = self.formatDate(endDateTimestamp?.dateValue())
                     let startDateString = self.formatDate(startDateTimestamp?.dateValue())
 
-                    reservedBooks.append(ReservedBook(bookID: bookID, documentID: documentID, startDateString: startDateString, endDateString: endDateString, fine: fine, book: book))
+                    reservedBooks.append(ReservedBook(bookID: bookID, documentID: documentID, startDateString: startDateString, endDateString: endDateString, fine: fine, book: book, hasRated: hasRated))
 
                     dispatchGroup.leave() // Leave the dispatch group when finished
                 }
@@ -116,13 +116,14 @@ class PreviouslyReservedBooksViewModel: ObservableObject {
             let startDateTimestamp = data["start_date"] as? Timestamp
             let endDateTimestamp = data["end_date"] as? Timestamp
             let fine = data["fine"] as? Int ?? 0
+            let hasRated = data["hasRated"] as? Bool ?? false
 
             // Fetch book details using bookID
             self.fetchBookDetails(for: bookID) { book in
                 let startDateString = self.formatDate(startDateTimestamp?.dateValue())
                 let endDateString = self.formatDate(endDateTimestamp?.dateValue())
 
-                let reservedBook = ReservedBook(bookID: bookID, documentID: documentID, startDateString: startDateString, endDateString: endDateString, fine: fine, book: book)
+                let reservedBook = ReservedBook(bookID: bookID, documentID: documentID, startDateString: startDateString, endDateString: endDateString, fine: fine, book: book, hasRated: hasRated)
 
                 // Append the fetched reserved book to the published property
                 DispatchQueue.main.async {
@@ -153,13 +154,14 @@ class PreviouslyReservedBooksViewModel: ObservableObject {
             let startDateTimestamp = data["start_date"] as? Timestamp
             let endDateTimestamp = data["end_date"] as? Timestamp
             let fine = data["fine"] as? Int ?? 0
+            let hasRated = data["hasRated"] as? Bool ?? false
 
             // Fetch book details using bookID
             self.fetchBookDetails(for: bookID) { book in
                 let startDateString = self.formatDate(startDateTimestamp?.dateValue())
                 let endDateString = self.formatDate(endDateTimestamp?.dateValue())
 
-                let reservedBook = ReservedBook(bookID: bookID, documentID: documentID, startDateString: startDateString, endDateString: endDateString, fine: fine, book: book)
+                let reservedBook = ReservedBook(bookID: bookID, documentID: documentID, startDateString: startDateString, endDateString: endDateString, fine: fine, book: book, hasRated: hasRated)
 
                 // Append the fetched reserved book to the published property
                 DispatchQueue.main.async {
@@ -187,4 +189,5 @@ struct ReservedBook: Identifiable {
     let endDateString: String
     let fine: Int
     let book: Book
+    let hasRated : Bool
 }

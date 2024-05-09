@@ -294,7 +294,7 @@ struct AddBookView: View {
                 "noOfPages": noOfPages,
                 "language": book.language ?? "",
                 "shelfLocation": shelfLocation,
-                "noOfRatings" : "10",
+                "noOfRatings" : "1",
                 "issued" : 0,
                 "isActive" : true
             ]

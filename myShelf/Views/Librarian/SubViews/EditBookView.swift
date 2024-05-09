@@ -26,6 +26,7 @@ struct EditBookView: View {
     @State private var qrCodeImage: UIImage?
     @State private var isShareSheetPresented = false // State variable to track if the share sheet is presented
     let qrCodeGenerator = CIFilter.qrCodeGenerator()
+    @State private var issuedCount: Int?
     init(bookUID: String) {
         self.bookUID = bookUID
         UINavigationBar.appearance().backgroundColor = .clear // Set navigation bar background color
@@ -71,8 +72,7 @@ struct EditBookView: View {
                                 }
                                 .padding()
                                 
-                                ButtonRow(title: "Book Activity", detail: nil)
-                                    .buttonStyle(PlainButtonStyle())
+                                
                                 
                                 EditableButtonRow_ForNoOfCopies(title: "Copies Available", detail: book.noOfCopies, newValue: $newCopies, isEditing: $isEditingCopies) { newValue in
                                     updateCopiesAvailable(newCopies: newValue, forBookUID: bookUID) { error in
@@ -83,10 +83,25 @@ struct EditBookView: View {
                                         }
                                     }
                                 }
-                                ButtonRow(title: "Currently Borrowed", detail: nil)
-                                    .buttonStyle(PlainButtonStyle())
-                                ButtonRow(title: "Reservation Request", detail: nil)
-                                    .buttonStyle(PlainButtonStyle())
+                                ZStack {
+                                    RoundedRectangle(cornerRadius: 10)
+                                        .fill(Color.clear)
+                                        .frame(width: 353, height: 14)
+                                        .padding(.vertical, 5)
+                                    
+                                    HStack {
+                                        Text("Currently Borrowed")
+                                        Spacer()
+                                        
+                                        Text("\(issuedCount ?? 0)")
+                                        
+                                    
+                                    }
+                                    .padding()
+                                    .foregroundColor(.white)
+                                }
+
+                               
                                 
                                 EditableButtonRow(title: "Book Location", detail: book.shelfLocation, newLocation: $newLocation, isEditing: $isEditing) { newLocation in
                                     // Update book location in Firebase
@@ -123,6 +138,8 @@ struct EditBookView: View {
             }
             .onAppear {
                 firebaseManager.fetchBooks() // Fetch books when the view appears
+                fetchIssuedAttribute(forBookUID: bookUID)
+                    
             }
         }
         .navigationBarItems(trailing:
@@ -281,6 +298,28 @@ struct EditBookView: View {
         
         return nil
     }
+
+    // Function to fetch the "issued" attribute for a specific book UID from Firebase
+    func fetchIssuedAttribute(forBookUID bookUID: String) {
+        let db = Firestore.firestore()
+        let bookRef = db.collection("books").document(bookUID)
+
+        bookRef.getDocument { (document, error) in
+            if let document = document, document.exists {
+                if let issuedCount = document.data()?["issued"] as? Int {
+                    print("Issued count for \(bookUID): \(issuedCount)")
+                    // Store the fetched issued count in a variable
+                    self.issuedCount = issuedCount
+                } else {
+                    print("Issued attribute does not exist or is not an integer")
+                }
+            } else {
+                print("Document for book UID \(bookUID) does not exist")
+            }
+        }
+    }
+
+
 }
 
 // Custom button row with a title and optional detail
@@ -301,7 +340,7 @@ struct ButtonRow: View {
                 if let detail = detail {
                     Text(detail)
                 }
-                Image(systemName: "chevron.right")
+              
             }
             .padding()
             .foregroundColor(.white)

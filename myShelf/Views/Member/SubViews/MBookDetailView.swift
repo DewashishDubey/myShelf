@@ -143,7 +143,7 @@ struct MBookDetailView: View {
                                     
                                     HStack{
                                         
-                                        StarsView(rating: Float(book.rating) ?? 0.0, maxRating: 5)
+                                        StarsView(rating: ((Float(book.rating) ?? 1)/(Float(book.noOfRatings) ?? 1)), maxRating: 5)
                                             .padding(.top, 30)
                                         
                                         

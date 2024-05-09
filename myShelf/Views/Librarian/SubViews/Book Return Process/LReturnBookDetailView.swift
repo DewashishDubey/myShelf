@@ -170,7 +170,7 @@ struct LReturnBookDetailView: View {
                 
                 let previouslyIssuedBooksRef = memberRef.collection("previously_issued_books")
                 
-                previouslyIssuedBooksRef.addDocument(data: data) { error in
+                previouslyIssuedBooksRef.addDocument(data: data.merging(["hasRated": false]) { _, new in new }) { error in
                     if let error = error {
                         print("Error adding document to previously_issued_books: \(error.localizedDescription)")
                     } else {

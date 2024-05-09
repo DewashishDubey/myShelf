@@ -15,6 +15,10 @@ struct MPreviouslyIssuedBooksView: View {
     @State private var existingRequest = false
     @State private var alreadyRequested = false
     @State private var isPremium: Bool = false
+    @State private var rating: Int = 0
+    @State private var showAlert = false
+    @State private var AlertMsg = ""
+    @Environment(\.presentationMode) var presentationMode
     var body: some View {
         ZStack{
             Color.black.ignoresSafeArea(.all)
@@ -118,7 +122,47 @@ struct MPreviouslyIssuedBooksView: View {
                         .background(Color(red: 0.19, green: 0.19, blue: 0.19))
                         
                         
+                        //Text(reservedBook.hasRated ? "yes"  :"no" )
                         
+                        if(reservedBook.hasRated == false)
+                        {
+                            Text("Tell Us What You Think")
+                                .font(
+                                Font.custom("SF Pro", size: 18)
+                                .weight(.medium)
+                                )
+                                .foregroundColor(.white)
+                            HStack {
+                                ForEach(1..<6) { index in
+                                    Image(systemName: index <= rating ? "star.fill" : "star")
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fit)
+                                        .frame(width: 30, height: 30)
+                                        .foregroundColor(.yellow)
+                                        .onTapGesture {
+                                            rating = index
+                                            print(rating)
+                                            // Here you can store the rating in a variable or perform any other action
+                                        }
+                                }
+                            }
+                            
+                            Button{
+                                updateHasRated(for: reservedBook.book.uid)
+                            }label: {
+                                Text("Submit")
+                                    .font(
+                                    Font.custom("SF Pro", size: 16)
+                                    .weight(.medium)
+                                    )
+                                    .foregroundColor(Color.green)
+                            }
+                            .alert(isPresented: $showAlert) {
+                                Alert(title: Text("Alert"), message: Text("\(AlertMsg)"), dismissButton: .default(Text("OK")){presentationMode.wrappedValue.dismiss()})
+                            }
+                        }
+                        
+                        //.padding()
                         
                     }
                 }
@@ -141,6 +185,84 @@ struct MPreviouslyIssuedBooksView: View {
                return dateString // Return original string if unable to parse
            }
        }
+    
+    private func updateHasRated(for bookID: String) {
+          let db = Firestore.firestore()
+          let userID = viewModel.currentUser?.id ?? "" // Get the current user's ID
+
+          // Query to find the document where bookID matches in previously_issued_books subcollection
+          let query = db.collection("members").document(userID)
+              .collection("previously_issued_books").whereField("bookID", isEqualTo: bookID)
+
+          // Execute the query
+          query.getDocuments { snapshot, error in
+              if let error = error {
+                  print("Error getting documents: \(error.localizedDescription)")
+                  return
+              }
+
+              guard let documents = snapshot?.documents else {
+                  print("No documents found")
+                  return
+              }
+
+              // Assuming there's only one document with matching bookID
+              if let document = documents.first {
+                  // Update the hasRated attribute in the document
+                  document.reference.updateData(["hasRated": true]) { error in
+                      if let error = error {
+                          print("Error updating hasRated attribute: \(error.localizedDescription)")
+                      } else {
+                          print("hasRated attribute updated successfully")
+                          // Optionally, you can perform any additional actions here after successful update
+                      }
+                  }
+
+                  // Get the rating from the state
+                  let ratingValue = Double(rating)
+
+                  // Retrieve the corresponding document from the "books" collection
+                  let bookRef = db.collection("books").document(bookID)
+
+                  // Update the rating attribute and increment the noOfRatings attribute
+                  db.runTransaction({ (transaction, errorPointer) -> Any? in
+                      do {
+                          let bookDocument = try transaction.getDocument(bookRef)
+
+                          // Extract the current rating and noOfRatings values
+                          guard var currentRatingString = bookDocument.data()?["rating"] as? String,
+                                var currentNoOfRatingsString = bookDocument.data()?["noOfRatings"] as? String,
+                                let currentRating = Double(currentRatingString),
+                                let currentNoOfRatings = Int(currentNoOfRatingsString) else {
+                              return nil
+                          }
+
+                          // Increment the rating and noOfRatings values
+                          let newRating = currentRating + ratingValue
+                          let newNoOfRatings = currentNoOfRatings + 1
+
+                          // Update the document with the new values
+                          transaction.updateData(["rating": String(newRating), "noOfRatings": String(newNoOfRatings)], forDocument: bookRef)
+
+                          return nil
+                      } catch let fetchError as NSError {
+                          errorPointer?.pointee = fetchError
+                          return nil
+                      }
+                  }) { (object, error) in
+                      if let error = error {
+                          print("Transaction failed: \(error.localizedDescription)")
+                      } else {
+                          AlertMsg = "Rating updated,Thank you!"
+                          showAlert = true
+                          print("Transaction successfully committed!")
+                      }
+                  }
+              } else {
+                  print("No document found with matching bookID")
+              }
+          }
+      }
     
 }
 

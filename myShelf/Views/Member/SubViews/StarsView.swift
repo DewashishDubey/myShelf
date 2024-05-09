@@ -32,7 +32,7 @@ struct StarsView: View {
                 .resizable()
                 .frame(width: size, height: size, alignment: .center)
         }
-
+        
         ZStack {
             text
             HStack(content: {
@@ -57,7 +57,11 @@ struct StarsView: View {
     }
     
     func valueForWidth(_ width: CGFloat, value: CGFloat) -> CGFloat {
-        value * width / CGFloat(maxRating)
+        guard width > 0 && value >= 0 else {
+            return 0 // Return a default value if width is non-positive or value is negative
+        }
+        return (value * width) / CGFloat(maxRating)
     }
 }
+
 

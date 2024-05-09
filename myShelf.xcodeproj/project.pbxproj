@@ -50,6 +50,7 @@
 		A16440492BEB39790064A867 /* Member.swift in Sources */ = {isa = PBXBuildFile; fileRef = A16440482BEB39790064A867 /* Member.swift */; };
 		A164404B2BEB4BCA0064A867 /* griveance.swift in Sources */ = {isa = PBXBuildFile; fileRef = A164404A2BEB4BCA0064A867 /* griveance.swift */; };
 		A164404D2BEB4BFD0064A867 /* AGriveanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A164404C2BEB4BFD0064A867 /* AGriveanceView.swift */; };
+		A17395472BECA60700219463 /* MCuratedDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17395462BECA60700219463 /* MCuratedDetailView.swift */; };
 		A17C5A192BE4A3EC0081A04E /* AllIssuedBooks.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17C5A182BE4A3EC0081A04E /* AllIssuedBooks.swift */; };
 		A17C5A1B2BE4AF600081A04E /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A17C5A1A2BE4AF600081A04E /* TestView.swift */; };
 		A1895CDA2BE5F99800898ED6 /* MCheckMembershipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1895CD92BE5F99800898ED6 /* MCheckMembershipView.swift */; };
@@ -141,6 +142,7 @@
 		A16440482BEB39790064A867 /* Member.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Member.swift; sourceTree = "<group>"; };
 		A164404A2BEB4BCA0064A867 /* griveance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = griveance.swift; sourceTree = "<group>"; };
 		A164404C2BEB4BFD0064A867 /* AGriveanceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AGriveanceView.swift; sourceTree = "<group>"; };
+		A17395462BECA60700219463 /* MCuratedDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCuratedDetailView.swift; sourceTree = "<group>"; };
 		A17C5A182BE4A3EC0081A04E /* AllIssuedBooks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllIssuedBooks.swift; sourceTree = "<group>"; };
 		A17C5A1A2BE4AF600081A04E /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 		A1895CD92BE5F99800898ED6 /* MCheckMembershipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCheckMembershipView.swift; sourceTree = "<group>"; };
@@ -245,6 +247,7 @@
 				A1B5715D2BE8985500D79116 /* MPayFineView.swift */,
 				A1C890F72BE8FD0600B52463 /* MHelpAndSupportView.swift */,
 				A162431C2BEA2E74001C286F /* MGriveanceView.swift */,
+				A17395462BECA60700219463 /* MCuratedDetailView.swift */,
 			);
 			path = SubViews;
 			sourceTree = "<group>";
@@ -575,6 +578,7 @@
 				A197D9932BD8F737005C18F2 /* OnboardingView.swift in Sources */,
 				A164404B2BEB4BCA0064A867 /* griveance.swift in Sources */,
 				1FABC5CA2BD7AC2F00E730FD /* AdminView.swift in Sources */,
+				A17395472BECA60700219463 /* MCuratedDetailView.swift in Sources */,
 				A1E5C7C82BE354420078A797 /* ScanReturn.swift in Sources */,
 				A1EFF8FE2BEA538D00E6F85C /* ParticipantsView.swift in Sources */,
 				A133C85C2BDA093C00A9597B /* LLibraryView.swift in Sources */,

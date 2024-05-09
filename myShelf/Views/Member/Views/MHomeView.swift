@@ -17,24 +17,32 @@ struct MHomeView: View {
     @ObservedObject var firebaseManager = FirebaseManager()
     @EnvironmentObject var viewModel : AuthViewModel
     var body: some View {
-        ScrollView {
+        ScrollView(showsIndicators: false) {
             VStack(alignment: .leading) {
                 HeaderView()
                 
                 CurrentlyReadingView()
-                    .padding(.vertical)
+                    .padding(.horizontal)
+                
+                
+                    
                 
                 ReservationDetailView()
                         .padding(.vertical)
                 
                 PopularBooksView()
                     .padding(.vertical)
+
+//                    .padding(.horizontal)
                 
+                CurationView()
+                    .padding(.horizontal)
                 
-               // AuthorSectionView()
-                
-                NewReleasesView()
+                ReleasesView()
                     .padding(.vertical)
+                
+                
+                Arc()
                     
             }
             .onAppear{
@@ -164,7 +172,7 @@ struct HeaderView: View {
     @State private var gender = ""
     var body: some View {
         if let user = viewModel.currentUser{
-            HStack 
+            HStack
             {
                 VStack(alignment: .leading) {
                     let name = Name(fullName: user.fullname)
@@ -216,138 +224,155 @@ struct HeaderView: View {
     
 }
 
+struct CurationView: View {
+    var body: some View {
+
+        VStack(alignment: .leading, spacing: 20) {
+            Text("Curated Collection")
+                .font(.custom("SF Pro", size: 20))
+            
+            HStack(spacing: 30) {
+                NavigationLink{
+                    MCuratedDetailView(genre: "classics")
+                }label: {
+                    Image("adap1")
+                }
+                
+                NavigationLink{
+                    MCuratedDetailView(genre: "philosophy")
+                }label: {
+                    Image("adap2")
+                }
+
+            }
+            
+            HStack(spacing: 30) {
+                NavigationLink{
+                    MCuratedDetailView(genre: "comics")
+                }label: {
+                    Image("adap3")
+                }
+                
+                NavigationLink{
+                    MCuratedDetailView(genre: "poetry")
+                }label: {
+                    Image("adap4")
+                }
+
+            }
+
+        }
+
+        }
+    }
+
 struct CurrentlyReadingView: View {
     @ObservedObject var firebaseManager = FirebaseManager()
     @State private var issuedBooks: [(String, Int, Int)] = []
+    
     var body: some View {
-            Text("Currently Reading")
-                .font(.headline)
-                .foregroundColor(.white)
-                .padding(.horizontal)
+        Text("Currently Reading")
+         .font(.headline)
+         .foregroundColor(.white)
+        
         ScrollView(.horizontal,showsIndicators: false)
         {
-                    HStack {
-                        ForEach(issuedBooks, id: \.0) { (bookID, remainingDays, fine) in
-                            if let book = firebaseManager.books.first(where: { $0.uid == bookID }) {
-                                
-                                HStack{
-                                    VStack{
-                                        VStack(alignment: .leading, spacing: 10) {
-                                            Text("Due in \(remainingDays) days")
-                                                .font(
-                                                Font.custom("SF Pro Text", size: 10)
+            HStack
+            {
+                ForEach(issuedBooks, id: \.0) { (bookID, remainingDays, fine) in
+                    if let book = firebaseManager.books.first(where: { $0.uid == bookID }) {
+                        
+                        HStack{
+                            
+                            
+                            AsyncImage(url: URL(string: book.imageUrl)) { phase in
+                                switch phase {
+                                case .empty:
+                                    ProgressView()
+                                case .success(let image):
+                                    image
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fill)
+                                        .frame(width: 140, height: 212)
+                                        .clipped()
+                                        .cornerRadius(5)
+                                case .failure:
+                                    Image(systemName: "photo")
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fill)
+                                        .frame(width: 140, height: 212)
+                                        .clipped()
+                                        .cornerRadius(5)
+                                @unknown default:
+                                    Text("Unknown")
+                                }
+                            }
+                            .frame(width: 140, height: 212)
+                            Spacer()
+                            
+                            VStack{
+                                VStack(alignment: .leading, spacing: 10) {
+                                    Text("Due in \(remainingDays) days")
+                                        .font(
+                                            Font.custom("SF Pro Text", size: 10)
                                                 .weight(.semibold)
-                                                )
-                                                .foregroundColor(.black)
-                                                .padding(.horizontal, 10)
-                                                .padding(.top, 4)
-                                                .padding(.bottom, 5)
-                                                .background(Color(red: 1, green: 0.79, blue: 0.16))
-                                                .cornerRadius(200)
-                                            
-                                            Text(book.title)
-                                            .font(
+                                        )
+                                        .foregroundColor(.black)
+                                        .padding(.horizontal, 10)
+                                        .padding(.top, 4)
+                                        .padding(.bottom, 5)
+                                        .background(Color(red: 1, green: 0.79, blue: 0.16))
+                                        .cornerRadius(200)
+                                    
+                                    Text(book.title)
+                                        .font(
                                             Font.custom("SF Pro Text", size: 16)
-                                            .weight(.bold)
-                                            )
-                                            .foregroundColor(.white)
-                                        }
-                                        .padding(0)
-                                        .frame(maxWidth: .infinity, alignment: .topLeading)
-                                        
-                                        Spacer()
-                                        VStack(alignment: .leading, spacing: 10) {
-                                            Text(book.authors[0])
-                                            .font(Font.custom("SF Pro Text", size: 12))
-                                            .foregroundColor(Color(red: 0.6, green: 0.6, blue: 0.6))
-                                            
-                                            Text(book.genre)
-                                            .font(Font.custom("SF Pro Text", size: 12))
-                                            .foregroundColor(Color(red: 0.6, green: 0.6, blue: 0.6))
-                                            
-                                            Text("Overdue Fine: $\(fine)")
-                                            .font(Font.custom("SF Pro Text", size: 12))
-                                            .foregroundColor(Color(red: 0.2, green: 0.66, blue: 0.33))
-
-
-                                        }
-                                        .frame(maxWidth: .infinity, alignment: .topLeading)
-                                        .padding(0)
-                                        .padding(.bottom,10)
-                                    }
-                                    .padding(.top,18)
-                                    Spacer()
-                                    AsyncImage(url: URL(string: book.imageUrl)) { phase in
-                                        switch phase {
-                                        case .empty:
-                                            ProgressView()
-                                        case .success(let image):
-                                            image
-                                                .resizable()
-                                                .aspectRatio(contentMode: .fit)
-                                                .frame(width: 100, height: 180)
-                                                .clipped()
-                                        case .failure:
-                                            Image(systemName: "photo")
-                                                .resizable()
-                                                .aspectRatio(contentMode: .fit)
-                                                .frame(width: 100, height: 180)
-                                                .clipped()
-                                        @unknown default:
-                                            Text("Unknown")
-                                        }
-                                    }
-                                    .frame(width: 100, height: 180)
+                                                .weight(.bold)
+                                        )
+                                        .foregroundColor(.white)
+                                }
+                                .padding(0)
+                                .frame(maxWidth: .infinity, alignment: .topLeading)
+                                
+                                Spacer()
+                                VStack(alignment: .leading, spacing: 10) {
+                                    Text(book.authors[0])
+                                        .font(Font.custom("SF Pro Text", size: 12))
+                                        .foregroundColor(Color(red: 0.6, green: 0.6, blue: 0.6))
+                                    
+                                    Text(book.genre)
+                                        .font(Font.custom("SF Pro Text", size: 12))
+                                        .foregroundColor(Color(red: 0.6, green: 0.6, blue: 0.6))
+                                    
+                                    Text("Overdue Fine: $\(fine)")
+                                        .font(Font.custom("SF Pro Text", size: 12))
+                                        .foregroundColor(Color(red: 0.2, green: 0.66, blue: 0.33))
+                                    
                                     
                                 }
-                                .frame(width: 300,alignment: .topLeading)
-                                .padding(15)
-                                .background(Color(red: 0.11, green: 0.11, blue: 0.12))
-                                .cornerRadius(10)
-                                .padding(.trailing,10)
+                                .frame(maxWidth: .infinity, alignment: .topLeading)
+                                .padding(0)
+                                .padding(.bottom,10)
                             }
+                            .padding(.top,18)
+                            
                         }
+                        .frame(width: 320,alignment: .topLeading)
+                        .padding(15)
+                        .background(Color(red: 0.11, green: 0.11, blue: 0.12))
+                        .cornerRadius(10)
+                        
+                        
                     }
-                    .padding(.horizontal)
                 }
-               .onAppear {
-                   fetchIssuedBookDetails()
-                   firebaseManager.fetchBooks()
-               }
-        /*
-        VStack(alignment: .leading) {
-            
-            
-            HStack {
-                VStack(alignment: .leading) {
-                    Text("Due in 10 days")
-                        .font(.caption)
-                        .foregroundColor(.gray)
-                    Text("Harry Potter and the Order of the phoenix")
-                        .fontWeight(.bold)
-                        .foregroundColor(.white)
-                    Text("Stephen King")
-                        .font(.caption)
-                        .foregroundColor(.gray)
-                    Text("2016 • Mystery")
-                        .font(.caption)
-                        .foregroundColor(.gray)
-                    Text("Overdue Fine: $0")
-                        .font(.caption)
-                        .foregroundColor(.red)
-                }
-                .padding(.leading)
                 
-                Spacer()
-                
-                Image("harrypotter")
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(width: 100, height: 180)
-                    .clipped()
             }
-            .padding(.horizontal)
-        }*/
+            
+        }
+        .onAppear {
+            fetchIssuedBookDetails()
+            firebaseManager.fetchBooks()
+        }
     }
     func fetchIssuedBookDetails() {
         guard let currentUserUID = Auth.auth().currentUser?.uid else {
@@ -401,44 +426,90 @@ struct ReservationDetailView: View {
             if let book = book, remainingTime>0 {
                 HStack
                 {
-                    VStack(spacing:10){
-                        Text("Book Reserved")
+                    HStack{
+                        AsyncImage(url: URL(string: book.imageUrl)) { phase in
+                            switch phase {
+                            case .empty:
+                                ProgressView()
+                            case .success(let image):
+                                image
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fill)
+                                    .frame(width: 60, height: 90)
+                                    .clipped()
+                                    .cornerRadius(5)
+                            case .failure:
+                                Image(systemName: "photo")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fill)
+                                    .frame(width: 60, height: 90)
+                                    .clipped()
+                                    .cornerRadius(5)
+                            @unknown default:
+                                Text("Unknown")
+                            }
+                        }
+                        .frame(width: 60, height: 90)
+                        VStack(spacing:5){
+                            Text("Book Reserved")
+                                .font(
+                                    Font.custom("SF Pro", size: 12)
+                                        .weight(.medium)
+                                )
+                                .multilineTextAlignment(.leading)
+                                .foregroundColor(Color(red: 0.6, green: 0.6, blue: 0.6))
+                                .frame(maxWidth: .infinity,alignment: .leading)
+                            
+                            Text(book.title)
+                                .font(
+                                    Font.custom("SF Pro", size: 12)
+                                        .weight(.medium)
+                                )
+                                .multilineTextAlignment(.leading)
+                                .foregroundColor(.white)
+                                .frame(maxWidth: .infinity,alignment: .leading)
+                            Text(book.authors[0])
+                                .font(
+                                    Font.custom("SF Pro", size: 12)
+                                        .weight(.medium)
+                                )
+                                .multilineTextAlignment(.leading)
+                                .foregroundColor(.white)
+                                .frame(maxWidth: .infinity,alignment: .leading)
+                            Text(book.genre)
+                                .font(
+                                    Font.custom("SF Pro", size: 12)
+                                        .weight(.medium)
+                                )
+                                .multilineTextAlignment(.leading)
+                                .foregroundColor(.white)
+                                .frame(maxWidth: .infinity,alignment: .leading)
+                        }
+                        .padding(.trailing,10)
+                        Spacer()
+                        VStack(spacing:10){
+                            Text("Time Left")
                             .font(
-                                Font.custom("SF Pro", size: 12)
-                                    .weight(.medium)
+                            Font.custom("SF Pro", size: 12)
+                            .weight(.medium)
                             )
-                            .multilineTextAlignment(.center)
+                            .multilineTextAlignment(.trailing)
                             .foregroundColor(Color(red: 0.6, green: 0.6, blue: 0.6))
-                        Text(book.title)
+                            
+                            Text("\(formattedRemainingTime)")
                             .font(
-                                Font.custom("SF Pro", size: 12)
-                                    .weight(.medium)
+                            Font.custom("SF Pro", size: 12)
+                            .weight(.medium)
                             )
-                            .multilineTextAlignment(.center)
+                            .multilineTextAlignment(.trailing)
                             .foregroundColor(.white)
-                    }
-                    Spacer()
-                    VStack(spacing:10){
-                        Text("Time Left")
-                        .font(
-                        Font.custom("SF Pro", size: 12)
-                        .weight(.medium)
-                        )
-                        .multilineTextAlignment(.trailing)
-                        .foregroundColor(Color(red: 0.6, green: 0.6, blue: 0.6))
-                        
-                        Text("\(formattedRemainingTime)")
-                        .font(
-                        Font.custom("SF Pro", size: 12)
-                        .weight(.medium)
-                        )
-                        .multilineTextAlignment(.trailing)
-                        .foregroundColor(.white)
 
 
+                        }
                     }
                 }
-                .padding(20)
+                .padding(15)
+                .padding(.trailing,8)
                 .frame(maxWidth: .infinity,alignment: .center)
                 .background(Color(red: 0.11, green: 0.11, blue: 0.12))
                 .cornerRadius(8)
@@ -510,7 +581,7 @@ struct ReservationDetailView: View {
                                 shelfLocation: data["shelfLocation"] as? String ?? "",
                                 uid: document.documentID,
                                 noOfRatings: data["noOfRatings"] as? String ?? "",
-                                isActive: data["isActive"] as? Bool ?? true
+                                isActive: data["isActive"] as? Bool ??  true
                             )
                             
                             // Assign fetched book data to the book property
@@ -531,7 +602,6 @@ struct ReservationDetailView: View {
         }
     }
 }
-
 struct PopularBooksView: View {
     @State private var lastReadGenre: String = "Loading..."
     @ObservedObject var firebaseManager = FirebaseManager()
@@ -541,20 +611,19 @@ struct PopularBooksView: View {
    // @State private var dueAmount: Int = 0
     //@StateObject var storeVM = StoreVM()
     var body: some View {
-        VStack(alignment: .leading) {
-            Text("Popular Books")
+        VStack(alignment: .leading, spacing:20) {
+            Text("Genre Follow-up")
+                .font(.custom("SF Pro", size: 20))
                 .font(.headline)
                 .foregroundColor(.white)
                 .padding(.horizontal)
-            
-            /*Text("Last Read Genre: \(lastReadGenre)") // Display last read genre
-                .foregroundStyle(Color.white)*/
+
             
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 20) {
                     ForEach(firebaseManager.books, id: \.uid) { book in
                         if book.genre == lastReadGenre{
-                            VStack {
+                            VStack(alignment: .leading, spacing: 4) {
                                 AsyncImage(url: URL(string: book.imageUrl)) { phase in
                                     switch phase {
                                     case .empty:
@@ -563,19 +632,22 @@ struct PopularBooksView: View {
                                         image
                                             .resizable()
                                             .aspectRatio(contentMode: .fill)
-                                            .frame(width: 100, height: 150)
+                                            .frame(width: 140, height: 217)
+                                            .cornerRadius(6)
                                             .clipped()
                                     case .failure:
                                         Image(systemName: "photo")
                                             .resizable()
                                             .aspectRatio(contentMode: .fill)
-                                            .frame(width: 100, height: 150)
+                                            .frame(width: 140, height: 217)
+                                            .cornerRadius(6)
                                             .clipped()
                                     @unknown default:
                                         Text("Unknown")
                                     }
                                 }
-                                .frame(width: 100, height: 150)
+                                .frame(width: 140, height: 217)
+                                .cornerRadius(6)
                                 
                                 Text(book.title)
                                     .font(.caption)
@@ -583,7 +655,7 @@ struct PopularBooksView: View {
                                     .lineLimit(1)
                                 Text("\(book.authors.joined(separator: ", "))")
                                     .font(.caption)
-                                    .foregroundColor(.gray)
+                                    .foregroundColor(.white.opacity(0.6))
                                     .lineLimit(1)
                             }
                             .onTapGesture {
@@ -687,10 +759,13 @@ struct AuthorLoader {
 
 
 
-struct NewReleasesView: View {
+struct  ReleasesView: View {
     var body: some View {
-        VStack(alignment: .leading) {
+        VStack(alignment: .leading, spacing: 20) {
             Text("New Relases")
+                .font(
+                Font.custom("SF Pro", size: 20)
+                )
                 .font(.headline)
                 .foregroundColor(.white)
                 .padding(.horizontal)
@@ -699,9 +774,8 @@ struct NewReleasesView: View {
                 HStack(spacing: 20) {
                         NewThumbnailView()
                 }
-                .padding(.horizontal)
             }
-        }
+        }.padding(.top,5)
     }
 }
 
@@ -713,7 +787,7 @@ struct NewThumbnailView: View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 20) {
                 ForEach(firebaseManager.books, id: \.uid) { book in
-                        VStack 
+                        VStack(alignment: .leading, spacing: 4)
                     {
                             AsyncImage(url: URL(string: book.imageUrl)) { phase in
                                 switch phase {
@@ -723,19 +797,22 @@ struct NewThumbnailView: View {
                                     image
                                         .resizable()
                                         .aspectRatio(contentMode: .fill)
-                                        .frame(width: 100, height: 150)
+                                        .frame(width: 140, height: 217)
+                                        .cornerRadius(6)
                                         .clipped()
                                 case .failure:
                                     Image(systemName: "photo")
                                         .resizable()
                                         .aspectRatio(contentMode: .fill)
-                                        .frame(width: 100, height: 150)
+                                        .frame(width: 140, height: 217)
+                                        .cornerRadius(6)
                                         .clipped()
                                 @unknown default:
                                     Text("Unknown")
                                 }
                             }
-                            .frame(width: 100, height: 150)
+                            .frame(width: 140, height: 217)
+                            .cornerRadius(6)
                             
                             Text(book.title)
                                 .font(.caption)
@@ -763,6 +840,175 @@ struct NewThumbnailView: View {
         }
     }
 }
+
+
+
+
+
+struct Arc: View {
+    
+    @State private var degrees: Double = -110
+    @State private var count: Int = 2000
+    @State private var maxCount: Int = 3546
+    
+    
+    var body: some View {
+        VStack{
+            Text("Reading Goals")
+                .font(
+                Font.custom("SF Pro Text", size: 30))
+                .padding(.bottom,10)
+            Text("Find a great book, set a goal and make reading")
+                .font(
+                Font.custom("SF Pro Text", size: 14)
+                )
+                .foregroundColor(.white.opacity(0.6))
+            Text("a daily habit")
+                .font(
+                Font.custom("SF Pro Text", size: 14))
+                .foregroundColor(.white.opacity(0.6))
+                .padding(.bottom,8)
+            
+            if count > maxCount {
+                ProgressBar2(progress: self.$count, maxCount: maxCount)
+                    .frame(width: 250.0, height: 250.0)
+                    .padding(20)
+                
+            }
+            else {
+                ProgressBar(progress: self.$count, maxCount: maxCount)
+                    .frame(width: 250.0, height: 250.0)
+                    .padding(20)
+                
+            }
+        }
+        .padding(.leading,50)
+    }
+    
+    struct ProgressBar: View {
+        @Binding var progress: Int
+        let maxCount: Int
+        
+        var body: some View {
+            ZStack {
+                Path { path in
+                    let width: CGFloat = 250.0
+                    let height: CGFloat = 125.0
+                    path.addArc(center: CGPoint(x: width / 2, y: height), radius: width / 2, startAngle: .degrees(180), endAngle: .degrees(360), clockwise: false)
+                }
+                .stroke(style: StrokeStyle(lineWidth: 12.0, lineCap: .round, lineJoin: .round))
+                .opacity(0.3)
+                .foregroundColor(Color.gray)
+                
+                Path { path in
+                    let width: CGFloat = 250.0
+                    let height: CGFloat = 125.0
+                    path.addArc(center: CGPoint(x: width / 2, y: height), radius: width / 2, startAngle: .degrees(180), endAngle: .degrees(180 + (Double(self.progress) / Double(self.maxCount)) * 180), clockwise: false)
+                }
+                .stroke(style: StrokeStyle(lineWidth: 12.0, lineCap: .round, lineJoin: .round))
+                .fill(Color(red: 0.26, green: 0.52, blue: 0.96))
+                
+                VStack {
+                    Text("Complete your Collection")
+                        .font(
+                            Font.custom("SF Pro Text", size: 14)
+                                .weight(.medium)
+                        )
+                        .foregroundColor(.white)
+                    Text("\(progress)/\(maxCount)")
+                        .foregroundColor(.white)
+                        .font(Font.custom("SF Pro Text", size: 30)
+                            .weight(.medium)
+                              )
+                        
+                        .padding()
+                    
+                    Button(action: {
+                        // Action to complete the collection
+                    }) {
+                        HStack(alignment: .center, spacing: 0) {
+                            Text("Complete your Collection")
+                                .foregroundColor(.white)
+                                .font(
+                                Font.custom("SF Pro Text", size: 12)
+                                .weight(.medium)
+                                )
+                        }
+                        .padding(.horizontal, 30)
+                        .padding(.top, 12)
+                        .padding(.bottom, 12)
+                        .background(Color(red: 0.26, green: 0.52, blue: 0.96))
+                        .cornerRadius(500)
+                    }
+                }
+            }
+        }
+    }
+    
+    
+}
+
+
+
+
+
+struct ProgressBar2: View {
+    @Binding var progress: Int
+    let maxCount: Int
+    
+    var body: some View {
+        ZStack {
+            Path { path in
+                let width: CGFloat = 250.0
+                let height: CGFloat = 125.0
+                path.addArc(center: CGPoint(x: width / 2, y: height), radius: width / 2, startAngle: .degrees(180), endAngle: .degrees(360), clockwise: false)
+            }
+            .stroke(style: StrokeStyle(lineWidth: 12.0, lineCap: .round, lineJoin: .round))
+            .opacity(0.3)
+            .foregroundColor(Color.gray)
+//                .rotationEffect(.degrees(54.5))
+            
+            Path { path in
+                let width: CGFloat = 250.0
+                let height: CGFloat = 125.0
+                path.addArc(center: CGPoint(x: width / 2, y: height), radius: width / 2, startAngle: .degrees(180), endAngle: .degrees(360), clockwise: false)
+            }
+            .stroke(style: StrokeStyle(lineWidth: 12.0, lineCap: .round, lineJoin: .round))
+            .fill(.white)
+//                .rotationEffect(.degrees(54.5))
+            
+            VStack {
+                Text("Complete your Collection")
+                    .font(
+                        Font.custom("SF Pro Text", size: 14)
+                            .weight(.medium)
+                    )
+                    .foregroundColor(.white)
+                Text("\(progress)/\(maxCount)")
+                    .foregroundColor(.white)
+                    .font(.largeTitle)
+                    .padding()
+                
+                Button(action: {
+                    // Action to complete the collection
+                }) {
+                    Text("Complete your Collection")
+                        .font(
+                            Font.custom("SF Pro Text", size: 10)
+                                .weight(.medium)
+                        )
+                        .foregroundColor(.white)
+                        .padding()
+                        .background(Color.blue)
+                        .cornerRadius(25)
+                }
+            }
+        }
+    }
+}
+
+
+
 
 // Placeholder image loader
 struct NewImageLoader {

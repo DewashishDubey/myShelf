@@ -49,8 +49,9 @@ struct MPremiumEventsView: View {
     var body: some View {
         ZStack
         {
+            Color.black.ignoresSafeArea(.all)
             ScrollView{
-                Color.black.ignoresSafeArea(.all)
+               
                 VStack(spacing:10)
                 {
                     ForEach(eventsViewModel.events) { event in
