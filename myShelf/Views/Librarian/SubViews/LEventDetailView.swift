@@ -44,6 +44,7 @@ struct EventDetails1: View {
     @State private var AlertMsg = ""
     @State private var showingSheet = false
     @State private var isPremiumMember: Bool = false
+    @State private var participantsCount: Int = 0
     var body: some View {
         
         /*Text("Book Reading & Signing Event")
@@ -109,7 +110,70 @@ struct EventDetails1: View {
                             }
                         }.padding(.horizontal)
                         
-                        
+                        NavigationLink{
+                            ParticipantsView(eventID: event.id)
+                        } label: {
+                            if(participantsCount==1)
+                            {
+                                HStack{
+                                    Image("male")
+                                        .resizable()
+                                        .frame(width: 40, height: 40)
+                                    Text("1 Going")
+                                        .font(
+                                            Font.custom("SF Pro", size: 12)
+                                                .weight(.medium)
+                                        )
+                                        .foregroundColor(Color(red: 0.6, green: 0.6, blue: 0.6))
+                                    
+                                    
+                                }
+                                .frame(maxWidth: .infinity,alignment: .leading)
+                                .padding(.horizontal)
+                            }
+                            else if(participantsCount == 2){
+                                HStack{
+                                    Image("male")
+                                        .resizable()
+                                        .frame(width: 40, height: 40)
+                                    Text("+1 Going")
+                                        .font(
+                                            Font.custom("SF Pro", size: 12)
+                                                .weight(.medium)
+                                        )
+                                        .foregroundColor(Color(red: 0.6, green: 0.6, blue: 0.6))
+                                    
+                                    
+                                    
+                                }
+                                .frame(maxWidth: .infinity,alignment: .leading)
+                                .padding(.horizontal)
+                            }
+                            else if(participantsCount != 0)
+                            {
+                                HStack{
+                                    Image("male")
+                                        .resizable()
+                                        .frame(width: 40, height: 40)
+                                    Image("female")
+                                        .resizable()
+                                        .frame(width: 40, height: 40)
+                                        .offset(x:-20)
+                                    Text("+\(participantsCount-2) Going")
+                                        .font(
+                                            Font.custom("SF Pro", size: 12)
+                                                .weight(.medium)
+                                        )
+                                        .foregroundColor(Color(red: 0.6, green: 0.6, blue: 0.6))
+                                        .offset(x:-20)
+                                    
+                                    
+                                }
+                                .frame(maxWidth: .infinity,alignment: .leading)
+                                .padding(.horizontal)
+                            }
+                            
+                        }
                         
                         Text("Event Overview")
                             .font(.custom("SF Pro Text", size: 16)
@@ -138,6 +202,7 @@ struct EventDetails1: View {
             viewModel.fetchEvent(forUID: eventID)
             checkRegistration()
             fetchMemberData()
+            countParticipants()
         }
         .navigationTitle(title)
         .navigationBarTitleDisplayMode(.inline)
@@ -167,6 +232,23 @@ struct EventDetails1: View {
                 } else {
                     print("Member document does not exist or could not be retrieved: \(error?.localizedDescription ?? "Unknown error")")
                 }
+            }
+        }
+    }
+    
+    
+    func countParticipants() {
+        let db = Firestore.firestore()
+        let participantsRef = db.collection("events").document(eventID).collection("participants")
+        
+        participantsRef.getDocuments { snapshot, error in
+            if let error = error {
+                print("Error getting participants: \(error)")
+                return
+            }
+            
+            if let snapshot = snapshot {
+                participantsCount = snapshot.documents.count
             }
         }
     }

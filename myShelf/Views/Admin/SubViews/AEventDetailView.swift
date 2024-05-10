@@ -436,7 +436,7 @@ struct EventDetails2: View {
                                 .frame(maxWidth: .infinity,alignment: .leading)
                                 .padding(.horizontal)
                             }
-                            else
+                            else if(participantsCount != 0)
                             {
                                 HStack{
                                     Image("male")
