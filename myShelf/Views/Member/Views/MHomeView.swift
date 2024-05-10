@@ -312,17 +312,36 @@ struct CurrentlyReadingView: View {
                             
                             VStack{
                                 VStack(alignment: .leading, spacing: 10) {
-                                    Text("Due in \(remainingDays) days")
-                                        .font(
-                                            Font.custom("SF Pro Text", size: 10)
-                                                .weight(.semibold)
-                                        )
-                                        .foregroundColor(.black)
-                                        .padding(.horizontal, 10)
-                                        .padding(.top, 4)
-                                        .padding(.bottom, 5)
-                                        .background(Color(red: 1, green: 0.79, blue: 0.16))
-                                        .cornerRadius(200)
+                                    if(remainingDays<=0)
+                                    {
+                                        Text("Overdue by \(0-remainingDays) days")
+                                            .font(
+                                                Font.custom("SF Pro Text", size: 10)
+                                                    .weight(.semibold)
+                                            )
+                                            .foregroundColor(.white)
+                                            .padding(.horizontal, 10)
+                                            .padding(.top, 4)
+                                            .padding(.bottom, 5)
+                                            .background(Color(red: 0.92, green: 0.26, blue: 0.21))
+                                            .cornerRadius(200)
+                                           
+                                    }
+                                    else
+                                    {
+                                        Text("Due in \(remainingDays) days")
+                                            .font(
+                                                Font.custom("SF Pro Text", size: 10)
+                                                    .weight(.semibold)
+                                            )
+                                            .foregroundColor(.black)
+                                            .padding(.horizontal, 10)
+                                            .padding(.top, 4)
+                                            .padding(.bottom, 5)
+                                            .background(Color(red: 1, green: 0.79, blue: 0.16))
+                                            .cornerRadius(200)
+                                    }
+                                   
                                     
                                     Text(book.title)
                                         .font(
@@ -344,7 +363,7 @@ struct CurrentlyReadingView: View {
                                         .font(Font.custom("SF Pro Text", size: 12))
                                         .foregroundColor(Color(red: 0.6, green: 0.6, blue: 0.6))
                                     
-                                    Text("Overdue Fine: $\(fine)")
+                                    Text("Overdue Fine: ₹\(fine)")
                                         .font(Font.custom("SF Pro Text", size: 12))
                                         .foregroundColor(Color(red: 0.2, green: 0.66, blue: 0.33))
                                     
