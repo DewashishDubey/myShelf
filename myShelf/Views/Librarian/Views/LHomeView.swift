@@ -49,7 +49,7 @@ struct LHomeView: View {
                         }
                         HStack(spacing:15){
                             VStack(spacing:15){
-                                Text("BORROWED")
+                                Text("BOOKS")
                                     .font(
                                         Font.custom("SF Pro", size: 12)
                                             .weight(.medium)
